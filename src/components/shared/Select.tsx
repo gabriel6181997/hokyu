@@ -20,7 +20,12 @@ export const Select: VFC<Props> = (props) => {
   const COUGHS = ["軽い咳","動くと咳き込む","セーざーヒューヒュー音の咳","苦しそうな頻繁な咳"]; //咳
   const SKINS = ["発疹がある","乾燥している"]; //皮膚の状況
 
-  const [SelectedMoods, setSelectedMoods] = useState(MOODS[0]);
+  // const [SelectedMoods, setSelectedMoods] = useState(MOODS[0]);
+
+  const [SelectedMoods, setSelectedMoods] = useState(props.ARRAY[0]);
+
+  const ARRAY = "MOODS" | "EXERCISES" | "FACES" | "APPETITES" | "BREATH" | "SLEEPS" | "DIARROHOEAS" | "COUGHS" | "SKINS" ;
+
 
   return(
     <Listbox
@@ -32,8 +37,8 @@ export const Select: VFC<Props> = (props) => {
       {({ open }) => (
         <>
           <Listbox.Label className="block text-sm leading-5 font-medium text-gray-700">
-            {/* {props.label} */}
-            機嫌
+            {props.label}
+            {/* 機嫌 */}
           </Listbox.Label>
           <div className="relative">
             <span className="inline-block w-full rounded-md shadow-sm">
@@ -70,6 +75,7 @@ export const Select: VFC<Props> = (props) => {
                 static
                 className="max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5"
               >
+
 
                 {MOODS.map((mood) => (
                   <Listbox.Option key={mood} value={mood}>
