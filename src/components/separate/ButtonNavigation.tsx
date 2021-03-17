@@ -27,10 +27,11 @@ export const ButtonNavigation = () => {
                   </a>
                 </Link>
               </li>
-            );
-          })};
+            )
+          })}
+          
           <li className="flex-1 text-center">
-            <Link href="/">
+            <Link href="/mypage">
               <a>
                 <Image
                   src="/img/gabriel-profile-picture.JPG"

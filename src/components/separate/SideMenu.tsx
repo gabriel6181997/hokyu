@@ -15,7 +15,7 @@ export const SideMenu = () => {
               <PrimaryButton
                 className="px-3 py-3 my-1 text-xl"
                 variant="ghost"
-                linkProps={{ href: {href} }}
+                linkProps={{ href: href }}
               >
                 <div>{icon}</div>
                 <p className="pl-4 font-bold">{label}</p>

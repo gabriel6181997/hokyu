@@ -13,7 +13,7 @@ export const GLOBAL_MENUS = [
     icon:<AiOutlineSearch />,
   },
   {
-    href:"/",
+    href:"/mypage",
     label: "マイページ",
     icon: <BsFillPersonFill />,
   },
