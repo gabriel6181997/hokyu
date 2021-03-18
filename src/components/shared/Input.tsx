@@ -8,7 +8,7 @@ type Props = {
   id:string;
   placeholder?:string;
   textarea?:boolean;
-  variant: "underlined";
+  variant: "underlined" | "box";
 };
 
 export const Input:VFC<Props> = (props) => {
@@ -17,6 +17,7 @@ export const Input:VFC<Props> = (props) => {
     "block w-full pl-2 bg-transparent focus:outline-none",
     {
       "border-b-2 focus:border-blue-400": props.variant === "underlined",
+      "border-b-3 focus:border-blue-400": props.variant === "box",
     }
   ]);
 

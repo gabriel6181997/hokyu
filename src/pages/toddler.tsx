@@ -80,10 +80,10 @@ const Toddler = () => {
 
         <div>
           <div>
-            <Select label="機嫌" values="MOODS" ARRAY="MOODS"/>
+            <Select label="機嫌" values="MOODS" array="MOODS"/>
           </div>
           <div>
-            <Select label="運動(活発性)" values="EXERCISES" ARRAY="EXERCISES"/>
+            <Select label="運動(活発性)" values="EXERCISES" array="EXERCISES"/>
           </div>
         </div>
       </div>

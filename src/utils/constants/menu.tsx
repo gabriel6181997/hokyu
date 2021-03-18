@@ -8,7 +8,7 @@ export const GLOBAL_MENUS = [
     icon: <AiFillHome />,
   },
   {
-    href:"/",
+    href:"/search",
     label: "検索",
     icon:<AiOutlineSearch />,
   },
