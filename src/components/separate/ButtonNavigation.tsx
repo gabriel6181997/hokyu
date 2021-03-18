@@ -29,9 +29,9 @@ export const ButtonNavigation = () => {
               </li>
             )
           })}
-          
+
           <li className="flex-1 text-center">
-            <Link href="/mypage">
+            <Link href="/home/mypage">
               <a>
                 <Image
                   src="/img/gabriel-profile-picture.JPG"

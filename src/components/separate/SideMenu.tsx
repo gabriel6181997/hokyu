@@ -29,7 +29,7 @@ export const SideMenu = () => {
         <PrimaryButton
           className="px-8 py-3"
           variant="solid"
-          linkProps={{ href: "/toddler" }}
+          linkProps={{ href: "/home/toddler" }}
         >
           <BsPencilSquare />
           <p className="pl-3">新規幼児</p>

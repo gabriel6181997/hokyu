@@ -3,17 +3,17 @@ import { BsFillPersonFill } from "react-icons/bs";
 
 export const GLOBAL_MENUS = [
   {
-    href:"/",
+    href:"/home",
     label: "ホーム",
     icon: <AiFillHome />,
   },
   {
-    href:"/search",
+    href:"/home/search",
     label: "検索",
     icon:<AiOutlineSearch />,
   },
   {
-    href:"/mypage",
+    href:"/home/mypage",
     label: "マイページ",
     icon: <BsFillPersonFill />,
   },
