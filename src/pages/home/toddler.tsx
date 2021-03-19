@@ -28,6 +28,10 @@ const Toddler = () => {
     alert("Delete Temperature");
   };
 
+  const onClickShow = () => {
+    alert("Show Explanation of urgency number")
+  }
+
   return (
     <Layout sideMenu buttonNavigation>
       <div className="container space-y-6">
@@ -83,7 +87,7 @@ const Toddler = () => {
         <div className="flex items-center justify-center">
           <label className="flex mr-6">
             <p>緊急度</p>
-            <button className="mx-1">
+            <button className="mx-1" onClick={onClickShow}>
               <AiOutlineQuestionCircle />
             </button>
             <p>:</p>
@@ -99,7 +103,7 @@ const Toddler = () => {
         </div>
 
         <div className="space-y-4">
-          <div>
+          <div className="space-y-2">
             <div className="flex justify-between">
               <p>体温</p>
               <button onClick={onClickAdd}>
@@ -107,8 +111,10 @@ const Toddler = () => {
               </button>
             </div>
             <div className="flex items-center">
+              <div className="flex-1">
               <Input id="time" placeholder="例：23:15" variant="underlined" />
-              <div className="ml-2">
+              </div>
+              <div className="flex-1 ml-2">
                 <Input
                   id="temperature"
                   placeholder="例：37°C"
@@ -119,8 +125,6 @@ const Toddler = () => {
                 <BiMinusCircle />
               </button>
             </div>
-
-            <div></div>
           </div>
           <Select label="機嫌" values="MOODS" value="mood" array={MOODS} />
           <Select
