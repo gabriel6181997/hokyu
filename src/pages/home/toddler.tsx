@@ -4,7 +4,7 @@ import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { Input } from "src/components/shared/Input";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { Select } from "src/components/shared/Select";
-import { EXERCISES, MOODS } from "src/utils/constants/selectoption";
+import { APPETITES, EXERCISES, FACES, MOODS } from "src/utils/constants/selectoption";
 
 const URGENCYNUMBERS = [1, 2, 3, 4, 5];
 
@@ -86,6 +86,14 @@ const Toddler = () => {
           <div>
             <Select label="運動(活発性)" values="EXERCISES" value="exercise" array={EXERCISES}/>
           </div>
+          <div>
+            <Select label="顔つき" values="FACES" value="face" array={FACES}/>
+          </div>
+          <div>
+            <Select label="食欲" values="APPETITES" value="appetite" array={APPETITES}/>
+          </div>
+
+
         </div>
       </div>
     </Layout>

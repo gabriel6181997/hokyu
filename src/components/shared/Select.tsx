@@ -12,7 +12,6 @@ type Props = {
 export const Select: VFC<Props> = (props) => {
   const [SelectedArray, setSelectedArray] = useState(props.array[0]);
 
-
   return(
     <Listbox
       as="div"
