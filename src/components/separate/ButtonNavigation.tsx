@@ -10,7 +10,7 @@ export const ButtonNavigation = () => {
         <ul className="flex">
           {BOTTOM_NAVS.map((item) => {
             return (
-              <li className="flex-1 text-center">
+              <li className="flex-1 text-center" key={item.key}>
                 <Link href={item.href}>
                   <a className="w-full py-2">
                     <svg
