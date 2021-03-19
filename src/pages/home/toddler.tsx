@@ -3,6 +3,8 @@ import { Layout } from "src/components/separate/layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { Input } from "src/components/shared/Input";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { BsPlusCircle } from "react-icons/bs";
+import { BiMinusCircle } from "react-icons/bi";
 import { Select } from "src/components/shared/Select";
 import {
   APPETITES,
@@ -18,6 +20,14 @@ import {
 } from "src/utils/constants/selectoption";
 
 const Toddler = () => {
+  const onClickAdd = () => {
+    alert("Add Input");
+  };
+
+  const onClickDelete = () => {
+    alert("Delete Temperature");
+  };
+
   return (
     <Layout sideMenu buttonNavigation>
       <div className="container space-y-6">
@@ -89,6 +99,29 @@ const Toddler = () => {
         </div>
 
         <div className="space-y-4">
+          <div>
+            <div className="flex justify-between">
+              <p>体温</p>
+              <button onClick={onClickAdd}>
+                <BsPlusCircle />
+              </button>
+            </div>
+            <div className="flex items-center">
+              <Input id="time" placeholder="例：23:15" variant="underlined" />
+              <div className="ml-2">
+                <Input
+                  id="temperature"
+                  placeholder="例：37°C"
+                  variant="underlined"
+                />
+              </div>
+              <button onClick={onClickDelete}>
+                <BiMinusCircle />
+              </button>
+            </div>
+
+            <div></div>
+          </div>
           <Select label="機嫌" values="MOODS" value="mood" array={MOODS} />
           <Select
             label="運動(活発性)"
