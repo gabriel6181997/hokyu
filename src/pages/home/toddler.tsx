@@ -4,10 +4,20 @@ import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { Input } from "src/components/shared/Input";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { Select } from "src/components/shared/Select";
-import { APPETITES, BREATHS, COUGHS, DIARRHEAS, EXERCISES, FACES, MOODS, SKINS, SLEEPS, URGENCYNUMBERS } from "src/utils/constants/selectoption";
+import {
+  APPETITES,
+  BREATHS,
+  COUGHS,
+  DIARRHEAS,
+  EXERCISES,
+  FACES,
+  MOODS,
+  SKINS,
+  SLEEPS,
+  URGENCYNUMBERS,
+} from "src/utils/constants/selectoption";
 
 const Toddler = () => {
-
   return (
     <Layout sideMenu buttonNavigation>
       <div className="container space-y-6">
@@ -68,22 +78,51 @@ const Toddler = () => {
             </button>
             <p>:</p>
           </label>
-          <Select label="" values="URGENCYNUMBERS" value="urgencynumber" array={URGENCYNUMBERS} />
+          <div className="z-50">
+            <Select
+              label=""
+              values="URGENCYNUMBERS"
+              value="urgencynumber"
+              array={URGENCYNUMBERS}
+            />
+          </div>
         </div>
 
         <div className="space-y-4">
-            <Select label="機嫌" values="MOODS" value="mood" array={MOODS} />
-            <Select label="運動(活発性)" values="EXERCISES" value="exercise" array={EXERCISES}/>
-            <Select label="顔つき" values="FACES" value="face" array={FACES}/>
-            <Select label="食欲" values="APPETITES" value="appetite" array={APPETITES}/>
-            <Select label="呼吸" values="BREATHS" value="breath" array={BREATHS}/>
-            <Select label="睡眠" values="SLEEPS" value="sleep" array={SLEEPS}/>
-            <Select label="下痢、嘔吐" values="DIARRHEAS" value="diarrhea" array={DIARRHEAS}/>
-            <Select label="咳" values="COUGHS" value="cough" array={COUGHS}/>
-            <Select label="皮膚の状況" values="SKINS" value="skin" array={SKINS} />
-
-
-
+          <Select label="機嫌" values="MOODS" value="mood" array={MOODS} />
+          <Select
+            label="運動(活発性)"
+            values="EXERCISES"
+            value="exercise"
+            array={EXERCISES}
+          />
+          <Select label="顔つき" values="FACES" value="face" array={FACES} />
+          <Select
+            label="食欲"
+            values="APPETITES"
+            value="appetite"
+            array={APPETITES}
+          />
+          <Select
+            label="呼吸"
+            values="BREATHS"
+            value="breath"
+            array={BREATHS}
+          />
+          <Select label="睡眠" values="SLEEPS" value="sleep" array={SLEEPS} />
+          <Select
+            label="下痢、嘔吐"
+            values="DIARRHEAS"
+            value="diarrhea"
+            array={DIARRHEAS}
+          />
+          <Select label="咳" values="COUGHS" value="cough" array={COUGHS} />
+          <Select
+            label="皮膚の状況"
+            values="SKINS"
+            value="skin"
+            array={SKINS}
+          />
         </div>
       </div>
     </Layout>

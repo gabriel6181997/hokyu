@@ -1,4 +1,4 @@
-export const URGENCYNUMBERS = [1, 2, 3, 4, 5];
+export const URGENCYNUMBERS = ["1", "2", "3", "4", "5"];
 export const MOODS =  ["普段と同じ","くずっている","不機嫌","落ち着いていない"] //機嫌
 export const EXERCISES = ["普段と同じ", "活気がない", "ぐったりしている"] //運動（活発性）
 export const FACES = ["生き生きしている","普段と同じ",""] // 顔つき
