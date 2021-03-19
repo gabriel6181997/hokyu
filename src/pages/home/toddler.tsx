@@ -95,7 +95,6 @@ const Toddler = () => {
           <div className="z-50">
             <Select
               label=""
-              values="URGENCYNUMBERS"
               value="urgencynumber"
               array={URGENCYNUMBERS}
             />
@@ -126,37 +125,32 @@ const Toddler = () => {
               </button>
             </div>
           </div>
-          <Select label="機嫌" values="MOODS" value="mood" array={MOODS} />
+          <Select label="機嫌"  value="mood" array={MOODS} />
           <Select
             label="運動(活発性)"
-            values="EXERCISES"
             value="exercise"
             array={EXERCISES}
           />
-          <Select label="顔つき" values="FACES" value="face" array={FACES} />
+          <Select label="顔つき" value="face" array={FACES} />
           <Select
             label="食欲"
-            values="APPETITES"
             value="appetite"
             array={APPETITES}
           />
           <Select
             label="呼吸"
-            values="BREATHS"
             value="breath"
             array={BREATHS}
           />
-          <Select label="睡眠" values="SLEEPS" value="sleep" array={SLEEPS} />
+          <Select label="睡眠" value="sleep" array={SLEEPS} />
           <Select
             label="下痢、嘔吐"
-            values="DIARRHEAS"
             value="diarrhea"
             array={DIARRHEAS}
           />
-          <Select label="咳" values="COUGHS" value="cough" array={COUGHS} />
+          <Select label="咳" value="cough" array={COUGHS} />
           <Select
             label="皮膚の状況"
-            values="SKINS"
             value="skin"
             array={SKINS}
           />

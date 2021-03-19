@@ -4,32 +4,30 @@ import { Listbox, Transition } from "@headlessui/react";
 
 type Props = {
   label?: string;
-  values: string;
   value:string;
   array:string[];
 };
 
 export const Select: VFC<Props> = (props) => {
-  const [SelectedArray, setSelectedArray] = useState(props.array[0]);
+  const [selectedArray, setSelectedArray] = useState(props.array[0]);
 
   return(
     <Listbox
       as="div"
       className="space-y-1"
-      value={props.values}
+      value={selectedArray}
       onChange={setSelectedArray}
     >
       {({ open }) => (
         <>
           <Listbox.Label className="block text-sm leading-5 font-medium text-gray-700">
             {props.label}
-            {/* 機嫌 */}
           </Listbox.Label>
           <div className="relative">
             <span className="inline-block w-full rounded-md shadow-sm">
               <Listbox.Button className="cursor-default relative w-full rounded-md border border-gray-300 bg-white pl-3 pr-10 py-2 text-left focus:outline-none focus:shadow-outline-blue focus:border-blue-400 transition ease-in-out duration-300 sm:text-sm sm:leading-5">
                 <span className="block truncate">
-                  {SelectedArray}
+                  {selectedArray}
                 </span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <svg
@@ -63,7 +61,7 @@ export const Select: VFC<Props> = (props) => {
 
 
                 {props.array.map( (item) => (
-                  <Listbox.Option key={props.value} value={props.value}>
+                  <Listbox.Option key={props.value} value={item}>
                     {({ selected, active }) => (
                       <div
                         className={`${
