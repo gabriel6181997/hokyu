@@ -34,7 +34,7 @@ const Toddler = () => {
 
   return (
     <Layout sideMenu buttonNavigation>
-      <div className="container space-y-6">
+      <div className="container space-y-6 mb-6">
         <div className="flex justify-between mt-3 text-lg">
           <PrimaryButton
             button
@@ -171,6 +171,15 @@ const Toddler = () => {
             value="skin"
             array={SKINS}
           />
+          </div>
+          <div>
+            <p>他の症状</p>
+            <Input
+              textarea
+              id="detail"
+              placeholder="他の症状があれば、ご記入ください。"
+              variant="box"
+            />
           </div>
         </div>
       </div>
