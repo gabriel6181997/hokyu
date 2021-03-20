@@ -38,6 +38,7 @@ const Toddler = () => {
           <PrimaryButton
             button
             variant="outline"
+            className="text-base"
             onClick={() => {
               alert("Back");
             }}
@@ -47,7 +48,7 @@ const Toddler = () => {
           <div className="mr-4">
             <PrimaryButton
               button
-              className="mr-5"
+              className="mr-5 text-base"
               variant="outline"
               onClick={() => {
                 alert("Update");
@@ -58,6 +59,7 @@ const Toddler = () => {
             <PrimaryButton
               button
               variant="outline"
+              className="text-base"
               onClick={() => {
                 alert("Delete");
               }}
@@ -103,20 +105,21 @@ const Toddler = () => {
         <div className="space-y-4">
           <div className="space-y-2">
             <div className="flex justify-between">
-              <p>体温</p>
+              <p className="text-sm text-gray-700 font-medium">体温</p>
               <button onClick={onClickAdd}>
                 <BiPlusCircle />
               </button>
             </div>
             <div className="flex items-center">
               <div className="flex-1">
-                <Input id="time" placeholder="例：23:15" variant="underlined" />
+                <Input id="time" placeholder="例：23:15" variant="underlined" className="text-sm" />
               </div>
               <div className="flex-1 ml-2">
                 <Input
                   id="temperature"
                   placeholder="例：37°C"
                   variant="underlined"
+                  className="text-sm"
                 />
               </div>
               <button onClick={onClickDelete}>
@@ -171,13 +174,14 @@ const Toddler = () => {
             array={SKINS}
           />
           </div>
-          <div>
-            <p>他の症状</p>
+          <div className="space-y-1">
+            <p className="text-sm text-gray-700 font-medium">他の症状</p>
             <Input
               textarea
               id="detail"
               placeholder="他の症状があれば、ご記入ください。"
               variant="box"
+              className="text-sm pt-1"
             />
           </div>
         </div>

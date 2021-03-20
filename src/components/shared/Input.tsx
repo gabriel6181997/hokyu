@@ -29,6 +29,7 @@ export const Input:VFC<Props> = (props) => {
          name={props.id}
          placeholder={props.placeholder}
          className={className}
+         minRows={3}
         />
         ) : (
         <input
