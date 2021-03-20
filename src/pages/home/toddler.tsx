@@ -3,8 +3,7 @@ import { Layout } from "src/components/separate/layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { Input } from "src/components/shared/Input";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { BsPlusCircle } from "react-icons/bs";
-import { BiMinusCircle } from "react-icons/bi";
+import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
 import { Select } from "src/components/shared/Select";
 import {
   APPETITES,
@@ -106,7 +105,7 @@ const Toddler = () => {
             <div className="flex justify-between">
               <p>体温</p>
               <button onClick={onClickAdd}>
-                <BsPlusCircle />
+                <BiPlusCircle />
               </button>
             </div>
             <div className="flex items-center">
