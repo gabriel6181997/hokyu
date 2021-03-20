@@ -1,7 +1,7 @@
 export const URGENCYNUMBERS = ["1", "2", "3", "4", "5"];
 export const MOODS =  ["普段と同じ","くずっている","不機嫌","落ち着いていない"] //機嫌
 export const EXERCISES = ["普段と同じ", "活気がない", "ぐったりしている"] //運動（活発性）
-export const FACES = ["生き生きしている","普段と同じ",""] // 顔つき
+export const FACES = ["生き生きしている","普段と同じ","ぼっとしている"] // 顔つき
 export const APPETITES = ["普段と同じ","低下ぎみ","ほとんど食べない"] //食欲
 export const BREATHS = ["普段と同じ","早い","呼吸時に小鼻を動かして肩で呼吸している"]; //呼吸
 export const SLEEPS = ["普段と同じ","眠りが浅い","寝つき、目覚めは悪い"]; //睡眠

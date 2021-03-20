@@ -111,7 +111,7 @@ const Toddler = () => {
             </div>
             <div className="flex items-center">
               <div className="flex-1">
-              <Input id="time" placeholder="例：23:15" variant="underlined" />
+                <Input id="time" placeholder="例：23:15" variant="underlined" />
               </div>
               <div className="flex-1 ml-2">
                 <Input
