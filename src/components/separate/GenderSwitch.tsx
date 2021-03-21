@@ -2,10 +2,11 @@ import { useState } from "react";
 import { GiMale, GiFemale } from "react-icons/gi";
 
 export const GenderSwitch = () => {
-  const [gender, setGender] = useState();
+  const [gender, setGender] = useState("male");
 
   const onClickChangeGender = () => {
-    alert("Change Gender");
+    alert("Change Gender!")
+    // setGender(!gender)
   };
 
   return (
@@ -18,7 +19,7 @@ export const GenderSwitch = () => {
           type="radio"
           name="gender"
           className="absolute top-0 left-0 opacity-0"
-          value="male"
+          value={gender === "male" ? "male" : "female"}
         />
         <span className="text-blue-400">
           <GiMale />
