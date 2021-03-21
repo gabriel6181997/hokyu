@@ -12,10 +12,12 @@ const Register = () => {
       </div>
 
       <div className="text-center mt-7">
+        <div className="relative w-52 mx-auto">
           <Image src="/img/notoddlerimage.png" width={200} height={200} />
-          <button className="absolute right-0 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2">
+          <button className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2">
             <FaCamera />
           </button>
+        </div>
 
         <p className="mt-5 text-2xl font-bold">新規登録</p>
 
@@ -27,7 +29,7 @@ const Register = () => {
 
             <div className="w-72 mx-auto">
               <Input
-                id="password"
+                id="email"
                 placeholder="メールアドレス"
                 variant="underlined"
               />
