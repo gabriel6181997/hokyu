@@ -42,8 +42,8 @@ const Toddler = () => {
 
   return (
     <Layout sideMenu buttonNavigation>
-      <div className="container space-y-6 mb-6">
-        <div className="flex justify-between mt-3 text-lg">
+      <div className="container space-y-6 pb-6">
+        <div className="flex justify-between pt-3 text-lg">
           <PrimaryButton
             button
             variant="outline"

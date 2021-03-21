@@ -5,7 +5,7 @@ import { PrimaryButton } from "src/components/shared/PrimaryButton";
 const myPage = () => {
   return (
     <Layout sideMenu buttonNavigation>
-      <div className="text-center mt-10">
+      <div className="text-center pt-10">
         <Image
           src="/img/gabriel-profile-picture.JPG"
           alt="profile-picture"

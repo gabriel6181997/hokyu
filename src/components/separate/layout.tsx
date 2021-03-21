@@ -44,7 +44,7 @@ export const Layout: VFC<Props> = (props) => {
         ) : null}
         <div className={props.sideMenu ? "md:col-span-9" : "md:col-span-12"}>
           <Header />
-          <main>{props.children}</main>
+          <main className= "border-l  border-r">{props.children}</main>
           {props.buttonNavigation ? (
             <div className="mx:block md:hidden">
               <ButtonNavigation />
