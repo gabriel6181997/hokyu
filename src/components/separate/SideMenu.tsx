@@ -50,11 +50,11 @@ export const SideMenu = () => {
             width={43}
             height={43}
           />
-          <div className="pl-4 text-left">
+          <div className="pl-2 text-left">
             <p className="font-bold">ガブリエル</p>
             <p>gabriel6181997</p>
           </div>
-          <p className="mb-4 text-xl ml-3">…</p>
+          <p className="mb-4 text-xl  ml-1 mr-2">…</p>
         </PrimaryButton>
       </div>
     </aside>
