@@ -81,7 +81,9 @@ const Toddler = () => {
               height={150}
             />
             <div className="text-3xl bg-white border border-gray-700 rounded-full p-1 absolute right-0 bottom-3">
-              <span className="text-blue-400"><GiMale /></span>
+              {/* <span className="text-blue-400"><GiMale /></span> */}
+              <span className="text-rose-300"><GiFemale /></span>
+
 
             </div>
           </div>
