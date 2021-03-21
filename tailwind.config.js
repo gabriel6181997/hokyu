@@ -5,7 +5,7 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   purge: ["./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: 'class', 
   theme: {
     container: {
       padding: '2rem',
