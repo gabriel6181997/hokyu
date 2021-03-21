@@ -56,7 +56,7 @@ const IndexPage = () => {
             <PrimaryButton
               className="px-3 py-1"
               variant="ghost"
-              linkProps={{ href: "/" }}
+              linkProps={{ href: "/register" }}
             >
               アカウントをお持ちでない方は<br />こちらへ
             </PrimaryButton>
