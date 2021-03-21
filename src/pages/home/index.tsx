@@ -3,7 +3,7 @@ import { ToddlerItems } from "src/components/separate/ToddlersItems";
 
 const IndexPage = () => {
   return (
-    <Layout sideMenu buttonNavigation>
+    <Layout addbutton sideMenu buttonNavigation>
       <ToddlerItems />
     </Layout>
   );

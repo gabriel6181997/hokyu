@@ -1,10 +1,15 @@
 import Head from "next/head";
+import Link from "next/link";
+
 import { Header } from "src/components/separate/Header";
 import type { ReactNode, VFC } from "react";
 import { SideMenu } from "src/components/separate/SideMenu";
 import { ButtonNavigation } from "src/components/separate/ButtonNavigation";
 
+import { BsPencilSquare } from "react-icons/bs";
+
 type Props = {
+  addbutton?: boolean;
   buttonNavigation: boolean;
   children: ReactNode;
   header?: boolean;
@@ -44,11 +49,19 @@ export const Layout: VFC<Props> = (props) => {
         ) : null}
         <div className={props.sideMenu ? "md:col-span-9" : "md:col-span-12"}>
           <Header />
-          <main className= "md:border-l  md:border-r">{props.children}</main>
+          <main className="md:border-l  md:border-r">{props.children}</main>
           {props.buttonNavigation ? (
             <div className="mx:block md:hidden">
               <ButtonNavigation />
             </div>
+          ) : null}
+
+          {props.addbutton ? (
+            <button className="mx:block md:hidden fixed right-5 bottom-20 text-xl border rounded-full border-gray-500 p-3 bg-white">
+              <Link href="/home/toddler">
+                <BsPencilSquare />
+              </Link>
+            </button>
           ) : null}
         </div>
       </div>
