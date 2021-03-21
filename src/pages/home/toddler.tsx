@@ -1,12 +1,17 @@
+//Import Libraries
 import Image from "next/image";
+import { useState } from "react";
+
+//Import Components
+import { GenderSwitch } from "src/components/separate/GenderSwitch";
+import { Input } from "src/components/shared/Input";
 import { Layout } from "src/components/separate/layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
-import { Input } from "src/components/shared/Input";
 import { Select } from "src/components/shared/Select";
+
+//Import React Icons
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
-import { GiMale, GiFemale } from "react-icons/gi";
-
 
 import {
   APPETITES,
@@ -33,6 +38,7 @@ const Toddler = () => {
   const onClickShow = () => {
     alert("Show Explanation of urgency number");
   };
+
 
   return (
     <Layout sideMenu buttonNavigation>
@@ -80,11 +86,8 @@ const Toddler = () => {
               width={150}
               height={150}
             />
-            <div className="text-3xl bg-white border border-gray-700 rounded-full p-1 absolute right-0 bottom-3">
-              {/* <span className="text-blue-400"><GiMale /></span> */}
-              <span className="text-rose-300"><GiFemale /></span>
-
-
+            <div className="absolute right-0 bottom-3">
+              <GenderSwitch />
             </div>
           </div>
           <div className="mt-3 ml-20">
@@ -113,7 +116,7 @@ const Toddler = () => {
           <div className="space-y-2">
             <div className="flex justify-between">
               <p className="text-sm text-gray-700 font-medium">体温</p>
-              <button className="text-gray-600" onClick={onClickAdd} >
+              <button className="text-gray-600" onClick={onClickAdd}>
                 <BiPlusCircle />
               </button>
             </div>
