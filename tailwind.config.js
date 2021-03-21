@@ -5,7 +5,7 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   purge: ["./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: 'class', 
+  darkMode: 'class',
   theme: {
     container: {
       padding: '2rem',
@@ -14,6 +14,7 @@ module.exports = {
       blue: colors.blue,
       gray: colors.blueGray,
       white: colors.white,
+      rose: colors.rose
     },
     extend: {
       screens:{
