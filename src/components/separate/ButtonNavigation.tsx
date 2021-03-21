@@ -6,7 +6,7 @@ import { BOTTOM_NAVS } from "src/utils/constants/bottomnav";
 export const ButtonNavigation = () => {
   return (
     <>
-      <nav className="fixed bottom-0 w-full bg-blue-200 py-2">
+      <nav className="fixed bottom-0 w-full bg-blue-200 py-2 text-gray-700 dark:text-gray-700">
         <ul className="flex">
           {BOTTOM_NAVS.map((item) => {
             return (
@@ -26,6 +26,7 @@ export const ButtonNavigation = () => {
                     </svg>
                   </a>
                 </Link>
+                <p className="pt-1 text-sm">{item.label}</p>
               </li>
             )
           })}
@@ -35,12 +36,13 @@ export const ButtonNavigation = () => {
               <a>
                 <Image
                   src="/img/gabriel-profile-picture.JPG"
-                  width={30}
-                  height={30}
+                  width={28}
+                  height={28}
                   className="rounded-full"
                 />
               </a>
             </Link>
+            <p className="text-sm">マイページ</p>
           </li>
         </ul>
       </nav>
