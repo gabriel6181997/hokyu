@@ -107,9 +107,7 @@ const Toddler = () => {
             </button>
             <p>:</p>
           </label>
-          <div className="z-100">
-            <Select label="" value="urgencynumber" array={URGENCYNUMBERS} />
-          </div>
+            <Select label="" className="z-100" value="urgencynumber" array={URGENCYNUMBERS} />
         </div>
 
         <div className="space-y-4">
@@ -142,32 +140,32 @@ const Toddler = () => {
               </button>
             </div>
           </div>
-          <div className="z-90">
-            <Select label="機嫌" value="mood" array={MOODS} />
+          <div>
+            <Select className="z-90" label="機嫌" value="mood" array={MOODS} />
           </div>
-          <div className="z-80">
-            <Select label="運動(活発性)" value="exercise" array={EXERCISES} />
+          <div>
+            <Select className="z-80" label="運動(活発性)" value="exercise" array={EXERCISES} />
           </div>
-          <div className="z-70">
-            <Select label="顔つき" value="face" array={FACES} />
+          <div >
+            <Select className="z-70"  label="顔つき" value="face" array={FACES} />
           </div>
-          <div className="z-60">
-            <Select label="食欲" value="appetite" array={APPETITES} />
+          <div >
+            <Select className="z-60"  label="食欲" value="appetite" array={APPETITES} />
           </div>
-          <div className="z-50">
-            <Select label="呼吸" value="breath" array={BREATHS} />
+          <div >
+            <Select className="z-50"  label="呼吸" value="breath" array={BREATHS} />
           </div>
-          <div className="z-40">
-            <Select label="睡眠" value="sleep" array={SLEEPS} />
+          <div >
+            <Select className="z-40" label="睡眠" value="sleep" array={SLEEPS} />
           </div>
-          <div className="z-30">
-            <Select label="下痢、嘔吐" value="diarrhea" array={DIARRHEAS} />
+          <div >
+            <Select  className="z-30" label="下痢、嘔吐" value="diarrhea" array={DIARRHEAS} />
           </div>
-          <div className="z-20">
-            <Select label="咳" value="cough" array={COUGHS} />
+          <div >
+            <Select className="z-20"  label="咳" value="cough" array={COUGHS} />
           </div>
-          <div className="z-10">
-            <Select label="皮膚の状況" value="skin" array={SKINS} />
+          <div >
+            <Select className="z-10" label="皮膚の状況" value="skin" array={SKINS} />
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-700 font-medium">他の症状</p>

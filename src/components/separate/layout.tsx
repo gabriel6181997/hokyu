@@ -1,11 +1,14 @@
+//import libraries
 import Head from "next/head";
 import Link from "next/link";
-
-import { Header } from "src/components/separate/Header";
 import type { ReactNode, VFC } from "react";
+
+//import components
+import { Header } from "src/components/separate/Header";
 import { SideMenu } from "src/components/separate/SideMenu";
 import { ButtonNavigation } from "src/components/separate/ButtonNavigation";
 
+//import logos
 import { BsPencilSquare } from "react-icons/bs";
 
 type Props = {

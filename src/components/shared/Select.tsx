@@ -1,11 +1,13 @@
 import type { VFC } from "react";
 import {  useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
+import cc from "classcat";
 
 type Props = {
+  array:string[];
+  className?: string;
   label?: string;
   value:string;
-  array:string[];
 };
 
 export const Select: VFC<Props> = (props) => {
@@ -56,7 +58,7 @@ export const Select: VFC<Props> = (props) => {
             >
               <Listbox.Options
                 static
-                className="max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5"
+                className = {cc([props.className, "max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5"])}
               >
 
 
