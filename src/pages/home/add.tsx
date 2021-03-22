@@ -1,6 +1,5 @@
 //Import Libraries
 import Image from "next/image";
-import { useState } from "react";
 
 //Import Components
 import { GenderSwitch } from "src/components/separate/GenderSwitch";
@@ -25,7 +24,6 @@ import {
   SLEEPS,
   URGENCYNUMBERS,
 } from "src/utils/constants/selectoption";
-import { AddressInfo } from "node:net";
 
 const Add = () => {
   const onClickAdd = () => {
