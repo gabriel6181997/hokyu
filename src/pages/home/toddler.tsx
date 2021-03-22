@@ -113,7 +113,7 @@ const Toddler = () => {
         <div className="space-y-4">
           <div className="space-y-2">
             <div className="flex justify-between">
-              <p className="text-sm text-gray-700 font-medium">体温</p>
+              <p className="text-sm text-gray-700 font-medium dark:text-white">体温</p>
               <button className="text-gray-600" onClick={onClickAdd}>
                 <BiPlusCircle />
               </button>
@@ -168,7 +168,7 @@ const Toddler = () => {
             <Select className="z-10" label="皮膚の状況" value="skin" array={SKINS} />
           </div>
           <div className="space-y-1">
-            <p className="text-sm text-gray-700 font-medium">他の症状</p>
+            <p className="text-sm text-gray-700 dark:text-white font-medium">他の症状</p>
             <Input
               textarea
               id="detail"

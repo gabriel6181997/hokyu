@@ -22,12 +22,12 @@ export const Select: VFC<Props> = (props) => {
     >
       {({ open }) => (
         <>
-          <Listbox.Label className="block text-sm leading-5 font-medium text-gray-700">
+          <Listbox.Label className="block text-sm leading-5 font-medium text-gray-700 dark:text-white">
             {props.label}
           </Listbox.Label>
           <div className="relative">
             <span className="inline-block w-full rounded-md shadow-sm">
-              <Listbox.Button className="cursor-default relative w-full rounded-md border border-gray-300 bg-white pl-3 pr-10 py-2 text-left focus:outline-none focus:shadow-outline-blue focus:border-blue-400 transition ease-in-out duration-300 sm:text-sm sm:leading-5">
+              <Listbox.Button className="cursor-default relative w-full rounded-md border border-gray-300 bg-white dark:bg-gray-900 pl-3 pr-10 py-2 text-left focus:outline-none focus:shadow-outline-blue focus:border-blue-400 transition ease-in-out duration-300 sm:text-sm sm:leading-5">
                 <span className="block truncate">
                   {selectedArray}
                 </span>
@@ -54,13 +54,12 @@ export const Select: VFC<Props> = (props) => {
               leave="transition ease-in duration-100"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
-              className="absolute mt-1 w-full rounded-md bg-white shadow-lg"
+              className="absolute mt-1 w-full rounded-md bg-white dark:bg-gray-900 shadow-lg"
             >
               <Listbox.Options
                 static
-                className = {cc([props.className, "max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5"])}
+                className = {cc([props.className, "max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm border sm:leading-5"])}
               >
-
 
                 {props.array.map( (item) => (
                   <Listbox.Option key={props.value} value={item}>
@@ -69,7 +68,7 @@ export const Select: VFC<Props> = (props) => {
                         className={`${
                           active
                             ? "text-white bg-blue-600"
-                            : "text-gray-900"
+                            : "text-gray-900 dark:text-white"
                         } cursor-default select-none relative py-2 pl-8 pr-4`}
                       >
                         <span
