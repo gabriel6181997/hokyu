@@ -5,7 +5,6 @@ export const GenderSwitch = () => {
   const [gender, setGender] = useState(false);
 
   const onClickChangeGender = () => {
-    alert("GENDER CHANGE");
     setGender(!gender);
   };
 
