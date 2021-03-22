@@ -1,5 +1,7 @@
 //Import Libraries
 import Image from "next/image";
+import Modal from 'react-modal';
+import {useState} from "react";
 
 //Import Components
 import { GenderSwitch } from "src/components/separate/GenderSwitch";
@@ -25,6 +27,7 @@ import {
   URGENCYNUMBERS,
 } from "src/utils/constants/selectoption";
 
+
 const Add = () => {
   const onClickAdd = () => {
     alert("Add Input");
@@ -34,10 +37,15 @@ const Add = () => {
     alert("Delete Temperature");
   };
 
-  const onClickShow = () => {
-    alert("Show Explanation of urgency number");
-  };
+  // var subtitle;
+  const [modalIsOpen,setIsOpen] = useState(false);
+  function openModal() {
+    setIsOpen(true);
+  }
 
+  function closeModal(){
+  setIsOpen(false);
+  }
 
   return (
     <Layout sideMenu buttonNavigation>
@@ -112,13 +120,28 @@ const Add = () => {
         <div className="flex items-center justify-center">
           <label className="flex mr-6">
             <p>緊急度</p>
-            <button className="mx-1" onClick={onClickShow}>
+            <button className="mx-1" onClick={openModal}>
               <AiOutlineQuestionCircle />
             </button>
             <p>:</p>
           </label>
             <Select label="" className="z-100" value="urgencynumber" array={URGENCYNUMBERS} />
         </div>
+
+      <div>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Urgency Modal"
+          className="bg-blue-200 w-80 relative top-1/3 left-1/4 md:left-1/2 right-auto bottom-auto -translate-x-1/2 -translate-y-1/2 p-5"
+        >
+
+          <button className="absolute top-1 right-4 font-bold" onClick={closeModal}>X</button>
+          <h1 className="font-bold text-center">緊急度</h1>
+          <p className="pt-7">緊急度とは、園医が幼児の身体状況によって決める数字です。数字が高ければ高いほど、状況が厳しいです。5は最も厳しい状況を表すもので、救急車を呼ぶ必要があります。</p>
+        </Modal>
+      </div>
+
 
         <div className="space-y-4">
           <div className="space-y-2">
