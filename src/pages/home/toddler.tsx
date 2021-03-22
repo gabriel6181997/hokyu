@@ -114,7 +114,7 @@ const Toddler = () => {
           <div className="space-y-2">
             <div className="flex justify-between">
               <p className="text-sm text-gray-700 font-medium dark:text-white">体温</p>
-              <button className="text-gray-600" onClick={onClickAdd}>
+              <button className="text-gray-600 dark:text-white" onClick={onClickAdd}>
                 <BiPlusCircle />
               </button>
             </div>
@@ -135,7 +135,7 @@ const Toddler = () => {
                   className="text-sm"
                 />
               </div>
-              <button className="text-gray-600" onClick={onClickDelete}>
+              <button className="text-gray-600 dark:text-white ml-1" onClick={onClickDelete}>
                 <BiMinusCircle />
               </button>
             </div>
