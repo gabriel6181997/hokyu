@@ -1,6 +1,6 @@
 //Import Libraries
 import Image from "next/image";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import {useState} from "react";
 
 //Import Components
