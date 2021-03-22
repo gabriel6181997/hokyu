@@ -4,7 +4,7 @@ import { PrimaryButton } from "src/components/shared/PrimaryButton";
 
 const myPage = () => {
   return (
-    <Layout addbutton sideMenu buttonNavigation>
+    <Layout addbutton sideMenu buttonNavigation title="マイページ">
       <div className="text-center pt-10">
         <Image
           src="/img/gabriel-profile-picture.JPG"

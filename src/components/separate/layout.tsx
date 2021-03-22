@@ -21,6 +21,7 @@ type Props = {
     description?: string;
   };
   sideMenu?: boolean;
+  title:string;
 };
 
 export const Layout: VFC<Props> = (props) => {
@@ -51,7 +52,7 @@ export const Layout: VFC<Props> = (props) => {
           </div>
         ) : null}
         <div className={props.sideMenu ? "md:col-span-9" : "md:col-span-12"}>
-          <Header />
+          <Header title={props.title}/>
           <main className="md:border-l  md:border-r">{props.children}</main>
           {props.buttonNavigation ? (
             <div className="mx:block md:hidden">

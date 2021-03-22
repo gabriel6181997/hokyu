@@ -37,7 +37,6 @@ const Add = () => {
     alert("Delete Temperature");
   };
 
-  // var subtitle;
   const [modalIsOpen,setIsOpen] = useState(false);
   function openModal() {
     setIsOpen(true);
@@ -48,7 +47,7 @@ const Add = () => {
   }
 
   return (
-    <Layout sideMenu buttonNavigation title="aaa">
+    <Layout sideMenu buttonNavigation title="新規幼児">
       <div className="container space-y-6 pb-6">
         <div className="flex justify-between pt-3 text-lg">
           <PrimaryButton
