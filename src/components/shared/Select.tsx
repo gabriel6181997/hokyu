@@ -54,11 +54,11 @@ export const Select: VFC<Props> = (props) => {
               leave="transition ease-in duration-100"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
-              className="absolute mt-1 w-full rounded-md bg-white dark:bg-gray-900 shadow-lg"
+              className="absolute mt-1 w-full rounded-md bg-white dark:bg-gray-900 shadow-lg z-100"
             >
               <Listbox.Options
                 static
-                className = {cc([props.className, "max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm border sm:leading-5"])}
+                className = "max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm border sm:leading-5"
               >
 
                 {props.array.map( (item) => (

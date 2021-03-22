@@ -48,7 +48,7 @@ const Add = () => {
   }
 
   return (
-    <Layout sideMenu buttonNavigation>
+    <Layout sideMenu buttonNavigation title="aaa">
       <div className="container space-y-6 pb-6">
         <div className="flex justify-between pt-3 text-lg">
           <PrimaryButton
@@ -174,31 +174,31 @@ const Add = () => {
             </div>
           </div>
           <div>
-            <Select className="z-90" label="機嫌" value="mood" array={MOODS} />
+            <Select label="機嫌" value="mood" array={MOODS} />
           </div>
           <div>
-            <Select className="z-80" label="運動(活発性)" value="exercise" array={EXERCISES} />
+            <Select label="運動(活発性)" value="exercise" array={EXERCISES} />
           </div>
           <div >
-            <Select className="z-70"  label="顔つき" value="face" array={FACES} />
+            <Select label="顔つき" value="face" array={FACES} />
           </div>
           <div >
-            <Select className="z-60"  label="食欲" value="appetite" array={APPETITES} />
+            <Select label="食欲" value="appetite" array={APPETITES} />
           </div>
           <div >
-            <Select className="z-50"  label="呼吸" value="breath" array={BREATHS} />
+            <Select label="呼吸" value="breath" array={BREATHS} />
           </div>
           <div >
-            <Select className="z-40" label="睡眠" value="sleep" array={SLEEPS} />
+            <Select label="睡眠" value="sleep" array={SLEEPS} />
           </div>
           <div >
-            <Select  className="z-30" label="下痢、嘔吐" value="diarrhea" array={DIARRHEAS} />
+            <Select label="下痢、嘔吐" value="diarrhea" array={DIARRHEAS} />
           </div>
           <div >
-            <Select className="z-20"  label="咳" value="cough" array={COUGHS} />
+            <Select label="咳" value="cough" array={COUGHS} />
           </div>
           <div >
-            <Select className="z-10" label="皮膚の状況" value="skin" array={SKINS} />
+            <Select label="皮膚の状況" value="skin" array={SKINS} />
           </div>
           <div className="space-y-1">
             <p className="text-sm text-gray-700 dark:text-white font-medium">他の症状</p>
