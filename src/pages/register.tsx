@@ -14,7 +14,7 @@ const Register = () => {
       <div className="text-center mt-7">
         <div className="relative w-52 mx-auto">
           <Image src="/img/notoddlerimage.png" width={200} height={200} />
-          <button className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2">
+          <button className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700">
             <FaCamera />
           </button>
         </div>
