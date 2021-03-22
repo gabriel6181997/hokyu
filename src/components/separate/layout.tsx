@@ -60,7 +60,7 @@ export const Layout: VFC<Props> = (props) => {
           ) : null}
 
           {props.addbutton ? (
-            <Link href="/home/toddler">
+            <Link href="/home/add">
               <button className="mx:block md:hidden fixed right-5 bottom-20 text-xl border rounded-full border-gray-500 p-3 bg-white">
                 <BsPencilSquare />
               </button>

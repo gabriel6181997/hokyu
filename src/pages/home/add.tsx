@@ -25,8 +25,9 @@ import {
   SLEEPS,
   URGENCYNUMBERS,
 } from "src/utils/constants/selectoption";
+import { AddressInfo } from "node:net";
 
-const Toddler = () => {
+const Add = () => {
   const onClickAdd = () => {
     alert("Add Input");
   };
@@ -54,8 +55,8 @@ const Toddler = () => {
           >
             ←戻る
           </PrimaryButton>
-          <div className="mr-4">
-            <PrimaryButton
+          <div>
+            {/* <PrimaryButton
               button
               className="mr-5 text-base"
               variant="outline"
@@ -74,7 +75,18 @@ const Toddler = () => {
               }}
             >
               削除する
+            </PrimaryButton> */}
+             <PrimaryButton
+              button
+              variant="outline"
+              className="text-base"
+              onClick={() => {
+                alert("Add Toddler");
+              }}
+            >
+              追加する
             </PrimaryButton>
+
           </div>
         </div>
 
@@ -183,4 +195,4 @@ const Toddler = () => {
   );
 };
 
-export default Toddler;
+export default Add;
