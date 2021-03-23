@@ -7,7 +7,10 @@ export const SideMenu = () => {
 
   return (
     <aside className="flex flex-col ml-auto w-48 sticky h-screen top-0">
-      <h1 className="py-8 text-center">ロゴ</h1>
+      <div className="ml-2 py-7 text-center flex items-center">
+        <Image src="/img/logo.png" alt="logo" width={50} height={50}/>
+        <h1 className="font-custom text-3xl pl-2">Hokyu</h1>
+      </div>
       <nav>
         <ul>
           {GLOBAL_MENUS.map(({ icon, label, href }) => (
