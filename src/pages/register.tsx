@@ -1,10 +1,36 @@
+//Import Libraries
+import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
+
+//Import Components
 import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
 import { Input } from "src/components/shared/Input";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
+import {auth} from "src/firebase"
+
+//Import Icons
 import { FaCamera } from "react-icons/fa";
 
 const Register = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const router = useRouter();
+
+  const createAccount = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        alert("アカウントを登録しました。ログインしてください");
+        router.push("/");
+
+        return authUser.user?.updateProfile({ displayName: username });
+      })
+      .catch((error) => alert(error.message));
+  };
+
   return (
     <>
       <div className=" mt-3 text-right mr-10  md:mr-20">
@@ -54,9 +80,10 @@ const Register = () => {
 
           <div className="mt-10">
             <PrimaryButton
+              button
               className="px-20 py-2 my-1 text-xl"
               variant="solid"
-              linkProps={{ href: "/" }}
+              onClick={createAccount}
             >
               登録
             </PrimaryButton>
