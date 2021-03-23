@@ -19,22 +19,22 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const router = useRouter();
 
-  const addName = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const inputName = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setName(e.currentTarget.value);
     console.log(name);
   };
 
-  const addUsername = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const inputUsername = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setUsername(e.currentTarget.value);
     console.log(username);
   };
 
-  const addEmail = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const inputEmail = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
     console.log(email);
   };
 
-  const addPassword = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const inputPassword = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setPassword(e.currentTarget.value);
     console.log(password);
   };
@@ -75,7 +75,7 @@ const Register = () => {
                 id="name"
                 placeholder="名前"
                 variant="underlined"
-                onChange={addName}
+                onChange={inputName}
               />
             </div>
 
@@ -84,7 +84,7 @@ const Register = () => {
                 id="username"
                 placeholder="ユーザーネーム"
                 variant="underlined"
-                onChange={addUsername}
+                onChange={inputUsername}
               />
             </div>
 
@@ -93,7 +93,7 @@ const Register = () => {
                 id="email"
                 placeholder="メールアドレス"
                 variant="underlined"
-                onChange={addEmail}
+                onChange={inputEmail}
               />
             </div>
 
@@ -102,7 +102,7 @@ const Register = () => {
                 id="password"
                 placeholder="パスワード"
                 variant="underlined"
-                onChange={addPassword}
+                onChange={inputPassword}
               />
             </div>
           </div>
