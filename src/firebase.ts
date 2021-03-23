@@ -16,8 +16,5 @@ if (!firebase.apps.length) {
 firebase.initializeApp(firebaseConfig);
 }
 
-// const admin = require('firebase-admin');
-// admin.initializeApp();
-
 export const auth = firebase.auth();
 export const db = firebase.firestore();

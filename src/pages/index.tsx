@@ -7,7 +7,7 @@ import {auth} from "src/firebase";
 
 const IndexPage = () => {
 
-  // console.log(auth);
+  console.log(auth);
 
   return (
     <>
