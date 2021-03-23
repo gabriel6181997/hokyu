@@ -18,6 +18,11 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const router = useRouter();
 
+  const addEmail = (e) => {
+    setEmail(e.target.value)
+    console.log(email);
+  }
+
   const createAccount = (e: React.SyntheticEvent) => {
     e.preventDefault();
     auth
@@ -58,7 +63,6 @@ const Register = () => {
                 id="username"
                 placeholder="ユーザーネーム"
                 variant="underlined"
-                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
 
@@ -67,6 +71,7 @@ const Register = () => {
                 id="email"
                 placeholder="メールアドレス"
                 variant="underlined"
+                onChange={addEmail}
               />
             </div>
 
