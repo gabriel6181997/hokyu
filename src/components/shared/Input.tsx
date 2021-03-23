@@ -7,6 +7,7 @@ type Props = {
   error?: string;
   id:string;
   placeholder?:string;
+  onChange?: ()=> void;
   textarea?:boolean;
   variant: "underlined" | "box";
 };
@@ -27,6 +28,7 @@ export const Input:VFC<Props> = (props) => {
         <TextAreaAutoSize
          id={props.id}
          name={props.id}
+         onChange={props.onChange}
          placeholder={props.placeholder}
          className={className}
          minRows={3}
@@ -38,6 +40,7 @@ export const Input:VFC<Props> = (props) => {
           name={props.id}
           placeholder={props.placeholder}
           className={className}
+          onChange={props.onChange}
         />
         )
       }
