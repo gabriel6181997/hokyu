@@ -9,11 +9,15 @@ const IndexPage = () => {
       <div className=" mt-3 text-right mr-10  md:mr-20">
         <DarkModeSwitch />
       </div>
-      <div className="text-center mt-7">
-        <Image src="/img/temporary_logo.jpg" width={200} height={200} />
-        <p className="mt-5 text-2xl font-bold">ログイン</p>
+      <div className="text-center mt-5 mx-auto">
+        <Image src="/img/loginpageimage.png" width={250} height={200} />
+        {/* <p className="mt-5 text-2xl font-bold">ログイン</p> */}
+        <div className="pl-2 flex items-center w-44 mx-auto mt-5">
+          <Image src="/img/logo.png" alt="logo" width={50} height={50} />
+          <h1 className="font-custom text-3xl pl-2">Hokyu</h1>
+        </div>
 
-        <div className="mt-10">
+        <div className="mt-8">
           <div className="w-72 mx-auto">
             <Input
               id="email"
@@ -22,7 +26,7 @@ const IndexPage = () => {
             />
           </div>
 
-          <div className="w-72 mx-auto mt-4">
+          <div className="w-72 mx-auto mt-5">
             <Input
               id="password"
               placeholder="パスワード"
@@ -58,7 +62,9 @@ const IndexPage = () => {
               variant="ghost"
               linkProps={{ href: "/register" }}
             >
-              アカウントをお持ちでない方は<br />こちらへ
+              アカウントをお持ちでない方は
+              <br />
+              こちらへ
             </PrimaryButton>
           </div>
         </div>
