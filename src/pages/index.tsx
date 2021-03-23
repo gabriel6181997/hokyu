@@ -3,11 +3,8 @@ import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
 import { Input } from "src/components/shared/Input";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 
-import {auth} from "src/firebase";
 
 const IndexPage = () => {
-
-  console.log(auth);
 
   return (
     <>
