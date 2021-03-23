@@ -11,7 +11,6 @@ const IndexPage = () => {
       </div>
       <div className="text-center mt-5 mx-auto">
         <Image src="/img/loginpageimage.png" width={250} height={200} />
-        {/* <p className="mt-5 text-2xl font-bold">ログイン</p> */}
         <div className="pl-2 flex items-center w-44 mx-auto mt-5">
           <Image src="/img/logo.png" alt="logo" width={50} height={50} />
           <h1 className="font-custom text-3xl pl-2">Hokyu</h1>
