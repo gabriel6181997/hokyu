@@ -19,6 +19,9 @@ module.exports = {
     extend: {
       screens:{
         'mx': {'max': '767px'},
+      },
+      fontFamily: {
+        custom: ['Righteous', 'sans-serif']
       }
     },
     zIndex: {
