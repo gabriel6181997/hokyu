@@ -29,6 +29,14 @@ const Register = () => {
 
             <div className="w-72 mx-auto">
               <Input
+                id="username"
+                placeholder="ユーザーネーム"
+                variant="underlined"
+              />
+            </div>
+
+            <div className="w-72 mx-auto">
+              <Input
                 id="email"
                 placeholder="メールアドレス"
                 variant="underlined"
