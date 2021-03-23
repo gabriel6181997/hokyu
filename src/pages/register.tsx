@@ -58,6 +58,7 @@ const Register = () => {
                 id="username"
                 placeholder="ユーザーネーム"
                 variant="underlined"
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
 
