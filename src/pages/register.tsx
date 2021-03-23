@@ -1,27 +1,43 @@
 //Import Libraries
-import React, { useState } from "react";
 import Image from "next/image";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 //Import Components
+import { auth } from "src/firebase";
 import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
 import { Input } from "src/components/shared/Input";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
-import {auth} from "src/firebase"
 
 //Import Icons
 import { FaCamera } from "react-icons/fa";
 
 const Register = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const router = useRouter();
 
-  const addEmail = (e) => {
-    setEmail(e.target.value)
+  const addName = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    setName(e.currentTarget.value);
+    console.log(name);
+  };
+
+  const addUsername = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    setUsername(e.currentTarget.value);
+    console.log(username);
+  };
+
+  const addEmail = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    setEmail(e.currentTarget.value);
     console.log(email);
-  }
+  };
+
+  const addPassword = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    setPassword(e.currentTarget.value);
+    console.log(password);
+  };
 
   const createAccount = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -55,7 +71,12 @@ const Register = () => {
         <div>
           <div className=" mt-6 space-y-5">
             <div className="w-72 mx-auto">
-              <Input id="name" placeholder="名前" variant="underlined" />
+              <Input
+                id="name"
+                placeholder="名前"
+                variant="underlined"
+                onChange={addName}
+              />
             </div>
 
             <div className="w-72 mx-auto">
@@ -63,6 +84,7 @@ const Register = () => {
                 id="username"
                 placeholder="ユーザーネーム"
                 variant="underlined"
+                onChange={addUsername}
               />
             </div>
 
@@ -80,6 +102,7 @@ const Register = () => {
                 id="password"
                 placeholder="パスワード"
                 variant="underlined"
+                onChange={addPassword}
               />
             </div>
           </div>
