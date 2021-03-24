@@ -22,7 +22,7 @@ const IndexPage = () => {
           <div className="w-72 mx-auto">
             <Input
               id="email"
-              placeholder="ユーザー名/メールアドレス"
+              placeholder="メールアドレス"
               variant="underlined"
             />
           </div>
