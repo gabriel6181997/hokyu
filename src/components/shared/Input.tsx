@@ -1,5 +1,5 @@
 import cc from "classcat";
-import type {InputHTMLAttributes, VFC} from "react";
+import type {InputHTMLAttributes, TextareaHTMLAttributes, VFC} from "react";
 import TextAreaAutoSize from "react-textarea-autosize";
 
 type Props = {
@@ -7,8 +7,7 @@ type Props = {
   error?: string;
   id:string;
   placeholder?:string;
-  onChange: InputHTMLAttributes<HTMLInputElement>["onChange"];
-  // onChangeTextarea? : InputHTMLAttributes<HTMLTextAreaElement>["onChange"];
+  onChange?: InputHTMLAttributes<HTMLInputElement>["onChange"];onChangeTextarea?:TextareaHTMLAttributes<HTMLTextAreaElement>["onChange"];
   textarea?:boolean;
   variant: "underlined" | "box";
 };
@@ -29,7 +28,7 @@ export const Input:VFC<Props> = (props) => {
         <TextAreaAutoSize
          id={props.id}
          name={props.id}
-        //  onChange={props.onChangeTextarea}
+         onChange={props.onChangeTextarea}
          placeholder={props.placeholder}
          className={className}
          minRows={3}
