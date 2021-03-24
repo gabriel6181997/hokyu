@@ -21,22 +21,18 @@ const Register = () => {
 
   const inputName = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setName(e.currentTarget.value);
-    console.log(name);
   };
 
   const inputUsername = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setUsername(e.currentTarget.value);
-    console.log(username);
   };
 
   const inputEmail = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
-    console.log(email);
   };
 
   const inputPassword = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setPassword(e.currentTarget.value);
-    console.log(password);
   };
 
   const createAccount = (e: React.SyntheticEvent) => {
@@ -45,6 +41,7 @@ const Register = () => {
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
         db.collection("users")
+          // if(auth.currentUser === null) return;
           .doc(auth.currentUser.uid)
           .set({
             name:name,
