@@ -1,10 +1,21 @@
 import Image from "next/image";
+import { InputHTMLAttributes, useState } from "react";
 import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
 import { Input } from "src/components/shared/Input";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 
 
 const IndexPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const inputEmail: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e)  => {
+    setEmail(e.target.value);
+  };
+
+  const inputPassword: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+    setPassword(e.target.value);
+  };
 
   return (
     <>
@@ -24,6 +35,7 @@ const IndexPage = () => {
               id="email"
               placeholder="メールアドレス"
               variant="underlined"
+              onChange={inputEmail}
             />
           </div>
 
@@ -32,6 +44,7 @@ const IndexPage = () => {
               id="password"
               placeholder="パスワード"
               variant="underlined"
+              onChange={inputPassword}
             />
           </div>
         </div>
