@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 //Import Components
-import { auth } from "src/firebase";
+import { auth, db, storage } from "src/firebase";
 import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
 import { Input } from "src/components/shared/Input";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
@@ -43,13 +43,21 @@ const Register = () => {
     e.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then((authUser) => {
+      .then((user) => {
+        db.collection("users")
+          .doc(auth.currentUser.uid)
+          .set({
+            name:name,
+            username:username,
+          })
+          .catch((error) => {
+            alert("ネームとユーザーネームの登録に失敗しました");
+          });
+
         alert("アカウントを登録しました。ログインしてください");
         router.push("/");
-
-        return authUser.user?.updateProfile({ displayName: username });
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => alert("新規登録に失敗しました"));
   };
 
   return (
