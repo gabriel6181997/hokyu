@@ -1,6 +1,6 @@
 //Import Libraries
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { InputHTMLAttributes, useState } from "react";
 import { useRouter } from "next/router";
 
 //Import Components
@@ -19,20 +19,20 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const router = useRouter();
 
-  const inputName = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setName(e.currentTarget.value);
+  const inputName: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+    setName(e.target.value);
   };
 
-  const inputUsername = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setUsername(e.currentTarget.value);
+  const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+    setUsername(e.target.value);
   };
 
-  const inputEmail = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value);
+  const inputEmail: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e)  => {
+    setEmail(e.target.value);
   };
 
-  const inputPassword = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setPassword(e.currentTarget.value);
+  const inputPassword: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+    setPassword(e.target.value);
   };
 
   const createAccount = (e: React.SyntheticEvent) => {
@@ -40,8 +40,8 @@ const Register = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
+        if(!auth.currentUser) return;
         db.collection("users")
-          // if(auth.currentUser === null) return;
           .doc(auth.currentUser.uid)
           .set({
             name:name,
