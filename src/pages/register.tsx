@@ -29,7 +29,9 @@ const Register = () => {
       const img = document.getElementById("avatar") as HTMLImageElement;
       img.src = _e.target.result;
     };
-    reader.readAsDataURL(file);
+    if(file){
+      reader.readAsDataURL(file);
+    }
     setProfileImageFile(file);
   };
 
