@@ -20,39 +20,45 @@ const Register = () => {
   const router = useRouter();
 
   const handleChange = () => {
-    alert("handle change")
-  }
+    alert("handle change");
+  };
 
   const uploadProfileImage = () => {
     // alert("Upload Profile Image");
-    const uploadTask = storage.ref(`images/mountains.jpg`).put("profile_picture");
+    const uploadTask = storage
+      .ref(`images/mountains.jpg`)
+      .put("profile_picture");
     uploadTask.on(
       "state_changed",
       (snapshot) => {
         const progressValue = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
-        console.log('Upload is ' + progressValue + '% done');
+        console.log("Upload is " + progressValue + "% done");
       },
       (error) => {
         alert("fail to upload image");
       }
-   )
-  }
+    );
+  };
 
   const inputName: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
     setName(e.target.value);
   };
 
-  const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+  const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (
+    e
+  ) => {
     setUsername(e.target.value);
   };
 
-  const inputEmail: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e)  => {
+  const inputEmail: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
     setEmail(e.target.value);
   };
 
-  const inputPassword: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+  const inputPassword: InputHTMLAttributes<HTMLInputElement>["onChange"] = (
+    e
+  ) => {
     setPassword(e.target.value);
   };
 
@@ -61,12 +67,12 @@ const Register = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        if(!auth.currentUser) return;
+        if (!auth.currentUser) return;
         db.collection("users")
           .doc(auth.currentUser.uid)
           .set({
-            name:name,
-            username:username,
+            name: name,
+            username: username,
           })
           .catch((error) => {
             alert("ネームとユーザーネームの登録に失敗しました");
@@ -86,10 +92,22 @@ const Register = () => {
 
       <div className="text-center mt-7">
         <div className="relative w-52 mx-auto">
-          <Image src="/img/notoddlerimage.png" width={200} height={200} />
+          <Image
+            src="/img/notoddlerimage.png"
+            alt="profile-picture"
+            width={200}
+            height={200}
+          />
 
-          <input className="z-10 opacity-0 absolute bottom-4 right-10 w-6" type="file" onChange={handleChange} />
-          <div className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700" onClick={handleChange}>
+          <input
+            className="z-10 opacity-0 absolute bottom-4 right-9 w-8"
+            type="file"
+            onChange={handleChange}
+          />
+          <div
+            className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700"
+            onClick={handleChange}
+          >
             <FaCamera />
           </div>
         </div>
