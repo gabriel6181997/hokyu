@@ -104,16 +104,14 @@ const Register = () => {
 
       <div className="text-center mt-7">
         <div className="relative w-52 mx-auto">
-          <div className="rounded-full border border-gray-700">
-          <Image
-            src={ "/img/nouserimage.jpg"}
+          <img
+            src={ profileimageFile ?? "/img/nouserimage.jpg"}
             alt="profile-picture"
             width={200}
             height={200}
-            className="rounded-full object-cover"
+            className="mx-auto rounded-full border border-gray-700 object-cover"
             id="avatar"
           />
-          </div>
 
           <input
             className="z-10 opacity-0 absolute bottom-4 right-9 w-8"
@@ -121,7 +119,7 @@ const Register = () => {
             onChange={handleChange}
           />
           <div
-            className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700"
+            className="absolute left-2/3 bottom-2  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700"
             onClick={handleChange}
           >
             <FaCamera />
