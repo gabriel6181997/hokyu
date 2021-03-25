@@ -14,7 +14,7 @@ import { FaCamera } from "react-icons/fa";
 
 const Register = () => {
   const [email, setEmail] = useState("");
-  const [profileimageFile, setProfileImageFile] = useState<any>(null);
+  const [profileImageFile, setProfileImageFile] = useState<any>(null);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [progress, setProgress] = useState(0);
@@ -23,36 +23,17 @@ const Register = () => {
 
   const handleChange = (e: any) => {
     const file = e.target.files[0];
-    console.log(file)
+    console.log(file);
     const reader = new FileReader();
     reader.onload = (_e: any) => {
       const img = document.getElementById("avatar") as HTMLImageElement;
       img.src = _e.target.result;
     };
-    if(file){
+    if (file) {
       reader.readAsDataURL(file);
     }
     setProfileImageFile(file);
   };
-
-  // const uploadProfileImage = () => {
-  //   // alert("Upload Profile Image");
-  //   const uploadTask = storage
-  //     .ref(`images/mountains.jpg`)
-  //     .put("profile_picture");
-  //   uploadTask.on(
-  //     "state_changed",
-  //     (snapshot) => {
-  //       const progressValue = Math.round(
-  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-  //       );
-  //       console.log("Upload is " + progressValue + "% done");
-  //     },
-  //     (error) => {
-  //       alert("fail to upload image");
-  //     }
-  //   );
-  // };
 
   const inputName: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
     setName(e.target.value);
@@ -90,6 +71,23 @@ const Register = () => {
             alert("ネームとユーザーネームの登録に失敗しました");
           });
 
+        const uploadTask = storage
+          .ref(`profileImageFile/${profileImageFile.name}`)
+          .put(profileImageFile);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progressValue = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setProgress(progressValue)
+            console.log("Upload is " + progressValue + "% done");
+          },
+          (error) => {
+            alert("fail to upload image");
+          }
+        );
+
         alert("アカウントを登録しました。ログインしてください");
         router.push("/");
       })
@@ -105,7 +103,7 @@ const Register = () => {
       <div className="text-center mt-7">
         <div className="relative w-52 mx-auto">
           <img
-            src={ profileimageFile ?? "/img/nouserimage.jpg"}
+            src={profileImageFile ?? "/img/nouserimage.jpg"}
             alt="profile-picture"
             className="mx-auto rounded-full border border-gray-700 w-48 h-48 object-cover"
             id="avatar"
