@@ -107,9 +107,7 @@ const Register = () => {
           <img
             src={ profileimageFile ?? "/img/nouserimage.jpg"}
             alt="profile-picture"
-            width={200}
-            height={200}
-            className="mx-auto rounded-full border border-gray-700 object-cover"
+            className="mx-auto rounded-full border border-gray-700 w-48 h-48 object-cover"
             id="avatar"
           />
 
