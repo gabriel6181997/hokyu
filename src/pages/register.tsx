@@ -92,12 +92,15 @@ const Register = () => {
 
       <div className="text-center mt-7">
         <div className="relative w-52 mx-auto">
+          <div className="rounded-full border border-gray-700">
           <Image
-            src="/img/notoddlerimage.png"
+            src="/img/nouserimage.jpg"
             alt="profile-picture"
             width={200}
             height={200}
+            className="rounded-full object-cover"
           />
+          </div>
 
           <input
             className="z-10 opacity-0 absolute bottom-4 right-9 w-8"
