@@ -19,6 +19,10 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const router = useRouter();
 
+  const handleChange = () => {
+    alert("handle change")
+  }
+
   const uploadProfileImage = () => {
     // alert("Upload Profile Image");
     const uploadTask = storage.ref(`images/mountains.jpg`).put("profile_picture");
@@ -83,7 +87,9 @@ const Register = () => {
       <div className="text-center mt-7">
         <div className="relative w-52 mx-auto">
           <Image src="/img/notoddlerimage.png" width={200} height={200} />
-          <button className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700" onClick={uploadProfileImage}>
+
+          <input className="absolute bottom-3 right-3 w-6" type="file" onChange={handleChange} />
+          <button className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700" onClick={handleChange}>
             <FaCamera />
           </button>
         </div>
