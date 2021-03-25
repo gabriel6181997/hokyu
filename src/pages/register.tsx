@@ -88,10 +88,10 @@ const Register = () => {
         <div className="relative w-52 mx-auto">
           <Image src="/img/notoddlerimage.png" width={200} height={200} />
 
-          <input className="absolute bottom-3 right-3 w-6" type="file" onChange={handleChange} />
-          <button className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700" onClick={handleChange}>
+          <input className="z-10 opacity-0 absolute bottom-4 right-10 w-6" type="file" onChange={handleChange} />
+          <div className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700" onClick={handleChange}>
             <FaCamera />
-          </button>
+          </div>
         </div>
 
         <p className="mt-5 text-2xl font-bold">新規登録</p>
