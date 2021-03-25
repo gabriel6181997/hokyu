@@ -19,6 +19,23 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const router = useRouter();
 
+  const uploadProfileImage = () => {
+    // alert("Upload Profile Image");
+    const uploadTask = storage.ref(`images/mountains.jpg`).put("profile_picture");
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progressValue = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+        );
+        console.log('Upload is ' + progressValue + '% done');
+      },
+      (error) => {
+        alert("fail to upload image");
+      }
+   )
+  }
+
   const inputName: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
     setName(e.target.value);
   };
@@ -66,7 +83,7 @@ const Register = () => {
       <div className="text-center mt-7">
         <div className="relative w-52 mx-auto">
           <Image src="/img/notoddlerimage.png" width={200} height={200} />
-          <button className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700">
+          <button className="absolute left-2/3 bottom-3  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700" onClick={uploadProfileImage}>
             <FaCamera />
           </button>
         </div>
