@@ -1,5 +1,4 @@
 //Import Libraries
-import Image from "next/image";
 import React, { InputHTMLAttributes, useState } from "react";
 import { useRouter } from "next/router";
 
@@ -23,7 +22,6 @@ const Register = () => {
 
   const handleChange = (e: any) => {
     const file = e.target.files[0];
-    console.log(file);
     const reader = new FileReader();
     reader.onload = (_e: any) => {
       const img = document.getElementById("avatar") as HTMLImageElement;
@@ -39,9 +37,7 @@ const Register = () => {
     setName(e.target.value);
   };
 
-  const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (
-    e
-  ) => {
+  const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
     setUsername(e.target.value);
   };
 
@@ -49,9 +45,7 @@ const Register = () => {
     setEmail(e.target.value);
   };
 
-  const inputPassword: InputHTMLAttributes<HTMLInputElement>["onChange"] = (
-    e
-  ) => {
+  const inputPassword: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
     setPassword(e.target.value);
   };
 
@@ -60,17 +54,6 @@ const Register = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        if (!auth.currentUser) return;
-        db.collection("users")
-          .doc(auth.currentUser.uid)
-          .set({
-            name: name,
-            username: username,
-          })
-          .catch((error) => {
-            alert("ネームとユーザーネームの登録に失敗しました");
-          });
-
         const uploadTask = storage
           .ref(`profileImageFile/${profileImageFile.name}`)
           .put(profileImageFile);
@@ -80,11 +63,35 @@ const Register = () => {
             const progressValue = Math.round(
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100
             );
-            setProgress(progressValue)
-            console.log("Upload is " + progressValue + "% done");
+            setProgress(progressValue);
           },
+          // 上記snapshotの部分はuseEffect clean up functionを用いて書き直す必要があります
+
           (error) => {
-            alert("fail to upload image");
+            alert("画像がデータベースにアップロードできませんでした");
+          },
+          async () => {
+            await storage
+              .ref("profileImageFile")
+              .child(profileImageFile.name)
+              .getDownloadURL()
+              .then((url) => {
+                if (!auth.currentUser) return;
+                db.collection("users")
+                  .doc(auth.currentUser.uid)
+                  .set({
+                    name: name,
+                    username: username,
+                    profileImageFile: url,
+                  })
+                  .catch((error) => {
+                    alert(
+                      "ネーム・ユーザーネーム・プロフィール写真の登録に失敗しました"
+                    );
+                  });
+              });
+            setProgress(0);
+            setProfileImageFile(null);
           }
         );
 
