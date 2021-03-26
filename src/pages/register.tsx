@@ -107,7 +107,7 @@ const Register = () => {
         <DarkModeSwitch />
       </div>
 
-      <div className="text-center mt-7">
+      <form className="text-center mt-7">
         <div className="relative w-52 mx-auto">
           <img
             src={profileImageFile ?? "/img/nouserimage.jpg"}
@@ -185,7 +185,7 @@ const Register = () => {
             </PrimaryButton>
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 };
