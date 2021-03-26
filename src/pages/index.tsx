@@ -4,7 +4,6 @@ import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
 import { Input } from "src/components/shared/Input";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 
-
 const IndexPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,9 +51,9 @@ const IndexPage = () => {
         <div className="flex flex-col mt-7">
           <div>
             <PrimaryButton
+              button
               className="px-20 py-2 my-1 text-xl"
               variant="solid"
-              linkProps={{ href: "/" }}
             >
               ログイン
             </PrimaryButton>
