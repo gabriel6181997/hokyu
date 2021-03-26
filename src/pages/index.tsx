@@ -1,12 +1,32 @@
+//Import Libraries
 import Image from "next/image";
 import { InputHTMLAttributes, useState } from "react";
+import { useRouter } from "next/router";
+
+//Import Components
 import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
 import { Input } from "src/components/shared/Input";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
+import {auth} from "src/firebase";
 
 const IndexPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const login = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(async () => {
+        await router.push("/home");
+        setEmail("");
+        setPassword("");
+      })
+      .catch(() => {
+        alert("入力された情報と登録された情報が一致しません");
+      });
+  };
 
   const inputEmail: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e)  => {
     setEmail(e.target.value);
@@ -31,6 +51,7 @@ const IndexPage = () => {
         <div className="mt-8">
           <div className="w-72 mx-auto">
             <Input
+              type="email"
               id="email"
               placeholder="メールアドレス"
               variant="underlined"
@@ -40,6 +61,7 @@ const IndexPage = () => {
 
           <div className="w-72 mx-auto mt-5">
             <Input
+              type="password"
               id="password"
               placeholder="パスワード"
               variant="underlined"
@@ -54,6 +76,7 @@ const IndexPage = () => {
               button
               className="px-20 py-2 my-1 text-xl"
               variant="solid"
+              onClick={login}
             >
               ログイン
             </PrimaryButton>
