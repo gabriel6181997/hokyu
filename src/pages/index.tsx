@@ -1,6 +1,6 @@
 //Import Libraries
 import Image from "next/image";
-import { InputHTMLAttributes, useState } from "react";
+import React, { InputHTMLAttributes, useState } from "react";
 import { useRouter } from "next/router";
 
 //Import Components
@@ -8,6 +8,8 @@ import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
 import { Input } from "src/components/shared/Input";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import {auth} from "src/firebase";
+import { testUser } from "src/config/testuser";
+
 
 const IndexPage = () => {
   const [email, setEmail] = useState("");
@@ -25,6 +27,18 @@ const IndexPage = () => {
       })
       .catch(() => {
         alert("入力された情報と登録された情報が一致しません");
+      });
+  };
+
+  const testLogin = (e:React.SyntheticEvent) => {
+    e.preventDefault();
+    auth
+      .signInWithEmailAndPassword(testUser.email, testUser.password)
+      .then(() => {
+        router.push("/home");
+      })
+      .catch(() => {
+        alert("テストログインに失敗しました");
       });
   };
 
@@ -84,9 +98,10 @@ const IndexPage = () => {
 
           <div className="mt-3">
             <PrimaryButton
+              button
               className="px-12 py-2 my-1 text-xl"
               variant="solid"
-              linkProps={{ href: "/home" }}
+              onClick={testLogin}
             >
               テストユーザー
             </PrimaryButton>
