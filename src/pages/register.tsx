@@ -138,6 +138,7 @@ const Register = () => {
                 id="name"
                 placeholder="名前"
                 variant="underlined"
+                type="text"
                 onChange={inputName}
               />
             </div>
@@ -147,6 +148,7 @@ const Register = () => {
                 id="username"
                 placeholder="ユーザーネーム"
                 variant="underlined"
+                type="text"
                 onChange={inputUsername}
               />
             </div>
@@ -156,6 +158,7 @@ const Register = () => {
                 id="email"
                 placeholder="メールアドレス"
                 variant="underlined"
+                type="email"
                 onChange={inputEmail}
               />
             </div>
@@ -165,6 +168,7 @@ const Register = () => {
                 id="password"
                 placeholder="パスワード"
                 variant="underlined"
+                type="password"
                 onChange={inputPassword}
               />
             </div>
