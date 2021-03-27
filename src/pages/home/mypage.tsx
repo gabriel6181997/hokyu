@@ -1,8 +1,20 @@
 import { Layout } from "src/components/separate/layout";
 import Image from "next/image";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
+import { auth } from "src/firebase";
+import { useRouter } from "next/router";
 
 const myPage = () => {
+  const router = useRouter()
+
+  const logout = () => {
+    const answer = confirm("ログアウトしますか？");
+    if (answer) {
+      auth.signOut();
+      router.push("/")
+    }
+  };
+
   return (
     <Layout addbutton sideMenu buttonNavigation title="マイページ">
       <div className="text-center pt-10">
@@ -28,11 +40,12 @@ const myPage = () => {
           </div>
           <div className="my-4">
           <PrimaryButton
-            className="px-10 py-2 my-1 text-xl"
+            button
+            className="px-12 py-2 my-1 text-xl"
             variant="solid"
-            linkProps={{ href: "/" }}
+            onClick={logout}
           >
-            サインアウト
+            ログアウト
           </PrimaryButton>
           </div>
         </div>
