@@ -72,10 +72,10 @@ export const SideMenu = () => {
             className="rounded-full w-11 h-11"
           />
           <div className="pl-2 text-left">
-            <p className="font-bold">{userInfo?.name}</p>
-            <p>@{userInfo?.username}</p>
+            <p className="font-bold text-white">{userInfo?.name}</p>
+            <p className="text-sm text-gray-300">@{userInfo?.username}</p>
           </div>
-          <p className="mb-4 text-xl  ml-3 mr-2">…</p>
+          <p className="mb-4 text-xl  ml-3 mr-2 text-white">…</p>
         </PrimaryButton>
       </div>
     </aside>
