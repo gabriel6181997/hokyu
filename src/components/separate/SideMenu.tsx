@@ -22,7 +22,7 @@ export const SideMenu = () => {
         .onSnapshot((snapshot) => {
           setUserInfo(snapshot.data());
         });
-    }, [user.uid]);
+    }, []);
   }
 
   return (
