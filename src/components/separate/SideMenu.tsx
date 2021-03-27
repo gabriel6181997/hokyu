@@ -68,7 +68,7 @@ export const SideMenu = () => {
         >
           <img
             src={userInfo?.profileImageFile}
-            alt="profile-picture"
+            alt={userInfo?.name}
             className="rounded-full w-11 h-11"
           />
           <div className="pl-2 text-left">
