@@ -1,9 +1,29 @@
+//Import Libraries
 import Image from "next/image";
-import { BsPencilSquare } from "react-icons/bs";
+import React, { useEffect, useState } from "react";
+import firebase from "firebase/app";
+import { auth, db, storage } from "src/firebase";
+
+//Import Components (or utils)
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { GLOBAL_MENUS } from "src/utils/constants/menu";
 
+//Import Icons
+import { BsPencilSquare } from "react-icons/bs";
+
 export const SideMenu = () => {
+  const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
+  const user = auth.currentUser;
+
+  if(user){
+    useEffect(() => {
+      db.collection("users")
+        .doc(user.uid)
+        .onSnapshot((snapshot) => {
+          setUserInfo(snapshot.data());
+        });
+    }, [user.uid]);
+  }
 
   return (
     <aside className="flex flex-col ml-auto w-48 sticky h-screen top-0">
@@ -39,25 +59,23 @@ export const SideMenu = () => {
         </PrimaryButton>
       </div>
 
-      <div className="mt-auto mb-5">
+      <div className="mt-auto mb-5 mx-auto">
         <PrimaryButton
           button
           className="px-1 py-1"
           variant="ghost"
           onClick={() => { alert("Logout")}}
         >
-          <Image
-            src="/img/gabriel-profile-picture.JPG"
+          <img
+            src={userInfo?.profileImageFile}
             alt="profile-picture"
-            className="rounded-full"
-            width={43}
-            height={43}
+            className="rounded-full w-11 h-11"
           />
           <div className="pl-2 text-left">
-            <p className="font-bold">ガブリエル</p>
-            <p>gabriel6181997</p>
+            <p className="font-bold">{userInfo?.name}</p>
+            <p>@{userInfo?.username}</p>
           </div>
-          <p className="mb-4 text-xl  ml-1 mr-2">…</p>
+          <p className="mb-4 text-xl  ml-3 mr-2">…</p>
         </PrimaryButton>
       </div>
     </aside>
