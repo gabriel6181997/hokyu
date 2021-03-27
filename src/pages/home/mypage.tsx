@@ -1,8 +1,11 @@
-import { Layout } from "src/components/separate/layout";
+//Import Libraries
 import Image from "next/image";
+import { useRouter } from "next/router";
+
+//Import Components
+import { Layout } from "src/components/separate/layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { auth } from "src/firebase";
-import { useRouter } from "next/router";
 
 const myPage = () => {
   const router = useRouter()
