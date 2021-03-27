@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import firebase from "firebase/app";
-import { auth, db, storage } from "src/firebase";
+import { auth, db } from "src/firebase";
 
 //Import Components (or utils)
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
