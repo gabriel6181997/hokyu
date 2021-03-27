@@ -1,9 +1,26 @@
+//Import Libraries
 import Link from "next/link";
-import Image from "next/image";
-import { BOTTOM_NAVS } from "src/utils/constants/bottomnav";
+import { useEffect, useState } from "react";
+import firebase from "firebase/app";
 
+//Import Components
+import { BOTTOM_NAVS } from "src/utils/constants/bottomnav";
+import { auth, db } from "src/firebase";
 
 export const ButtonNavigation = () => {
+  const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
+  const user = auth.currentUser;
+
+  if (user) {
+    useEffect(() => {
+      db.collection("users")
+        .doc(user.uid)
+        .onSnapshot((snapshot) => {
+          setUserInfo(snapshot.data());
+        });
+    }, []);
+  }
+
   return (
     <>
       <nav className="fixed bottom-0 w-full bg-blue-200 py-2 text-gray-700 dark:text-gray-700">
@@ -19,34 +36,29 @@ export const ButtonNavigation = () => {
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
-                      <path
-                        strokeWidth={1.2}
-                        d={item.icon}
-                      />
+                      <path strokeWidth={1.2} d={item.icon} />
                     </svg>
                   </a>
                 </Link>
                 <p className="pt-1 text-sm">{item.label}</p>
               </li>
-            )
+            );
           })}
 
           <li className="flex-1 text-center">
             <Link href="/home/mypage">
               <a>
-                <Image
-                  src="/img/gabriel-profile-picture.JPG"
-                  width={28}
-                  height={28}
-                  className="rounded-full"
+                <img
+                  src={userInfo?.profileImageFile}
+                  alt={userInfo?.name}
+                  className="rounded-full block mx-auto w-7 h-7 "
                 />
               </a>
             </Link>
-            <p className="text-sm">マイページ</p>
+            <p className="text-sm pt-1">マイページ</p>
           </li>
         </ul>
       </nav>
     </>
   );
 };
-
