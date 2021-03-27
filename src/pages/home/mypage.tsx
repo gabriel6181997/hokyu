@@ -1,21 +1,34 @@
 //Import Libraries
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import firebase from "firebase/app";
 
 //Import Components
+import { auth, db } from "src/firebase";
 import { Layout } from "src/components/separate/layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
-import { auth } from "src/firebase";
 
 const myPage = () => {
+  const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
+  const user = auth.currentUser;
   const router = useRouter();
 
   useEffect(()=> {
-    if (!auth.currentUser){
+    if (!user){
       router.push('/')
     };
-  },[auth.currentUser])
+  },[user])
+
+  if(user){
+    useEffect(() => {
+      db.collection("users")
+        .doc(user.uid)
+        .onSnapshot((snapshot) => {
+          setUserInfo(snapshot.data());
+        });
+    }, []);
+  }
 
   const logout = () => {
     const answer = confirm("ログアウトしますか？");
@@ -27,16 +40,14 @@ const myPage = () => {
 
   return (
     <Layout addbutton sideMenu buttonNavigation title="マイページ">
-      <div className="text-center pt-10">
-        <Image
-          src="/img/gabriel-profile-picture.JPG"
-          alt="profile-picture"
-          className="rounded-full"
-          width={200}
-          height={200}
+      <div className="text-center mx-auto pt-10">
+        <img
+          src={userInfo?.profileImageFile}
+          alt={userInfo?.name}
+          className="block mx-auto rounded-full w-52 h-52"
         />
-        <p className="text-2xl font-bold my-6">ガブリエル</p>
-        <p className=" mt-2 ">gabriel6181997</p>
+        <p className="text-2xl font-bold my-6">{userInfo?.name}</p>
+        <p className=" mt-2 ">{userInfo?.username}</p>
 
         <div className="flex flex-col">
           <div className="mt-6">
