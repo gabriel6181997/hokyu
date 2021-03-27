@@ -1,9 +1,11 @@
 //Import Libraries
 import Image from "next/image";
+import { useRouter } from "next/router";
 import Modal from "react-modal";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 //Import Components
+import { auth } from "src/firebase";
 import { GenderSwitch } from "src/components/separate/GenderSwitch";
 import { Input } from "src/components/shared/Input";
 import { Layout } from "src/components/separate/layout";
@@ -29,6 +31,14 @@ import {
 
 
 const Add = () => {
+  const router = useRouter();
+
+  useEffect(()=> {
+    if (!auth.currentUser){
+      router.push('/')
+    };
+  },[auth.currentUser])
+
   const onClickAdd = () => {
     alert("Add Input");
   };

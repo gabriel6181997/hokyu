@@ -1,6 +1,7 @@
 //Import Libraries
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 //Import Components
 import { Layout } from "src/components/separate/layout";
@@ -8,7 +9,13 @@ import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { auth } from "src/firebase";
 
 const myPage = () => {
-  const router = useRouter()
+  const router = useRouter();
+
+  useEffect(()=> {
+    if (!auth.currentUser){
+      router.push('/')
+    };
+  },[auth.currentUser])
 
   const logout = () => {
     const answer = confirm("ログアウトしますか？");
