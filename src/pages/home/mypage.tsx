@@ -1,5 +1,4 @@
 //Import Libraries
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import firebase from "firebase/app";
