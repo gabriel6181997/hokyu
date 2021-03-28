@@ -80,9 +80,9 @@ const myPage = () => {
         {isEdit ? (
           <div className="relative w-52 mx-auto">
             <img
-              src={profileImageFile ?? "/img/nouserimage.jpg"}
+              src={userInfo?.profileImageFile ?? "/img/nouserimage.jpg"}
               alt="profile-picture"
-              className="mx-auto rounded-full border border-gray-700 w-52 h-52 object-cover"
+              className="mx-auto rounded-full w-52 h-52 object-cover"
               id="avatar"
             />
             <input
