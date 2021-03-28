@@ -66,7 +66,7 @@ const myPage = () => {
   };
 
   const updateInfo = () => {
-    if(newProfileImageFile) {
+    if (newProfileImageFile) {
       const uploadTask = storage
         .ref(`profileImageFile/${newProfileImageFile.name}`)
         .put(newProfileImageFile);
@@ -78,36 +78,54 @@ const myPage = () => {
           );
           setProgress(progressValue);
         },
-        // 上記snapshotの部分はuseEffect clean up functionを用いて書き直す必要があります
         (error) => {
           alert("画像がデータベースにアップロードできませんでした");
         },
-        async() => {
+        async () => {
           await storage
-           .ref("profileImageFile")
-           .child(newProfileImageFile.name)
-           .getDownloadURL()
-           .then((url) => {
-            if (!user) return;
-            db.collection("users")
-              .doc(user.uid)
-              .update({
-                profileImageFile: url,
-              })
-              .catch((error) => {
-                alert(
-                  "画像の変更に失敗しました"
-                );
-              });
-          });
-        setProgress(0);
-        setNewProfileImageFile(null);
+            .ref("profileImageFile")
+            .child(newProfileImageFile.name)
+            .getDownloadURL()
+            .then((url) => {
+              if (!user) return;
+              db.collection("users")
+                .doc(user.uid)
+                .update({
+                  profileImageFile: url,
+                })
+                .catch((error) => {
+                  alert("画像の変更に失敗しました");
+                });
+            });
+          setProgress(0);
+          setNewProfileImageFile(null);
         }
       );
     };
 
-    
+    if (newName !== userInfo?.name) {
+      if (!user) return;
+      db.collection("users")
+        .doc(user.uid)
+        .update({
+          name: newName,
+        })
+        .catch((error) => {
+          alert("名前の変更に失敗しました");
+        });
+    };
 
+    if(newUsername !== userInfo?.username) {
+      if(!user) return;
+      db.collection("users")
+      .doc(user.uid)
+      .update({
+        username: newUsername,
+      })
+      .catch((error) => {
+        alert("ユーザーの変更に失敗しました");
+      });
+    };
 
     setIsEdit(false);
   };
