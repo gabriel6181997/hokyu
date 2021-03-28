@@ -55,8 +55,12 @@ const myPage = () => {
           className="block mx-auto rounded-full w-52 h-52"
         />
 
-        <p className="text-2xl font-bold my-6">{userInfo?.name}</p>
-        <p className=" mt-2 ">{userInfo?.username}</p>
+        <div className="my-6">
+          <p className="text-2xl font-bold">{userInfo?.name}</p>
+        </div>
+        <div className="mt-2">
+          <p>{userInfo?.username}</p>
+        </div>
 
         <div className="flex flex-col">
           <div className="mt-6">
