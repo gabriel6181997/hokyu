@@ -4,7 +4,7 @@ import { useState, useEffect, InputHTMLAttributes } from "react";
 import firebase from "firebase/app";
 
 //Import Components
-import { auth, db } from "src/firebase";
+import { auth, db, storage } from "src/firebase";
 import { Layout } from "src/components/separate/layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 
@@ -15,9 +15,10 @@ import { Input } from "src/components/shared/Input";
 const myPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
-  const [profileImageFile, setProfileImageFile] = useState<any>(null);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
+  const [profileImageFile, setProfileImageFile] = useState<any>(null);
+  const [progress, setProgress] = useState(0);
   const user = auth.currentUser;
   const router = useRouter();
 
@@ -54,15 +55,34 @@ const myPage = () => {
     setProfileImageFile(file);
   };
 
-  const inputName: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e)  => {
+  const inputName: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
     setName(e.target.value);
   };
 
-  const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+  const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (
+    e
+  ) => {
     setUsername(e.target.value);
   };
 
   const updateInfo = () => {
+    const uploadTask = storage
+      .ref(`profileImageFile/${profileImageFile.name}`)
+      .put(profileImageFile);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progressValue = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progressValue);
+      },
+      // 上記snapshotの部分はuseEffect clean up functionを用いて書き直す必要があります
+      (error) => {
+        alert("画像がデータベースにアップロードできませんでした");
+      },
+    );
+
     setIsEdit(false);
   };
 
@@ -81,7 +101,7 @@ const myPage = () => {
           <div className="relative w-52 mx-auto">
             <img
               src={userInfo?.profileImageFile ?? "/img/nouserimage.jpg"}
-              alt="profile-picture"
+              alt={userInfo?.name}
               className="mx-auto rounded-full w-52 h-52 object-cover"
               id="avatar"
             />
@@ -101,39 +121,39 @@ const myPage = () => {
           <img
             src={userInfo?.profileImageFile}
             alt={userInfo?.name}
-            className="block mx-auto rounded-full w-52 h-52"
+            className="block mx-auto rounded-full w-52 h-52 object-fit"
           />
         )}
 
         <div className="my-6">
-        {isEdit? (
-          <div className="w-72 mx-auto">
-            <Input
-            type="text"
-            id="name"
-            placeholder="名前"
-            variant="underlined"
-            onChange={inputName}
-            />
-          </div>
-        ): (
-          <p className="text-2xl font-bold">{userInfo?.name}</p>
-        )}
+          {isEdit ? (
+            <div className="w-72 mx-auto">
+              <Input
+                type="text"
+                id="name"
+                placeholder="名前"
+                variant="underlined"
+                onChange={inputName}
+              />
+            </div>
+          ) : (
+            <p className="text-2xl font-bold">{userInfo?.name}</p>
+          )}
         </div>
         <div className="mt-2">
-        {isEdit? (
-          <div className="w-72 mx-auto">
-            <Input
-            type="text"
-            id="username"
-            placeholder="ユーザーネーム"
-            variant="underlined"
-            onChange={inputUsername}
-            />
-          </div>
-        ): (
-          <p>{userInfo?.username}</p>
-        )}
+          {isEdit ? (
+            <div className="w-72 mx-auto">
+              <Input
+                type="text"
+                id="username"
+                placeholder="ユーザーネーム"
+                variant="underlined"
+                onChange={inputUsername}
+              />
+            </div>
+          ) : (
+            <p>{userInfo?.username}</p>
+          )}
         </div>
 
         <div className="flex flex-col">
