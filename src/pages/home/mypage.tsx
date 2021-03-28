@@ -7,6 +7,7 @@ import firebase from "firebase/app";
 import { auth, db, storage } from "src/firebase";
 import { Layout } from "src/components/separate/layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
+import { testUser } from "src/config/testuser";
 
 //Import Icons
 import { FaCamera } from "react-icons/fa";
@@ -101,7 +102,7 @@ const myPage = () => {
           setNewProfileImageFile(null);
         }
       );
-    };
+    }
 
     if (newName !== userInfo?.name) {
       if (!user) return;
@@ -113,19 +114,19 @@ const myPage = () => {
         .catch((error) => {
           alert("名前の変更に失敗しました");
         });
-    };
+    }
 
-    if(newUsername !== userInfo?.username) {
-      if(!user) return;
+    if (newUsername !== userInfo?.username) {
+      if (!user) return;
       db.collection("users")
-      .doc(user.uid)
-      .update({
-        username: newUsername,
-      })
-      .catch((error) => {
-        alert("ユーザーの変更に失敗しました");
-      });
-    };
+        .doc(user.uid)
+        .update({
+          username: newUsername,
+        })
+        .catch((error) => {
+          alert("ユーザーの変更に失敗しました");
+        });
+    }
 
     setIsEdit(false);
   };
@@ -201,27 +202,30 @@ const myPage = () => {
         </div>
 
         <div className="flex flex-col">
-          <div className="mt-6">
-            {isEdit ? (
-              <PrimaryButton
-                button
-                className="px-20 py-2 my-1 text-xl"
-                variant="solid"
-                onClick={updateInfo}
-              >
-                更新
-              </PrimaryButton>
-            ) : (
-              <PrimaryButton
-                button
-                className="px-20 py-2 my-1 text-xl"
-                variant="solid"
-                onClick={startEdit}
-              >
-                編集
-              </PrimaryButton>
-            )}
-          </div>
+          {user.email === testUser.email ? null : (
+            <div className="mt-6">
+              {isEdit ? (
+                <PrimaryButton
+                  button
+                  className="px-20 py-2 my-1 text-xl"
+                  variant="solid"
+                  onClick={updateInfo}
+                >
+                  更新
+                </PrimaryButton>
+              ) : (
+                <PrimaryButton
+                  button
+                  className="px-20 py-2 my-1 text-xl"
+                  variant="solid"
+                  onClick={startEdit}
+                >
+                  編集
+                </PrimaryButton>
+              )}
+            </div>
+          )}
+
           {isEdit ? null : (
             <div className="my-4">
               <PrimaryButton
