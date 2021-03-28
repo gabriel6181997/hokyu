@@ -62,7 +62,6 @@ const myPage = () => {
     setUsername(e.target.value);
   };
 
-
   const updateInfo = () => {
     setIsEdit(false);
   };
@@ -108,30 +107,33 @@ const myPage = () => {
 
         <div className="my-6">
         {isEdit? (
-          <Input
-          type="text"
-          id="name"
-          placeholder="名前"
-          variant="underlined"
-          onChange={inputName}
-          />
+          <div className="w-72 mx-auto">
+            <Input
+            type="text"
+            id="name"
+            placeholder="名前"
+            variant="underlined"
+            onChange={inputName}
+            />
+          </div>
         ): (
           <p className="text-2xl font-bold">{userInfo?.name}</p>
         )}
         </div>
         <div className="mt-2">
         {isEdit? (
-          <Input
-          type="text"
-          id="username"
-          placeholder="ユーザーネーム"
-          variant="underlined"
-          onChange={inputUsername}
-          />
+          <div className="w-72 mx-auto">
+            <Input
+            type="text"
+            id="username"
+            placeholder="ユーザーネーム"
+            variant="underlined"
+            onChange={inputUsername}
+            />
+          </div>
         ): (
           <p>{userInfo?.username}</p>
         )}
-
         </div>
 
         <div className="flex flex-col">
