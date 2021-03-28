@@ -15,9 +15,9 @@ import { Input } from "src/components/shared/Input";
 const myPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [profileImageFile, setProfileImageFile] = useState<any>(null);
+  const [newName, setNewName] = useState("");
+  const [newUsername, setNewUsername] = useState("");
+  const [newProfileImageFile, setNewProfileImageFile] = useState<any>(null);
   const [progress, setProgress] = useState(0);
   const user = auth.currentUser;
   const router = useRouter();
@@ -52,36 +52,62 @@ const myPage = () => {
     if (file) {
       reader.readAsDataURL(file);
     }
-    setProfileImageFile(file);
+    setNewProfileImageFile(file);
   };
 
   const inputName: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
-    setName(e.target.value);
+    setNewName(e.target.value);
   };
 
   const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (
     e
   ) => {
-    setUsername(e.target.value);
+    setNewUsername(e.target.value);
   };
 
   const updateInfo = () => {
-    const uploadTask = storage
-      .ref(`profileImageFile/${profileImageFile.name}`)
-      .put(profileImageFile);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progressValue = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progressValue);
-      },
-      // 上記snapshotの部分はuseEffect clean up functionを用いて書き直す必要があります
-      (error) => {
-        alert("画像がデータベースにアップロードできませんでした");
-      },
-    );
+    if(newProfileImageFile) {
+      const uploadTask = storage
+        .ref(`profileImageFile/${newProfileImageFile.name}`)
+        .put(newProfileImageFile);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progressValue = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progressValue);
+        },
+        // 上記snapshotの部分はuseEffect clean up functionを用いて書き直す必要があります
+        (error) => {
+          alert("画像がデータベースにアップロードできませんでした");
+        },
+        async() => {
+          await storage
+           .ref("profileImageFile")
+           .child(newProfileImageFile.name)
+           .getDownloadURL()
+           .then((url) => {
+            if (!user) return;
+            db.collection("users")
+              .doc(user.uid)
+              .update({
+                profileImageFile: url,
+              })
+              .catch((error) => {
+                alert(
+                  "画像の変更に失敗しました"
+                );
+              });
+          });
+        setProgress(0);
+        setNewProfileImageFile(null);
+        }
+      );
+    };
+
+    
+
 
     setIsEdit(false);
   };
