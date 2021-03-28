@@ -9,17 +9,18 @@ import { Layout } from "src/components/separate/layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 
 const myPage = () => {
+  const [isEdit, setIsEdit] = useState(false);
   const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
   const user = auth.currentUser;
   const router = useRouter();
 
-  useEffect(()=> {
-    if (!user){
-      router.push('/')
-    };
-  },[user])
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+  }, [user]);
 
-  if(user){
+  if (user) {
     useEffect(() => {
       db.collection("users")
         .doc(user.uid)
@@ -29,11 +30,19 @@ const myPage = () => {
     }, []);
   }
 
+  const startEdit = () => {
+    setIsEdit(true);
+  };
+
+  const updateInfo = () => {
+    setIsEdit(false);
+  };
+
   const logout = () => {
     const answer = confirm("ログアウトしますか？");
     if (answer) {
       auth.signOut();
-      router.push("/")
+      router.push("/");
     }
   };
 
@@ -45,29 +54,44 @@ const myPage = () => {
           alt={userInfo?.name}
           className="block mx-auto rounded-full w-52 h-52"
         />
+
         <p className="text-2xl font-bold my-6">{userInfo?.name}</p>
         <p className=" mt-2 ">{userInfo?.username}</p>
 
         <div className="flex flex-col">
           <div className="mt-6">
-          <PrimaryButton
-            className="px-20 py-2 my-1 text-xl"
-            variant="solid"
-            linkProps={{ href: "/" }}
-          >
-            編集
-          </PrimaryButton>
+            {isEdit ? (
+              <PrimaryButton
+                button
+                className="px-20 py-2 my-1 text-xl"
+                variant="solid"
+                onClick={updateInfo}
+              >
+                更新
+              </PrimaryButton>
+            ) : (
+              <PrimaryButton
+                button
+                className="px-20 py-2 my-1 text-xl"
+                variant="solid"
+                onClick={startEdit}
+              >
+                編集
+              </PrimaryButton>
+            )}
           </div>
-          <div className="my-4">
-          <PrimaryButton
-            button
-            className="px-12 py-2 my-1 text-xl"
-            variant="solid"
-            onClick={logout}
-          >
-            ログアウト
-          </PrimaryButton>
-          </div>
+          {isEdit ? null : (
+            <div className="my-4">
+              <PrimaryButton
+                button
+                className="px-12 py-2 my-1 text-xl"
+                variant="solid"
+                onClick={logout}
+              >
+                ログアウト
+              </PrimaryButton>
+            </div>
+          )}
         </div>
       </div>
     </Layout>
