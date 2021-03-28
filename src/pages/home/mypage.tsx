@@ -1,6 +1,6 @@
 //Import Libraries
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, InputHTMLAttributes } from "react";
 import firebase from "firebase/app";
 
 //Import Components
@@ -8,9 +8,16 @@ import { auth, db } from "src/firebase";
 import { Layout } from "src/components/separate/layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 
+//Import Icons
+import { FaCamera } from "react-icons/fa";
+import { Input } from "src/components/shared/Input";
+
 const myPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
+  const [profileImageFile, setProfileImageFile] = useState<any>(null);
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const user = auth.currentUser;
   const router = useRouter();
 
@@ -34,6 +41,28 @@ const myPage = () => {
     setIsEdit(true);
   };
 
+  const handleChange = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (_e: any) => {
+      const img = document.getElementById("avatar") as HTMLImageElement;
+      img.src = _e.target.result;
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+    setProfileImageFile(file);
+  };
+
+  const inputName: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e)  => {
+    setName(e.target.value);
+  };
+
+  const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+    setUsername(e.target.value);
+  };
+
+
   const updateInfo = () => {
     setIsEdit(false);
   };
@@ -49,17 +78,60 @@ const myPage = () => {
   return (
     <Layout addbutton sideMenu buttonNavigation title="マイページ">
       <div className="text-center mx-auto pt-10">
-        <img
-          src={userInfo?.profileImageFile}
-          alt={userInfo?.name}
-          className="block mx-auto rounded-full w-52 h-52"
-        />
+        {isEdit ? (
+          <div className="relative w-52 mx-auto">
+            <img
+              src={profileImageFile ?? "/img/nouserimage.jpg"}
+              alt="profile-picture"
+              className="mx-auto rounded-full border border-gray-700 w-52 h-52 object-cover"
+              id="avatar"
+            />
+            <input
+              className="z-10 opacity-0 absolute bottom-4 right-9 w-8"
+              type="file"
+              onChange={handleChange}
+            />
+            <div
+              className="absolute left-2/3 bottom-2  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700"
+              onClick={handleChange}
+            >
+              <FaCamera />
+            </div>
+          </div>
+        ) : (
+          <img
+            src={userInfo?.profileImageFile}
+            alt={userInfo?.name}
+            className="block mx-auto rounded-full w-52 h-52"
+          />
+        )}
 
         <div className="my-6">
+        {isEdit? (
+          <Input
+          type="text"
+          id="name"
+          placeholder="名前"
+          variant="underlined"
+          onChange={inputName}
+          />
+        ): (
           <p className="text-2xl font-bold">{userInfo?.name}</p>
+        )}
         </div>
         <div className="mt-2">
+        {isEdit? (
+          <Input
+          type="text"
+          id="username"
+          placeholder="ユーザーネーム"
+          variant="underlined"
+          onChange={inputUsername}
+          />
+        ): (
           <p>{userInfo?.username}</p>
+        )}
+
         </div>
 
         <div className="flex flex-col">
