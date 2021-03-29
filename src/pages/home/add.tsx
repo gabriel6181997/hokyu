@@ -71,26 +71,6 @@ const Add = () => {
             ←戻る
           </PrimaryButton>
           <div>
-            {/* <PrimaryButton
-              button
-              className="mr-5 text-base"
-              variant="outline"
-              onClick={() => {
-                alert("Update");
-              }}
-            >
-              更新する
-            </PrimaryButton>
-            <PrimaryButton
-              button
-              variant="outline"
-              className="text-base"
-              onClick={() => {
-                alert("Delete");
-              }}
-            >
-              削除する
-            </PrimaryButton> */}
              <PrimaryButton
               button
               variant="outline"
