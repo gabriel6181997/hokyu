@@ -1,7 +1,8 @@
 //Import Libraries
 import { useRouter } from "next/router";
-import { useState, useEffect, InputHTMLAttributes } from "react";
+import React, { useState, useEffect, InputHTMLAttributes } from "react";
 import firebase from "firebase/app";
+import { useForm } from "react-hook-form";
 
 //Import Components
 import { auth, db, storage } from "src/firebase";
@@ -12,6 +13,12 @@ import { testUser } from "src/config/testuser";
 //Import Icons
 import { FaCamera } from "react-icons/fa";
 import { Input } from "src/components/shared/Input";
+
+// type Inputs = {
+//   name: string;
+//   username: string;
+// }
+
 
 const myPage = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -37,7 +44,14 @@ const myPage = () => {
           setUserInfo(snapshot.data());
         });
     }, []);
-  }
+  };
+
+  // const { register } = useForm<Inputs>({
+  //   defaultValues: {
+  //     name: userInfo?.name,
+  //     username: userInfo?.username
+  //   }
+  // })
 
   const startEdit = () => {
     setIsEdit(true);
@@ -170,7 +184,7 @@ const myPage = () => {
           />
         )}
 
-        <div className="my-6">
+        <div className="py-6">
           {isEdit ? (
             <div className="w-72 mx-auto">
               <Input
@@ -179,6 +193,7 @@ const myPage = () => {
                 placeholder="名前"
                 variant="underlined"
                 onChange={inputName}
+                // ref={register}
               />
             </div>
           ) : (
@@ -194,6 +209,7 @@ const myPage = () => {
                 placeholder="ユーザーネーム"
                 variant="underlined"
                 onChange={inputUsername}
+                // ref={register}
               />
             </div>
           ) : (
