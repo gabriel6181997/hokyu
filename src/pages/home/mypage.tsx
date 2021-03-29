@@ -81,6 +81,16 @@ const myPage = () => {
   };
 
   const updateInfo = () => {
+    if(!newName || !userInfo?.name) {
+      alert("必ず名前を記入してください！");
+      return;
+    }
+
+    if(!newUsername || !userInfo?.username) {
+      alert("必ずユーザーネームを記入してください！");
+      return;
+    }
+
     if (newProfileImageFile) {
       const uploadTask = storage
         .ref(`profileImageFile/${newProfileImageFile.name}`)
@@ -116,7 +126,7 @@ const myPage = () => {
           setNewProfileImageFile(null);
         }
       );
-    }
+    };
 
     if (newName !== userInfo?.name) {
       if (!user) return;
@@ -128,7 +138,7 @@ const myPage = () => {
         .catch((error) => {
           alert("名前の変更に失敗しました");
         });
-    }
+    };
 
     if (newUsername !== userInfo?.username) {
       if (!user) return;
@@ -140,7 +150,7 @@ const myPage = () => {
         .catch((error) => {
           alert("ユーザーの変更に失敗しました");
         });
-    }
+    };
 
     setIsEdit(false);
   };
