@@ -76,31 +76,6 @@ const Add = () => {
   return (
     <Layout sideMenu buttonNavigation title="新規幼児">
       <div className="container space-y-6 pb-6">
-        {/* <div className="flex justify-between pt-3 text-lg">
-          <PrimaryButton
-            button
-            variant="outline"
-            className="text-base"
-            onClick={() => {
-              alert("Back");
-            }}
-          >
-            ←戻る
-          </PrimaryButton>
-          <div>
-            <PrimaryButton
-              button
-              variant="outline"
-              className="text-base"
-              onClick={() => {
-                alert("Add Toddler");
-              }}
-            >
-              追加する
-            </PrimaryButton>
-          </div>
-        </div> */}
-
         <div className="flex items-center justify-center pt-12">
           <div className="relative">
             <img
