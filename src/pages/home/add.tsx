@@ -33,11 +33,11 @@ const Add = () => {
   const [toddlerImageFile, setToddlerImageFile] = useState<any>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!auth.currentUser) {
-      router.push("/");
-    }
-  }, [auth.currentUser]);
+  // useEffect(() => {
+  //   if (!auth.currentUser) {
+  //     router.push("/");
+  //   }
+  // }, [auth.currentUser]);
 
   const handleChange = (e: any) => {
     const file = e.target.files[0];
@@ -51,7 +51,6 @@ const Add = () => {
     }
     setToddlerImageFile(file);
   };
-
 
   const onClickAdd = () => {
     alert("Add Input");
@@ -70,10 +69,14 @@ const Add = () => {
     setIsOpen(false);
   }
 
+  const SubmitData = () => {
+    alert("Submit Data");
+  };
+
   return (
     <Layout sideMenu buttonNavigation title="新規幼児">
       <div className="container space-y-6 pb-6">
-        <div className="flex justify-between pt-3 text-lg">
+        {/* <div className="flex justify-between pt-3 text-lg">
           <PrimaryButton
             button
             variant="outline"
@@ -96,9 +99,9 @@ const Add = () => {
               追加する
             </PrimaryButton>
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center pt-12">
           <div className="relative">
             <img
               src="/img/nouserimage.jpg"
@@ -239,6 +242,16 @@ const Add = () => {
               className="text-sm pt-1"
             />
           </div>
+        </div>
+        <div>
+          <PrimaryButton
+            button
+            variant="solid"
+            className="px-8 py-2"
+            onClick={SubmitData}
+          >
+            追加する
+          </PrimaryButton>
         </div>
       </div>
     </Layout>
