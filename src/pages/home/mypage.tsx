@@ -81,6 +81,11 @@ const myPage = () => {
   };
 
   const updateInfo = () => {
+    if(!newName|| !userInfo?.name && !newUsername || !userInfo?.username) {
+      alert("必ず名前とユーザーネームを記入してください");
+      return;
+    }
+
     if(!newName || !userInfo?.name) {
       alert("必ず名前を記入してください！");
       return;
