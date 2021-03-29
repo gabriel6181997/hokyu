@@ -202,7 +202,7 @@ const myPage = () => {
         </div>
 
         <div className="flex flex-col">
-          {user.email === testUser.email ? null : (
+          {user!==null && user.email === testUser.email ? null : (
             <div className="mt-6">
               {isEdit ? (
                 <PrimaryButton
