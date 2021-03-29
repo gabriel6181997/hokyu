@@ -43,7 +43,7 @@ export const Input:VFC<Props> = (props) => {
           placeholder={props.placeholder}
           className={className}
           onChange={props.onChange}
-          ref={props.ref}
+          // ref={props.ref}
         />
         )
       }
