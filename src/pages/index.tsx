@@ -30,6 +30,8 @@ const IndexPage = () => {
       });
   };
 
+  //Cause of memory leak error↑
+
   const testLogin = (e:React.SyntheticEvent) => {
     e.preventDefault();
     auth
