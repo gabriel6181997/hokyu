@@ -12,6 +12,7 @@ type Props = {
   textarea?:boolean;
   type?:string;
   variant: "underlined" | "box";
+  value?:string | number;
 };
 
 export const Input:VFC<Props> = (props) => {
@@ -34,6 +35,7 @@ export const Input:VFC<Props> = (props) => {
          placeholder={props.placeholder}
          className={className}
          minRows={3}
+         value={props.value}
         />
         ) : (
         <input
@@ -44,6 +46,7 @@ export const Input:VFC<Props> = (props) => {
           className={className}
           onChange={props.onChange}
           // ref={props.ref}
+          value={props.value}
         />
         )
       }
