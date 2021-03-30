@@ -32,15 +32,15 @@ import {
 
 const Add = () => {
   const [toddlerImageFile, setToddlerImageFile] = useState<any>(null);
-  const [time,setTime] = useState<number>(2020202020);
+  const [datetime,setDatetime] = useState<number>(2020202020);
   const router = useRouter();
 
 
-  const inputTime: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
-    setTime(Number(e.target.value))
+  const inputDatetime: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+    setDatetime(Number(e.target.value))
   };
 
-  const formatTime = (numberValue: number) => {
+  const formatDatetime = (numberValue: number) => {
     const stringValue = numberValue.toString();
     if(stringValue.length < 12) {
       return
@@ -51,8 +51,9 @@ const Add = () => {
     const hour = stringValue.slice(8,10);
     const minute = stringValue.slice(10,12);
     const value = `${year}-${month}-${date} ${hour}:${minute}`
-    const formatedTime = format(new Date(value), "yyyy年M月d日 HH:mm");
-    return formatedTime;
+    const formatedDatetime = format(new Date(value), "yyyy年M月d日 HH:mm");
+    console.log(formatedDatetime);
+    return formatedDatetime;
   }
 
 
@@ -167,7 +168,7 @@ const Add = () => {
           <div className="space-y-2">
             <div className="flex justify-between">
               <p className="text-sm text-gray-700 font-medium dark:text-white">
-                体温  {formatTime(time)}
+                体温  {formatDatetime(datetime)}
               </p>
               <button
                 className="text-gray-600 dark:text-white"
@@ -182,9 +183,9 @@ const Add = () => {
                  type="text"
                  id="time"
                  placeholder="例：11:15"
-                 onChange={inputTime}
+                 onChange={inputDatetime}
                  variant="underlined"
-                 value={time}
+                 value={datetime}
                 />
               </div>
               <div className="flex-1 ml-2">
