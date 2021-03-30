@@ -22,7 +22,7 @@ export const SideMenu = () => {
         .onSnapshot((snapshot) => {
           setUserInfo(snapshot.data());
         });
-    }, []);
+    }, [user]);
   }
   //↑Unhandled Runtime Error (Error: Rendered more hooks than during the previous render.)
 
