@@ -24,6 +24,7 @@ export const SideMenu = () => {
         });
     }, []);
   }
+  //↑Unhandled Runtime Error (Error: Rendered more hooks than during the previous render.)
 
   return (
     <aside className="flex flex-col ml-auto w-48 sticky h-screen top-0">
