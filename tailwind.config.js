@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       screens:{
+        'ms': {'max': '600px'},
         'mx': {'max': '767px'},
       },
       fontFamily: {
