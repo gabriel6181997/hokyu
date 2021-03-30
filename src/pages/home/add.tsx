@@ -2,7 +2,8 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Modal from "react-modal";
-import { useEffect, useState } from "react";
+import {InputHTMLAttributes, useEffect, useState } from "react";
+import { format } from 'date-fns'
 
 //Import Components
 import { auth } from "src/firebase";
@@ -31,7 +32,29 @@ import {
 
 const Add = () => {
   const [toddlerImageFile, setToddlerImageFile] = useState<any>(null);
+  const [time,setTime] = useState<number>(2020202020);
   const router = useRouter();
+
+
+  const inputTime: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+    setTime(Number(e.target.value))
+  };
+
+  const formatTime = (numberValue: number) => {
+    const stringValue = numberValue.toString();
+    if(stringValue.length < 12) {
+      return
+    };
+    const year = stringValue.slice(0,4);
+    const month = stringValue.slice(4,6);
+    const date = stringValue.slice(6,8);
+    const hour = stringValue.slice(8,10);
+    const minute = stringValue.slice(10,12);
+    const value = `${year}-${month}-${date} ${hour}:${minute}`
+    const formatedTime = format(new Date(value), "yyyy年M月d日 HH:mm");
+    return formatedTime;
+  }
+
 
   // useEffect(() => {
   //   if (!auth.currentUser) {
@@ -144,7 +167,7 @@ const Add = () => {
           <div className="space-y-2">
             <div className="flex justify-between">
               <p className="text-sm text-gray-700 font-medium dark:text-white">
-                体温
+                体温  {formatTime(time)}
               </p>
               <button
                 className="text-gray-600 dark:text-white"
@@ -156,10 +179,12 @@ const Add = () => {
             <div className="flex items-center">
               <div className="flex-1">
                 <Input
-                  id="time"
-                  placeholder="例：23:15"
-                  variant="underlined"
-                  className="text-sm"
+                 type="text"
+                 id="time"
+                 placeholder="例：11:15"
+                 onChange={inputTime}
+                 variant="underlined"
+                 value={time}
                 />
               </div>
               <div className="flex-1 ml-2">
