@@ -76,12 +76,12 @@ const Add = () => {
   return (
     <Layout sideMenu buttonNavigation title="新規幼児">
       <div className="container space-y-6 pb-6">
-        <div className="flex items-center justify-center pt-12">
-          <div className="relative">
+        <div className="flex ms:flex-col items-center justify-center pt-12">
+          <div className="relative w-36 h-36">
             <img
               src="/img/nouserimage.jpg"
               alt="profile-picture"
-              className="w-36 h-36 rounded-full border-gray-700 border object-cover"
+              className="w-full h-auto rounded-full border-gray-700 border object-fit"
               id="avatar"
             />
 
@@ -95,7 +95,7 @@ const Add = () => {
               <GenderSwitch />
             </div>
           </div>
-          <div className="mt-3 ml-20">
+          <div className="ms:mt-7 mt-3 ms:ml-0 ml-10 md:ml-20">
             <Input id="name" placeholder="名前" variant="underlined" />
             <div className="mt-8 flex">
               <Input id="age" placeholder="年齢" variant="underlined" />
