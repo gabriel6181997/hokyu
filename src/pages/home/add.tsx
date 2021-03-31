@@ -29,33 +29,12 @@ import {
   SLEEPS,
   URGENCYNUMBERS,
 } from "src/utils/constants/selectoption";
+import { TemperatureList } from "src/components/separate/TemperatureList";
 
 const Add = () => {
   const [toddlerImageFile, setToddlerImageFile] = useState<any>(null);
-  const [datetime,setDatetime] = useState<number>(2020202020);
+  const [temperatureList, setTemperatureList] = useState([]);
   const router = useRouter();
-
-
-  const inputDatetime: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
-    setDatetime(Number(e.target.value))
-  };
-
-  const formatDatetime = (numberValue: number) => {
-    const stringValue = numberValue.toString();
-    if(stringValue.length < 12) {
-      return
-    };
-    const year = stringValue.slice(0,4);
-    const month = stringValue.slice(4,6);
-    const date = stringValue.slice(6,8);
-    const hour = stringValue.slice(8,10);
-    const minute = stringValue.slice(10,12);
-    const value = `${year}-${month}-${date} ${hour}:${minute}`
-    const formatedDatetime = format(new Date(value), "yyyy年M月d日 HH:mm");
-    console.log(formatedDatetime);
-    return formatedDatetime;
-  }
-
 
   // useEffect(() => {
   //   if (!auth.currentUser) {
@@ -78,10 +57,7 @@ const Add = () => {
 
   const onClickAdd = () => {
     alert("Add Input");
-  };
-
-  const onClickDelete = () => {
-    alert("Delete Temperature");
+    // const newTemperatureList = [...TemperatureList, ]
   };
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -168,7 +144,7 @@ const Add = () => {
           <div className="space-y-2">
             <div className="flex justify-between">
               <p className="text-sm text-gray-700 font-medium dark:text-white">
-                体温  {formatDatetime(datetime)}
+                体温
               </p>
               <button
                 className="text-gray-600 dark:text-white"
@@ -177,33 +153,11 @@ const Add = () => {
                 <BiPlusCircle />
               </button>
             </div>
-            <div className="flex items-center">
-              <div className="flex-1">
-                <Input
-                 type="text"
-                 id="time"
-                 placeholder="例：11:15"
-                 onChange={inputDatetime}
-                 variant="underlined"
-                 value={datetime}
-                />
-              </div>
-              <div className="flex-1 ml-2">
-                <Input
-                  id="temperature"
-                  placeholder="例：37°C"
-                  variant="underlined"
-                  className="text-sm"
-                />
-              </div>
-              <button
-                className="text-gray-600 dark:text-white ml-1"
-                onClick={onClickDelete}
-              >
-                <BiMinusCircle />
-              </button>
-            </div>
+
+            <TemperatureList />
+
           </div>
+
           <div>
             <Select label="機嫌" value="mood" array={MOODS} />
           </div>
