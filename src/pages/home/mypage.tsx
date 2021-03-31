@@ -19,7 +19,6 @@ import { Input } from "src/components/shared/Input";
 //   username: string;
 // }
 
-
 const myPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
@@ -31,20 +30,16 @@ const myPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
-      router.push("/");
-    }
-  }, [user]);
-
-  if (user) {
-    useEffect(() => {
+    if (user) {
       db.collection("users")
         .doc(user.uid)
         .onSnapshot((snapshot) => {
           setUserInfo(snapshot.data());
         });
-    }, []);
-  };
+    } else {
+      router.push("/")
+    }
+  }, []);
 
   // const { register } = useForm<Inputs>({
   //   defaultValues: {
@@ -81,17 +76,17 @@ const myPage = () => {
   };
 
   const updateInfo = () => {
-    if(!newName|| !userInfo?.name && !newUsername || !userInfo?.username) {
+    if (!newName || (!userInfo?.name && !newUsername) || !userInfo?.username) {
       alert("必ず名前とユーザーネームを記入してください");
       return;
     }
 
-    if(!newName || !userInfo?.name) {
+    if (!newName || !userInfo?.name) {
       alert("必ず名前を記入してください！");
       return;
     }
 
-    if(!newUsername || !userInfo?.username) {
+    if (!newUsername || !userInfo?.username) {
       alert("必ずユーザーネームを記入してください！");
       return;
     }
@@ -131,7 +126,7 @@ const myPage = () => {
           setNewProfileImageFile(null);
         }
       );
-    };
+    }
 
     if (newName !== userInfo?.name) {
       if (!user) return;
@@ -143,7 +138,7 @@ const myPage = () => {
         .catch((error) => {
           alert("名前の変更に失敗しました");
         });
-    };
+    }
 
     if (newUsername !== userInfo?.username) {
       if (!user) return;
@@ -155,7 +150,7 @@ const myPage = () => {
         .catch((error) => {
           alert("ユーザーの変更に失敗しました");
         });
-    };
+    }
 
     setIsEdit(false);
   };
@@ -233,7 +228,7 @@ const myPage = () => {
         </div>
 
         <div className="flex flex-col">
-          {user!==null && user.email === testUser.email ? null : (
+          {user !== null && user.email === testUser.email ? null : (
             <div className="mt-6">
               {isEdit ? (
                 <PrimaryButton
