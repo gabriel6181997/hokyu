@@ -9,15 +9,11 @@ import { auth, db, storage } from "src/firebase";
 import { Layout } from "src/components/separate/layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { testUser } from "src/config/testuser";
+import { Input } from "src/components/shared/Input";
 
 //Import Icons
 import { FaCamera } from "react-icons/fa";
-import { Input } from "src/components/shared/Input";
-
-// type Inputs = {
-//   name: string;
-//   username: string;
-// }
+// import { UserForm } from "src/components/separate/UseForm";
 
 const myPage = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -37,16 +33,9 @@ const myPage = () => {
           setUserInfo(snapshot.data());
         });
     } else {
-      router.push("/")
+      router.push("/");
     }
   }, []);
-
-  // const { register } = useForm<Inputs>({
-  //   defaultValues: {
-  //     name: userInfo?.name,
-  //     username: userInfo?.username
-  //   }
-  // })
 
   const startEdit = () => {
     setIsEdit(true);
@@ -165,7 +154,7 @@ const myPage = () => {
 
   return (
     <Layout addbutton sideMenu buttonNavigation title="マイページ">
-      <div className="text-center mx-auto pt-10">
+      <form className="text-center mx-auto pt-10">
         {isEdit ? (
           <div className="relative w-52 mx-auto">
             <img
@@ -177,7 +166,9 @@ const myPage = () => {
             <input
               className="z-10 opacity-0 absolute bottom-4 right-9 w-8"
               type="file"
+              name="newUserProfile"
               onChange={handleChange}
+              // ref={register}
             />
             <div
               className="absolute left-2/3 bottom-2  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700"
@@ -204,6 +195,7 @@ const myPage = () => {
                 variant="underlined"
                 onChange={inputName}
                 // ref={register}
+                // ref={register({ required: true })}
               />
             </div>
           ) : (
@@ -220,6 +212,7 @@ const myPage = () => {
                 variant="underlined"
                 onChange={inputUsername}
                 // ref={register}
+                // ref={register({ required: true })}
               />
             </div>
           ) : (
@@ -265,7 +258,7 @@ const myPage = () => {
             </div>
           )}
         </div>
-      </div>
+      </form>
     </Layout>
   );
 };
