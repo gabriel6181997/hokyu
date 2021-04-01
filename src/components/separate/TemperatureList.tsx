@@ -1,14 +1,19 @@
 import format from "date-fns/format";
-import { InputHTMLAttributes, useState } from "react";
+import React, { InputHTMLAttributes, useState } from "react";
 import { BiMinusCircle } from "react-icons/bi";
 import { Input } from "src/components/shared/Input";
+import { DateTimePicker,   MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
+import DateFnsUtils from '@date-io/date-fns';
+import { setDate } from "date-fns";
 
 // type Props = {
 //   value: number;
 // }
 
 export const TemperatureList = () => {
-  const [datetime, setDatetime] = useState<number>(2020202020);
+  const [datetime, setDatetime] = useState(new Date());
+  // const [selectedDate, handleDateChange] = useState(new Date());
 
   const inputDatetime: InputHTMLAttributes<HTMLInputElement>["onChange"] = (
     e
@@ -48,6 +53,9 @@ export const TemperatureList = () => {
             variant="underlined"
             value={datetime}
           />
+          {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <DateTimePicker value={selectedDate} onChange={handleDateChange} />
+          </MuiPickersUtilsProvider> */}
         </div>
         <div className="flex-1 ml-2">
           <Input
