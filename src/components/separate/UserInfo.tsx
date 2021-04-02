@@ -31,6 +31,7 @@ export const UserInfo = ({ preloadedValues }) => {
       .catch((error) => {
         alert("ユーザー情報の変更に失敗しました");
       });
+    setIsEdit(false);
   };
 
   const logout = () => {
