@@ -11,8 +11,6 @@ export const UserInfo = ({ preloadedValues }) => {
   const user = auth.currentUser;
   const router = useRouter();
 
-  console.log({preloadedValues});
-
 
   const startEdit = () => {
     setIsEdit(true);
@@ -50,35 +48,35 @@ export const UserInfo = ({ preloadedValues }) => {
         className="text-center mx-auto pt-10"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {/* {isEdit ? (
+        {isEdit ? (
           <div className="relative w-52 mx-auto">
             <img
-              src={userInfo?.profileImageFile ?? "/img/nouserimage.jpg"}
-              alt={userInfo?.name}
+              src={preloadedValues.profileImageFile ?? "/img/nouserimage.jpg"}
+              alt={preloadedValues.name}
               className="mx-auto rounded-full w-52 h-52 object-cover"
               id="avatar"
             />
-            <input
+            {/* <input
               className="z-10 opacity-0 absolute bottom-4 right-9 w-8"
               type="file"
               name="newUserProfile"
               onChange={handleChange}
               // ref={register}
-            />
+            /> */}
             <div
               className="absolute left-2/3 bottom-2  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700"
-              onClick={handleChange}
+              // onClick={handleChange}
             >
               <FaCamera />
             </div>
           </div>
         ) : (
           <img
-            src={userInfo?.profileImageFile}
-            alt={userInfo?.name}
+            src={preloadedValues.profileImageFile}
+            alt={preloadedValues.name}
             className="block mx-auto rounded-full w-52 h-52 object-fit"
           />
-        )} */}
+        )}
 
         <div className="py-6">
           {isEdit ? (
