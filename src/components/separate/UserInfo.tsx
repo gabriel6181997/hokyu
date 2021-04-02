@@ -7,7 +7,13 @@ import { auth, db, storage } from "src/firebase";
 import { useRouter } from "next/router";
 
 export const UserInfo = ({ preloadedValues }) => {
+  const { register, handleSubmit, reset, formState: { isSubmitSuccessful }
+} = useForm({
+    defaultValues: preloadedValues,
+  });
+
   const [isEdit, setIsEdit] = useState(false);
+  const [submittedData, setSubmittedData] = React.useState({});
   const user = auth.currentUser;
   const router = useRouter();
 
@@ -15,40 +21,27 @@ export const UserInfo = ({ preloadedValues }) => {
     setIsEdit(true);
   };
 
-  const { register, handleSubmit } = useForm({
-    defaultValues: preloadedValues,
-  });
-
-  // const onSubmit = (data) => {
-  //   if (!user) return;
-  //     db.collection("users")
-  //       .doc(user.uid)
-  //       .update({
-  //         name: data.name,
-  //         username: data.username,
-  //       })
-  //       .catch((error) => {
-  //         alert("ユーザー情報の変更に失敗しました");
-  //       }),
-  //   setIsEdit(false);
-  // };
 
   const onSubmit = (data) => {
-    React.useEffect(()=>{
-      if (!user) return;
-        db.collection("users")
-          .doc(user.uid)
-          .update({
-            name: data.name,
-            username: data.username,
-          })
-          .catch((error) => {
-            alert("ユーザー情報の変更に失敗しました");
-          }),
-    },[])
+    if (!user) return;
+      db.collection("users")
+        .doc(user.uid)
+        .update({
+          name: data.name,
+          username: data.username,
+        })
+        .catch((error) => {
+          alert("ユーザー情報の変更に失敗しました");
+        }),
+    setSubmittedData(data);
     setIsEdit(false);
   };
 
+  React.useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset({ ...submittedData });
+    }
+  }, [isSubmitSuccessful, submittedData, reset]);
 
   const logout = () => {
     const answer = confirm("ログアウトしますか？");
@@ -102,6 +95,7 @@ export const UserInfo = ({ preloadedValues }) => {
                 type="text"
                 id="name"
                 name="name"
+                key="name"
                 placeholder="名前"
                 className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400"
               />
@@ -119,6 +113,7 @@ export const UserInfo = ({ preloadedValues }) => {
                 type="text"
                 id="username"
                 name="username"
+                key="username"
                 placeholder="ユーザーネーム"
                 className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400"
               />
