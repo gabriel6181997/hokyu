@@ -3,9 +3,12 @@ import { useForm } from "react-hook-form";
 import { FaCamera } from "react-icons/fa";
 import { Input } from "../shared/Input";
 import { PrimaryButton } from "../shared/PrimaryButton";
+import { auth, db, storage } from "src/firebase";
 
 export const UserInfo = ({ preloadedValues }) => {
   const [isEdit, setIsEdit] = useState(false);
+
+  const user = auth.currentUser;
 
   const startEdit = () => {
     setIsEdit(true);
@@ -16,7 +19,17 @@ export const UserInfo = ({ preloadedValues }) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    if (!user) return;
+    db.collection("users")
+    .doc(user.uid)
+    .update({
+      name: data.name,
+      username: data.username,
+    })
+    .catch((error) => {
+      alert("ユーザー情報の変更に失敗しました");
+    });
+
   };
 
   return (
