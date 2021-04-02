@@ -7,8 +7,12 @@ import { auth, db, storage } from "src/firebase";
 import { useRouter } from "next/router";
 
 export const UserInfo = ({ preloadedValues }) => {
-  const { register, handleSubmit, reset, formState: { isSubmitSuccessful }
-} = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitSuccessful },
+  } = useForm({
     defaultValues: preloadedValues,
   });
 
@@ -17,23 +21,25 @@ export const UserInfo = ({ preloadedValues }) => {
   const user = auth.currentUser;
   const router = useRouter();
 
+  console.log(preloadedValues);
+
   const startEdit = () => {
     setIsEdit(true);
   };
 
-
   const onSubmit = (data) => {
     if (!user) return;
-      db.collection("users")
-        .doc(user.uid)
-        .update({
-          name: data.name,
-          username: data.username,
-        })
-        .catch((error) => {
-          alert("ユーザー情報の変更に失敗しました");
-        }),
-    setSubmittedData(data);
+    db
+      .collection("users")
+      .doc(user.uid)
+      .update({
+        name: data.name,
+        username: data.username,
+      })
+      .catch((error) => {
+        alert("ユーザー情報の変更に失敗しました");
+      }),
+      setSubmittedData(data);
     setIsEdit(false);
   };
 
@@ -65,13 +71,12 @@ export const UserInfo = ({ preloadedValues }) => {
               className="mx-auto rounded-full w-52 h-52 object-cover"
               id="avatar"
             />
-            {/* <input
+            <input
               className="z-10 opacity-0 absolute bottom-4 right-9 w-8"
               type="file"
-              name="newUserProfile"
-              onChange={handleChange}
-              // ref={register}
-            /> */}
+              {...register("profileImageFile")}
+              // onChange={handleChange}
+            />
             <div
               className="absolute left-2/3 bottom-2  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700"
               // onClick={handleChange}
@@ -91,10 +96,9 @@ export const UserInfo = ({ preloadedValues }) => {
           {isEdit ? (
             <div className="w-72 mx-auto">
               <input
-                ref={register}
+                {...register('name')}
                 type="text"
                 id="name"
-                name="name"
                 placeholder="名前"
                 className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400"
               />
@@ -108,10 +112,9 @@ export const UserInfo = ({ preloadedValues }) => {
           {isEdit ? (
             <div className="w-72 mx-auto">
               <input
-                ref={register}
+                {...register('username')}
                 type="text"
                 id="username"
-                name="username"
                 placeholder="ユーザーネーム"
                 className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400"
               />
