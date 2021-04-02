@@ -12,7 +12,6 @@ import { testUser } from "src/config/testuser";
 import { Input } from "src/components/shared/Input";
 import { UserInfo } from "src/components/separate/UserInfo";
 
-//Import Icons
 
 const myPage = () => {
   const [isEdit, setIsEdit] = useState(false);
