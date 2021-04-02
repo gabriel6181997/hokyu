@@ -6,6 +6,12 @@ import { PrimaryButton } from "../shared/PrimaryButton";
 import { auth, db, storage } from "src/firebase";
 import { useRouter } from "next/router";
 
+type Inputs = {
+  name: string;
+  username: string;
+  profileImageFile:string;
+}
+
 export const UserInfo = ({ preloadedValues }) => {
   const {
     register,
@@ -21,13 +27,11 @@ export const UserInfo = ({ preloadedValues }) => {
   const user = auth.currentUser;
   const router = useRouter();
 
-  console.log(preloadedValues);
-
   const startEdit = () => {
     setIsEdit(true);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: Inputs) => {
     if (!user) return;
     db
       .collection("users")
@@ -74,7 +78,7 @@ export const UserInfo = ({ preloadedValues }) => {
             <input
               className="z-10 opacity-0 absolute bottom-4 right-9 w-8"
               type="file"
-              {...register("profileImageFile")}
+              // {...register("profileImageFile")}
               // onChange={handleChange}
             />
             <div
