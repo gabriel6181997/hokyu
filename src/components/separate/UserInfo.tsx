@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaCamera } from "react-icons/fa";
 import { Input } from "../shared/Input";
@@ -11,7 +11,6 @@ export const UserInfo = ({ preloadedValues }) => {
   const user = auth.currentUser;
   const router = useRouter();
 
-
   const startEdit = () => {
     setIsEdit(true);
   };
@@ -20,19 +19,36 @@ export const UserInfo = ({ preloadedValues }) => {
     defaultValues: preloadedValues,
   });
 
+  // const onSubmit = (data) => {
+  //   if (!user) return;
+  //     db.collection("users")
+  //       .doc(user.uid)
+  //       .update({
+  //         name: data.name,
+  //         username: data.username,
+  //       })
+  //       .catch((error) => {
+  //         alert("ユーザー情報の変更に失敗しました");
+  //       }),
+  //   setIsEdit(false);
+  // };
+
   const onSubmit = (data) => {
-    if (!user) return;
-    db.collection("users")
-      .doc(user.uid)
-      .update({
-        name: data.name,
-        username: data.username,
-      })
-      .catch((error) => {
-        alert("ユーザー情報の変更に失敗しました");
-      });
+    React.useEffect(()=>{
+      if (!user) return;
+        db.collection("users")
+          .doc(user.uid)
+          .update({
+            name: data.name,
+            username: data.username,
+          })
+          .catch((error) => {
+            alert("ユーザー情報の変更に失敗しました");
+          }),
+    },[])
     setIsEdit(false);
   };
+
 
   const logout = () => {
     const answer = confirm("ログアウトしますか？");
