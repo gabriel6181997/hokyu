@@ -8,7 +8,6 @@ type Props = {
   id:string;
   placeholder?:string;
   onChange?: InputHTMLAttributes<HTMLInputElement>["onChange"];onChangeTextarea?:TextareaHTMLAttributes<HTMLTextAreaElement>["onChange"];
-  // ref?:any;    // 型の修正が必要
   textarea?:boolean;
   type?:string;
   variant: "underlined" | "box";
@@ -45,7 +44,6 @@ export const Input:VFC<Props> = (props) => {
           placeholder={props.placeholder}
           className={className}
           onChange={props.onChange}
-          // ref={props.ref}
           value={props.value}
         />
         )
