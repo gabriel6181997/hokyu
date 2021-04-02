@@ -16,7 +16,7 @@ export const UserInfo = ({ preloadedValues }) => {
   });
 
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    console.log(data);
   };
 
   return (
@@ -92,13 +92,14 @@ export const UserInfo = ({ preloadedValues }) => {
         <div className="flex flex-col">
         <div className="mt-6">
               {isEdit ? (
-                <PrimaryButton
-                  button
-                  className="px-20 py-2 my-1 text-xl"
-                  variant="solid"
-                >
-                  更新
-                </PrimaryButton>
+                // <PrimaryButton
+                //   button
+                //   className="px-20 py-2 my-1 text-xl"
+                //   variant="solid"
+                // >
+                //   更新
+                // </PrimaryButton>
+                <button type="submit" className="inline-flex items-center justify-center rounded-full text-white rounded-3x1 shadow-md bg-blue-400 font-bold hover:bg-blue-300 duration-300 px-20 py-2 my-1 text-xl">更新</button>
               ) : (
                 <PrimaryButton
                   button
