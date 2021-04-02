@@ -1,8 +1,10 @@
+import React from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "../shared/Input";
 import { PrimaryButton } from "../shared/PrimaryButton";
 
 export const UserInfo = ({preloadedValues}) => {
+
   const { register, handleSubmit } = useForm({
     defaultValues: preloadedValues
   });
@@ -22,7 +24,7 @@ export const UserInfo = ({preloadedValues}) => {
               id="name"
               name="name"
               placeholder="名前"
-              // variant="underlined"
+              className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400"
             />
           </div>
         </div>
@@ -34,7 +36,7 @@ export const UserInfo = ({preloadedValues}) => {
               id="username"
               name="username"
               placeholder="ユーザーネーム"
-              // variant="underlined"
+              className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400"
             />
           </div>
         </div>
@@ -45,7 +47,6 @@ export const UserInfo = ({preloadedValues}) => {
               button
               className="px-20 py-2 my-1 text-xl"
               variant="solid"
-              // onClick={updateInfo}
             >
               更新
             </PrimaryButton>
