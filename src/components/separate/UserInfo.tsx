@@ -11,6 +11,8 @@ export const UserInfo = ({ preloadedValues }) => {
   const user = auth.currentUser;
   const router = useRouter();
 
+  console.log({preloadedValues});
+
 
   const startEdit = () => {
     setIsEdit(true);
@@ -91,7 +93,7 @@ export const UserInfo = ({ preloadedValues }) => {
               />
             </div>
           ) : (
-            <p className="text-2xl font-bold">Name of user</p>
+            <p className="text-2xl font-bold">{preloadedValues.name}</p>
           )}
         </div>
 
@@ -108,7 +110,7 @@ export const UserInfo = ({ preloadedValues }) => {
               />
             </div>
           ) : (
-            <p>username of user</p>
+            <p>{preloadedValues.username}</p>
           )}
         </div>
 
