@@ -95,7 +95,6 @@ export const UserInfo = ({ preloadedValues }) => {
                 type="text"
                 id="name"
                 name="name"
-                key="name"
                 placeholder="名前"
                 className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400"
               />
@@ -113,7 +112,6 @@ export const UserInfo = ({ preloadedValues }) => {
                 type="text"
                 id="username"
                 name="username"
-                key="username"
                 placeholder="ユーザーネーム"
                 className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400"
               />
