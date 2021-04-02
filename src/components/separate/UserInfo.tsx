@@ -4,11 +4,13 @@ import { FaCamera } from "react-icons/fa";
 import { Input } from "../shared/Input";
 import { PrimaryButton } from "../shared/PrimaryButton";
 import { auth, db, storage } from "src/firebase";
+import { useRouter } from "next/router";
 
 export const UserInfo = ({ preloadedValues }) => {
   const [isEdit, setIsEdit] = useState(false);
-
   const user = auth.currentUser;
+  const router = useRouter();
+
 
   const startEdit = () => {
     setIsEdit(true);
@@ -21,15 +23,22 @@ export const UserInfo = ({ preloadedValues }) => {
   const onSubmit = (data) => {
     if (!user) return;
     db.collection("users")
-    .doc(user.uid)
-    .update({
-      name: data.name,
-      username: data.username,
-    })
-    .catch((error) => {
-      alert("ユーザー情報の変更に失敗しました");
-    });
+      .doc(user.uid)
+      .update({
+        name: data.name,
+        username: data.username,
+      })
+      .catch((error) => {
+        alert("ユーザー情報の変更に失敗しました");
+      });
+  };
 
+  const logout = () => {
+    const answer = confirm("ログアウトしますか？");
+    if (answer) {
+      auth.signOut();
+      router.push("/");
+    }
   };
 
   return (
@@ -103,27 +112,45 @@ export const UserInfo = ({ preloadedValues }) => {
         </div>
 
         <div className="flex flex-col">
-        <div className="mt-6">
-              {isEdit ? (
-                // <PrimaryButton
-                //   button
-                //   className="px-20 py-2 my-1 text-xl"
-                //   variant="solid"
-                // >
-                //   更新
-                // </PrimaryButton>
-                <button type="submit" className="inline-flex items-center justify-center rounded-full text-white rounded-3x1 shadow-md bg-blue-400 font-bold hover:bg-blue-300 duration-300 px-20 py-2 my-1 text-xl">更新</button>
-              ) : (
+          <div className="mt-6">
+            {isEdit ? (
+              // <PrimaryButton
+              //   button
+              //   className="px-20 py-2 my-1 text-xl"
+              //   variant="solid"
+              // >
+              //   更新
+              // </PrimaryButton>
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center rounded-full text-white rounded-3x1 shadow-md bg-blue-400 font-bold hover:bg-blue-300 duration-300 px-20 py-2 my-1 text-xl"
+              >
+                更新
+              </button>
+            ) : (
+              <PrimaryButton
+                button
+                className="px-20 py-2 my-1 text-xl"
+                variant="solid"
+                onClick={startEdit}
+              >
+                編集
+              </PrimaryButton>
+            )}
+
+            {isEdit ? null : (
+              <div className="my-4">
                 <PrimaryButton
                   button
-                  className="px-20 py-2 my-1 text-xl"
+                  className="px-12 py-2 my-1 text-xl"
                   variant="solid"
-                  onClick={startEdit}
+                  onClick={logout}
                 >
-                  編集
+                  ログアウト
                 </PrimaryButton>
-              )}
-            </div>
+              </div>
+            )}
+          </div>
         </div>
       </form>
     </>
