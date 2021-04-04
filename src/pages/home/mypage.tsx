@@ -12,7 +12,6 @@ import { testUser } from "src/config/testuser";
 import { Input } from "src/components/shared/Input";
 import { UserInfo } from "src/components/separate/UserInfo";
 
-
 const myPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
@@ -35,14 +34,15 @@ const myPage = () => {
     }
   }, []);
 
-  return userInfo ? (
+  return (
     <Layout addbutton sideMenu buttonNavigation title="マイページ">
-      <UserInfo preloadedValues={userInfo} />
+      {userInfo ? (
+        <UserInfo preloadedValues={userInfo} />
+      ) : (
+        <div>loading...</div>
+      )}
     </Layout>
-  ) : (
-    <div>loading...</div>
-  )
-
+  );
 };
 
 export default myPage;
