@@ -1,27 +1,51 @@
 //Import Libraries
-import { useEffect } from 'react'
+import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 //Import Components
 import { auth } from "src/firebase";
 import { Layout } from "src/components/separate/layout";
 import { ToddlerItems } from "src/components/separate/ToddlersItems";
 
+import { MAINITEMS } from "src/utils/constants/mainitems";
+
 const IndexPage = () => {
   const router = useRouter();
 
-  useEffect(()=> {
-    if (!auth.currentUser){
-      router.push('/')
-    };
-  },[auth.currentUser])
+  useEffect(() => {
+    if (!auth.currentUser) {
+      router.push("/");
+    }
+  }, [auth.currentUser]);
 
   return (
     <Layout addbutton sideMenu buttonNavigation title="ホーム">
-      <ToddlerItems />
+      <ul>
+        {MAINITEMS.map(({ src, name, age, urgency }) => (
+          <li
+            key={name}
+            className="border-b dark:border-gray-400 md:hover:bg-blue-50 duration-300 md:dark:hover:text-blue-400 md:dark:hover:bg-gray-50 md:dark:hover:bg-opacity-20"
+          >
+            <Link href="/">
+              <a className="flex items-center py-3">
+                <img src={src} alt={name} className="w-1/6 pl-4 rounded-full" />
+                <div className="w-3/6 pl-3">
+                  <h2 className="text-xl md:text-2xl">{name}</h2>
+                  <p className="text-lg pt-1 md:pt-3">{age}歳</p>
+                </div>
+                <div className="items-center w-1/6 text-center">
+                  <p>緊急度:</p>
+                  <p className="text-3xl md:text-5xl">{urgency}</p>
+                </div>
+                <p className="w-1/6 text-center text-2xl md:text-4xl">〉</p>
+              </a>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </Layout>
   );
 };
 
 export default IndexPage;
-
