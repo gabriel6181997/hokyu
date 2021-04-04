@@ -20,6 +20,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     db.collection("toddlers")
+       .orderBy("urgency", "desc")
        .get()
        .then((toddler)=>
          setToddlerInfos(toddler.docs.map((doc)=>  ({ id: doc.id, data: doc.data() }))),
@@ -51,7 +52,6 @@ const IndexPage = () => {
               </Link>
             </li>
           ))}
-
       </ul>
     </Layout>
   );
