@@ -51,7 +51,7 @@ const IndexPage = () => {
                     alt={data.name}
                     className="rounded-full"
                   />
-                  <div className="absolute bottom-2 right-0 text-3xl p-2 bg-white rounded-full border">
+                  <div className="absolute ms:bottom-4 bottom-2 right-0 ms:text-2xl text-3xl p-2 bg-white rounded-full border">
                     {data.gender === "male" ? (<div className="text-blue-400"><GiMale /></div>) : (<div className="text-rose-300"><GiFemale /></div>)}
                   </div>
                 </div>
