@@ -44,7 +44,7 @@ const IndexPage = () => {
             className="border-b dark:border-gray-400 md:hover:bg-blue-50 duration-300 md:dark:hover:text-blue-400 md:dark:hover:bg-gray-50 md:dark:hover:bg-opacity-20"
           >
             <Link href="/">
-              <a className="flex items-center py-3">
+              <a className="flex items-center py-3 pr-3">
                 <div className="w-32 h-32 pl-4 relative mt-3">
                   <img
                     src={data.toddlerphoto}
@@ -55,7 +55,7 @@ const IndexPage = () => {
                     {data.gender === "male" ? (<div className="text-blue-400"><GiMale /></div>) : (<div className="text-rose-300"><GiFemale /></div>)}
                   </div>
                 </div>
-                <div className="w-3/6 ml-6">
+                <div className="ms:w-2/6 w-3/6 ml-6">
                   <h2 className="text-xl md:text-2xl">{data.name}</h2>
                   <p className="text-lg pt-1 md:pt-3">{data.age}歳</p>
                 </div>
@@ -63,7 +63,7 @@ const IndexPage = () => {
                   <p className="ms:text-xs">緊急度:</p>
                   <p className="text-3xl md:text-5xl">{data.urgency}</p>
                 </div>
-                <p className="w-1/6 text-center text-2xl md:text-4xl">〉</p>
+                <p className=" text-center text-2xl md:text-4xl ml-auto">〉</p>
               </a>
             </Link>
           </li>
