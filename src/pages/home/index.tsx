@@ -10,7 +10,7 @@ import { Layout } from "src/components/separate/layout";
 
 const IndexPage = () => {
   const router = useRouter();
-  const [toddlerInfos, setToddlerInfos] = useState<firebase.firestore.DocumentData>();
+  const [toddlerInfos, setToddlerInfos] = useState<firebase.firestore.DocumentData>([]);
 
   useEffect(() => {
     if (!auth.currentUser) {
@@ -30,7 +30,6 @@ const IndexPage = () => {
   return (
     <Layout addbutton sideMenu buttonNavigation title="ホーム">
       <ul>
-
           {toddlerInfos.map(({ id, data }) => (
             <li
               key={id}
