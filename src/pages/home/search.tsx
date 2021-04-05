@@ -38,8 +38,6 @@ const SearchPage = () => {
     toddlerInfo.data.name.includes(searchInput)
   );
 
-  console.log(toddlerInfos);
-
   const search: ChangeEventHandler<HTMLInputElement>["onChange"] = (e) => {
     setSearchInput(e.target.value);
   };
