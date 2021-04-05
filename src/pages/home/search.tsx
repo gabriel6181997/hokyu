@@ -9,14 +9,12 @@ import { Layout } from "src/components/separate/layout";
 import { Input } from "src/components/shared/Input";
 import Link from "next/link";
 import { ToddlerItem } from "src/components/separate/ToddlersItem";
-import { log } from "node:console";
 
 const SearchPage = () => {
   const router = useRouter();
-  const [
-    toddlerInfos,
-    setToddlerInfos,
-  ] = useState<firebase.firestore.DocumentData[]>([]);
+  const [toddlerInfos, setToddlerInfos] = useState<
+    firebase.firestore.DocumentData[]
+  >([]);
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
@@ -40,8 +38,7 @@ const SearchPage = () => {
     toddlerInfo.data.name.includes(searchInput)
   );
 
-  console.log(toddlerInfos)
-
+  console.log(toddlerInfos);
 
   const search: ChangeEventHandler<HTMLInputElement>["onChange"] = (e) => {
     setSearchInput(e.target.value);
@@ -58,26 +55,28 @@ const SearchPage = () => {
           onChange={search}
         />
         <p className="mt-12 text-xl">検索結果</p>
+     </div>
         <div className="mt-4">
-          {searchInput.trim() &&
-            resultsofToddlers.map(({ id, data }) => (
-              <li
-                key={id}
-                className="border-b dark:border-gray-400 md:hover:bg-blue-50 duration-300 md:dark:hover:text-blue-400 md:dark:hover:bg-gray-50 md:dark:hover:bg-opacity-20"
-              >
-                <Link href={`/posts/${id}`} key={id} passHref>
-                  <ToddlerItem
-                    age={data.age}
-                    toddlerphoto={data.toddlerphoto}
-                    name={data.name}
-                    urgency={data.urgency}
-                    gender={data.gender}
-                  />
-                </Link>
-              </li>
-            ))}
+          <ul>
+            {searchInput.trim() &&
+              resultsofToddlers.map(({ id, data }) => (
+                <li
+                  key={id}
+                  className="border-b dark:border-gray-400 md:hover:bg-blue-50 duration-300 md:dark:hover:text-blue-400 md:dark:hover:bg-gray-50 md:dark:hover:bg-opacity-20"
+                >
+                  <Link href={`/posts/${id}`} key={id} passHref>
+                    <ToddlerItem
+                      age={data.age}
+                      toddlerphoto={data.toddlerphoto}
+                      name={data.name}
+                      urgency={data.urgency}
+                      gender={data.gender}
+                    />
+                  </Link>
+                </li>
+              ))}
+          </ul>
         </div>
-      </div>
     </Layout>
   );
 };
