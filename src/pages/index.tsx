@@ -16,12 +16,12 @@ const IndexPage = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const login = (e: React.SyntheticEvent) => {
+  const login = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    auth
+    await auth
       .signInWithEmailAndPassword(email, password)
-      .then(async () => {
-        await router.push("/home");
+      .then( () => {
+        router.push("/home");
         setEmail("");
         setPassword("");
       })
@@ -30,11 +30,9 @@ const IndexPage = () => {
       });
   };
 
-  //Cause of memory leak error↑
-
-  const testLogin = (e:React.SyntheticEvent) => {
+  const testLogin = async (e:React.SyntheticEvent) => {
     e.preventDefault();
-    auth
+    await auth
       .signInWithEmailAndPassword(testUser.email, testUser.password)
       .then(() => {
         router.push("/home");
