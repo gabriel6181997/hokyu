@@ -2,7 +2,6 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect, InputHTMLAttributes } from "react";
 import firebase from "firebase/app";
-import { useForm } from "react-hook-form";
 
 //Import Components
 import { auth, db, storage } from "src/firebase";
@@ -13,7 +12,6 @@ import { Input } from "src/components/shared/Input";
 
 //Import Icons
 import { FaCamera } from "react-icons/fa";
-// import { UserForm } from "src/components/separate/UseForm";
 
 const myPage = () => {
   const [isEdit, setIsEdit] = useState(false);
