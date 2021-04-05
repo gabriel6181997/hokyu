@@ -7,9 +7,8 @@ import firebase from "firebase/app";
 //Import Components
 import { auth, db } from "src/firebase";
 import { Layout } from "src/components/separate/layout";
+import {ToddlerItem} from "src/components/separate/ToddlersItem"
 
-//Import Icons
-import { GiMale, GiFemale } from "react-icons/gi";
 
 const IndexPage = () => {
   const router = useRouter();
@@ -43,28 +42,14 @@ const IndexPage = () => {
             key={id}
             className="border-b dark:border-gray-400 md:hover:bg-blue-50 duration-300 md:dark:hover:text-blue-400 md:dark:hover:bg-gray-50 md:dark:hover:bg-opacity-20"
           >
-            <Link href="/">
-              <a className="flex items-center py-3 pr-3">
-                <div className="w-32 h-32 pl-4 relative mt-3">
-                  <img
-                    src={data.toddlerphoto}
-                    alt={data.name}
-                    className="rounded-full"
-                  />
-                  <div className="absolute ms:bottom-4 bottom-2 right-0 ms:text-2xl text-3xl p-2 bg-white rounded-full border">
-                    {data.gender === "male" ? (<div className="text-blue-400"><GiMale /></div>) : (<div className="text-rose-300"><GiFemale /></div>)}
-                  </div>
-                </div>
-                <div className="ms:w-2/6 w-3/6 ml-6">
-                  <h2 className="text-xl md:text-2xl">{data.name}</h2>
-                  <p className="text-lg pt-1 md:pt-3">{data.age}歳</p>
-                </div>
-                <div className="items-center mr-3 text-center">
-                  <p className="ms:text-xs">緊急度:</p>
-                  <p className="text-3xl md:text-5xl">{data.urgency}</p>
-                </div>
-                <p className=" text-center text-2xl md:text-4xl ml-auto">〉</p>
-              </a>
+            <Link href="/" passHref>
+               <ToddlerItem
+                age={data.age}
+                toddlerphoto={data.toddlerphoto}
+                name={data.name}
+                urgency={data.urgency}
+                gender={data.gender}
+              />
             </Link>
           </li>
         ))}
@@ -74,3 +59,4 @@ const IndexPage = () => {
 };
 
 export default IndexPage;
+
