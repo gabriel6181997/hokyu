@@ -20,6 +20,7 @@ export const ButtonNavigation = () => {
         });
     }, []);
   }
+  //↑Cause of Memory Leak
 
   return (
     <>
