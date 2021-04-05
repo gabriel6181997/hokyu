@@ -168,7 +168,6 @@ const myPage = () => {
               type="file"
               name="newUserProfile"
               onChange={handleChange}
-              // ref={register}
             />
             <div
               className="absolute left-2/3 bottom-2  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700"
@@ -194,8 +193,6 @@ const myPage = () => {
                 placeholder="名前"
                 variant="underlined"
                 onChange={inputName}
-                // ref={register}
-                // ref={register({ required: true })}
               />
             </div>
           ) : (
@@ -211,8 +208,6 @@ const myPage = () => {
                 placeholder="ユーザーネーム"
                 variant="underlined"
                 onChange={inputUsername}
-                // ref={register}
-                // ref={register({ required: true })}
               />
             </div>
           ) : (
