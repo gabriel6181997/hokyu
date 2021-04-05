@@ -32,9 +32,9 @@ export const UserInfo = ({ preloadedValues }) => {
     setIsEdit(true);
   };
 
-  const onSubmit = (data: Inputs) => {
+  const onSubmit = async(data: Inputs) => {
     if (!user) return;
-    db
+    await db
       .collection("users")
       .doc(user.uid)
       .update({
