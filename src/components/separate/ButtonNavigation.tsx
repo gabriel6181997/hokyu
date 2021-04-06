@@ -11,16 +11,41 @@ export const ButtonNavigation = () => {
   const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
   const user = auth.currentUser;
 
-  if (user) {
-    useEffect(() => {
-      db.collection("users")
-        .doc(user.uid)
-        .onSnapshot((snapshot) => {
-          setUserInfo(snapshot.data());
-        });
-    }, []);
-  }
+  // if (user) {
+  //   useEffect(() => {
+  //     db.collection("users")
+  //       .doc(user.uid)
+  //       .onSnapshot((snapshot) => {
+  //         setUserInfo(snapshot.data());
+  //       });
+  //   }, []);
+  // }
+
   //↑Cause of Memory Leak
+
+  if(user){
+    useEffect(()=>{
+      const fetchData = async() => {
+         try{
+           const response = await db
+           .collection("users")
+           .doc(user.uid)
+           .get();
+
+           let info = {name: "unknown", username: "unknown", profileImageFile: "no picture"}
+
+           if(response.exists) {
+             info = response.data()
+           }
+           setUserInfo(info);
+         } catch(error) {
+           alert("ユーザーの情報お取得できませんでした！")
+         }
+      };
+      fetchData();
+    },[])
+  }
+
 
   return (
     <>
