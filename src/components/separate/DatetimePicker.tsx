@@ -47,6 +47,7 @@ export const DatetimePicker = () => {
             onError={console.log}
             disablePast
             format="yyyy/MM/dd HH:mm"
+            minDateMessage="過去の日付は指定できません"
           />
         </MuiPickersUtilsProvider>
     </div>
