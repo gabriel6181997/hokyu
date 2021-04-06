@@ -1,9 +1,12 @@
+import React from "react";
 import {
   KeyboardDateTimePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import ja from 'date-fns/locale/ja'
 import { useState } from "react";
+
 
 export const DatetimePicker = () => {
   const [selectedDate, handleDateChange] = useState(
@@ -18,7 +21,7 @@ export const DatetimePicker = () => {
   //   setDatetime(Number(e.target.value));
   // };
 
-    // const formatDatetime = (numberValue: number) => {
+  //   const formatDatetime = (numberValue: number) => {
   //   const stringValue = numberValue.toString();
   //   if (stringValue.length < 12) {
   //     return;
@@ -30,33 +33,22 @@ export const DatetimePicker = () => {
   //   const minute = stringValue.slice(10, 12);
   //   const value = `${year}-${month}-${date} ${hour}:${minute}`;
   //   const formatedDatetime = format(new Date(value), "yyyy年M月d日 HH:mm");
-  //   console.log(formatedDatetime);
   //   return formatedDatetime;
   // };
 
-
   return (
     <div>
-      {/* <Input
-            type="text"
-            id="datetime"
-            placeholder="例：11:15"
-            onChange={inputDatetime}
-            variant="underlined"
-            value={datetime}
-      /> */}
-
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDateTimePicker
-          variant="inline"
-          ampm={false}
-          value={selectedDate}
-          onChange={handleDateChange}
-          onError={console.log}
-          disablePast
-          format="yyyy/MM/dd HH:mm"
-        />
-      </MuiPickersUtilsProvider>
+        <MuiPickersUtilsProvider  locale={ja} utils={DateFnsUtils}>
+          <KeyboardDateTimePicker
+            variant="inline"
+            ampm={false}
+            value={selectedDate}
+            onChange={handleDateChange}
+            onError={console.log}
+            disablePast
+            format="yyyy/MM/dd HH:mm"
+          />
+        </MuiPickersUtilsProvider>
     </div>
   );
 };
