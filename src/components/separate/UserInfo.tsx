@@ -20,10 +20,15 @@ export const UserInfo = ({ preloadedValues }) => {
     reset,
     formState: { isSubmitSuccessful },
   } = useForm({
-    defaultValues: preloadedValues,
+    defaultValues: {
+      name: preloadedValues.name,
+      username: preloadedValues.username
+    }
   });
 
   const [isEdit, setIsEdit] = useState(false);
+  const [newProfileImageFile, setNewProfileImageFile] = useState<any>(null);
+  const [progress, setProgress] = useState(0);
   const [submittedData, setSubmittedData] = React.useState({});
   const user = auth.currentUser;
   const router = useRouter();
@@ -32,8 +37,59 @@ export const UserInfo = ({ preloadedValues }) => {
     setIsEdit(true);
   };
 
+  const handleChange = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (_e: any) => {
+      const img = document.getElementById("avatar") as HTMLImageElement;
+      img.src = _e.target.result;
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+    setNewProfileImageFile(file);
+  };
+
   const onSubmit = async(data: Inputs) => {
     if (!user) return;
+
+    if (newProfileImageFile) {
+      const uploadTask = storage
+        .ref(`profileImageFile/${newProfileImageFile.name}`)
+        .put(newProfileImageFile);
+       uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progressValue = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progressValue);
+        },
+        (error) => {
+          alert("画像がデータベースにアップロードできませんでした");
+        },
+        async () => {
+          await storage
+            .ref("profileImageFile")
+            .child(newProfileImageFile.name)
+            .getDownloadURL()
+            .then((url) => {
+              if (!user) return;
+              db.collection("users")
+                .doc(user.uid)
+                .update({
+                  profileImageFile: url,
+                })
+                .catch((error) => {
+                  alert("画像の変更に失敗しました");
+                });
+            });
+          setProgress(0);
+          setNewProfileImageFile(null);
+        }
+      );
+    }
+
     await db
       .collection("users")
       .doc(user.uid)
@@ -79,12 +135,12 @@ export const UserInfo = ({ preloadedValues }) => {
             <input
               className="z-10 opacity-0 absolute bottom-4 right-9 w-8"
               type="file"
-              // {...register("profileImageFile")}
-              // onChange={handleChange}
+              {...register("profileImageFile")}
+              onChange={handleChange}
             />
             <div
               className="absolute left-2/3 bottom-2  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700"
-              // onClick={handleChange}
+              onClick={handleChange}
             >
               <FaCamera />
             </div>
