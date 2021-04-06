@@ -25,27 +25,28 @@ export const SideMenu = () => {
   //   }, [user]);
   // }
 
-  if(user){
-    useEffect(()=>{
-      const fetchData = async() => {
-         try{
-           const response = await db
-           .collection("users")
-           .doc(user.uid)
-           .get();
+  if (user) {
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await db.collection("users").doc(user.uid).get();
 
-           let info = {name: "unknown", username: "unknown", profileImageFile: "no picture"}
+          let info = {
+            name: "unknown",
+            username: "unknown",
+            profileImageFile: "no picture",
+          };
 
-           if(response.exists) {
-             info = response.data()
-           }
-           setUserInfo(info);
-         } catch(error) {
-           alert("ユーザーの情報お取得できませんでした！")
-         }
+          if (response.exists) {
+            info = response.data();
+          }
+          setUserInfo(info);
+        } catch (error) {
+          alert("ユーザーの情報お取得できませんでした！");
+        }
       };
       fetchData();
-    },[])
+    }, []);
   }
 
   //↑Unhandled Runtime Error (Error: Rendered more hooks than during the previous render.)
@@ -53,7 +54,7 @@ export const SideMenu = () => {
   return (
     <aside className="flex flex-col ml-auto w-48 sticky h-screen top-0">
       <div className="ml-2 py-7 text-center flex items-center">
-        <Image src="/img/logo.png" alt="logo" width={50} height={50}/>
+        <Image src="/img/logo.png" alt="logo" width={50} height={50} />
         <h1 className="font-custom text-3xl pl-2">Hokyu</h1>
       </div>
       <nav>
@@ -84,24 +85,18 @@ export const SideMenu = () => {
         </PrimaryButton>
       </div>
 
-      <div className="mt-auto mb-5 mx-auto">
-        <PrimaryButton
-          button
-          className="px-1 py-1"
-          variant="ghost"
-          onClick={() => { alert("Logout")}}
-        >
-          <img
-            src={userInfo?.profileImageFile}
-            alt={userInfo?.name}
-            className="rounded-full w-11 h-11"
-          />
-          <div className="pl-2 text-left">
-            <p className="font-bold dark:text-white ">{userInfo?.name}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">@{userInfo?.username}</p>
-          </div>
-          <p className="mb-4 text-xl  ml-3 mr-2 dark:text-white">…</p>
-        </PrimaryButton>
+      <div className="mt-auto mb-5 mx-auto flex items-center">
+        <img
+          src={userInfo?.profileImageFile}
+          alt={userInfo?.name}
+          className="rounded-full w-11 h-11"
+        />
+        <div className="pl-2 text-left">
+          <p className="font-bold dark:text-white ">{userInfo?.name}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            @{userInfo?.username}
+          </p>
+        </div>
       </div>
     </aside>
   );
