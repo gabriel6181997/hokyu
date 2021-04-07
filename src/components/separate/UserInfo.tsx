@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaCamera } from "react-icons/fa";
-import { Input } from "../shared/Input";
 import { PrimaryButton } from "../shared/PrimaryButton";
 import { auth, db, storage } from "src/firebase";
 import { useRouter } from "next/router";
 import { testUser } from "src/config/testuser";
+import { Input } from "src/components/shared/Input";
 
 type Inputs = {
   name: string;
@@ -22,8 +22,8 @@ export const UserInfo = ({ preloadedValues }) => {
   } = useForm({
     defaultValues: {
       name: preloadedValues.name,
-      username: preloadedValues.username
-    }
+      username: preloadedValues.username,
+    },
   });
 
   const [isEdit, setIsEdit] = useState(false);
@@ -50,14 +50,14 @@ export const UserInfo = ({ preloadedValues }) => {
     setNewProfileImageFile(file);
   };
 
-  const onSubmit = async(data: Inputs) => {
+  const onSubmit = async (data: Inputs) => {
     if (!user) return;
 
     if (newProfileImageFile) {
       const uploadTask = storage
         .ref(`profileImageFile/${newProfileImageFile.name}`)
         .put(newProfileImageFile);
-       uploadTask.on(
+      uploadTask.on(
         "state_changed",
         (snapshot) => {
           const progressValue = Math.round(
@@ -135,7 +135,6 @@ export const UserInfo = ({ preloadedValues }) => {
             <input
               className="z-10 opacity-0 absolute bottom-4 right-9 w-8"
               type="file"
-              {...register("profileImageFile")}
               onChange={handleChange}
             />
             <div
@@ -156,12 +155,12 @@ export const UserInfo = ({ preloadedValues }) => {
         <div className="py-6">
           {isEdit ? (
             <div className="w-72 mx-auto">
-              <input
-                {...register("name")}
+              <Input
                 type="text"
                 id="name"
                 placeholder="名前"
-                className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400"
+                variant="underlined"
+                {...register("name")}
               />
             </div>
           ) : (
@@ -172,12 +171,12 @@ export const UserInfo = ({ preloadedValues }) => {
         <div className="mt-2">
           {isEdit ? (
             <div className="w-72 mx-auto">
-              <input
-                {...register("username")}
+              <Input
                 type="text"
                 id="username"
                 placeholder="ユーザーネーム"
-                className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400"
+                variant="underlined"
+                {...register("username")}
               />
             </div>
           ) : (
