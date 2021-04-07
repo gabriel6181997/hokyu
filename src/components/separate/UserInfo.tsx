@@ -69,25 +69,26 @@ export const UserInfo = ({ preloadedValues }) => {
           alert("画像がデータベースにアップロードできませんでした");
         },
         async () => {
-          await storage
-            .ref("profileImageFile")
-            .child(newProfileImageFile.name)
-            .getDownloadURL()
-            .then((url) => {
-              if (!user) return;
-              db.collection("users")
-                .doc(user.uid)
-                .update({
-                  profileImageFile: url,
-                })
-                .catch((error) => {
-                  alert("画像の変更に失敗しました");
-                });
-            });
+          try {
+            await storage
+              .ref("profileImageFile")
+              .child(newProfileImageFile.name)
+              .getDownloadURL()
+              .then((url) => {
+                if (!user) return;
+                db.collection("users")
+                  .doc(user.uid)
+                  .update({
+                    profileImageFile: url,
+                  })
+              });
+          } catch(error) {
+            alert("画像の変更に失敗しました");
+          };
           setProgress(0);
           setNewProfileImageFile(null);
         }
-      );
+      )
     }
 
     await db
