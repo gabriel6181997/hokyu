@@ -8,6 +8,7 @@ type Common = {
   variant:"solid" | "outline" |"ghost";
   className?:string;
   coloredTextDefault?:boolean;
+  // type: string;
 };
 
 type Button = Common & { button: boolean; onClick? : DOMAttributes<HTMLButtonElement>["onClick"] };
@@ -17,6 +18,10 @@ type Link = Common & { linkProps: LinkProps; external?: boolean };
 const isButton = (props: Button | Link):props is Button => {
   return "button" in props;
 };
+
+// const isSubmit = (props: Button | Link): props is Button=> {
+//   return "submit" in props;
+// };
 
 export const PrimaryButton: VFC<Button | Link> = (props) => {
   const className = cc([
