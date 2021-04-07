@@ -6,6 +6,7 @@ import { auth, db, storage } from "src/firebase";
 import { useRouter } from "next/router";
 import { testUser } from "src/config/testuser";
 import { Input } from "src/components/shared/Input";
+import { ErrorMessage } from "@hookform/error-message";
 
 type Inputs = {
   name: string;
@@ -18,8 +19,8 @@ export const UserInfo = ({ preloadedValues }) => {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitSuccessful },
-  } = useForm({
+    formState: { errors, isSubmitSuccessful },
+  } = useForm<Inputs>({
     defaultValues: {
       name: preloadedValues.name,
       username: preloadedValues.username,
@@ -76,19 +77,17 @@ export const UserInfo = ({ preloadedValues }) => {
               .getDownloadURL()
               .then((url) => {
                 if (!user) return;
-                db.collection("users")
-                  .doc(user.uid)
-                  .update({
-                    profileImageFile: url,
-                  })
+                db.collection("users").doc(user.uid).update({
+                  profileImageFile: url,
+                });
               });
-          } catch(error) {
+          } catch (error) {
             alert("画像の変更に失敗しました");
-          };
+          }
           setProgress(0);
           setNewProfileImageFile(null);
         }
-      )
+      );
     }
 
     await db
@@ -101,7 +100,7 @@ export const UserInfo = ({ preloadedValues }) => {
       .catch((error) => {
         alert("ユーザー情報の変更に失敗しました");
       }),
-    setSubmittedData(data);
+      setSubmittedData(data);
     setIsEdit(false);
   };
 
@@ -161,8 +160,11 @@ export const UserInfo = ({ preloadedValues }) => {
                 id="name"
                 placeholder="名前"
                 variant="underlined"
-                {...register("name")}
+                {...register("name", { required: "名前を入力してください！" })}
               />
+              <div className="text-rose-600 font-bold">
+                <ErrorMessage errors={errors} name="name" />
+              </div>
             </div>
           ) : (
             <p className="text-2xl font-bold">{preloadedValues.name}</p>
@@ -177,8 +179,13 @@ export const UserInfo = ({ preloadedValues }) => {
                 id="username"
                 placeholder="ユーザーネーム"
                 variant="underlined"
-                {...register("username")}
+                {...register("username", {
+                  required: "ユーザーネームを入力してください！",
+                })}
               />
+              <div className="text-rose-600 font-bold">
+                <ErrorMessage errors={errors} name="username" />
+              </div>
             </div>
           ) : (
             <p>{preloadedValues.username}</p>
