@@ -61,7 +61,7 @@ export const Select: VFC<Props> = (props) => {
               >
 
                 {props.array.map( (item) => (
-                  <Listbox.Option key={props.value} value={item}>
+                  <Listbox.Option key={item} value={item}>
                     {({ selected, active }) => (
                       <div
                         className={`${
