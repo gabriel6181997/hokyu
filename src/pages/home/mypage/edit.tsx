@@ -8,7 +8,7 @@ import { auth, db } from "src/firebase";
 import { Layout } from "src/components/separate/layout";
 import { UserInfoEdit } from "src/components/separate/UserInfoEdit";
 
-const myPage = () => {
+const UserInfoEditPage = () => {
   const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
   const user = auth.currentUser;
   const router = useRouter();
@@ -36,4 +36,4 @@ const myPage = () => {
   );
 };
 
-export default myPage;
+export default UserInfoEditPage;
