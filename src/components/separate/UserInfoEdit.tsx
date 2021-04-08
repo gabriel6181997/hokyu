@@ -108,14 +108,6 @@ export const UserInfoEdit = ({
     }
   }, [isSubmitSuccessful, submittedData, reset]);
 
-  const logout = () => {
-    const answer = confirm("ログアウトしますか？");
-    if (answer) {
-      auth.signOut();
-      router.push("/");
-    }
-  };
-
   return (
     <>
       <form
