@@ -14,7 +14,7 @@ type Inputs = {
   profileImageFile: string;
 };
 
-export const UserInfo = ({ preloadedValues }) => {
+export const UserInfo = ({ preloadedValues }:{preloadedValues: Inputs}) => {
   const {
     register,
     handleSubmit,
@@ -198,6 +198,7 @@ export const UserInfo = ({ preloadedValues }) => {
               {isEdit ? (
                 // <PrimaryButton
                 //   button
+                //   type="submit"
                 //   className="px-20 py-2 my-1 text-xl"
                 //   variant="solid"
                 // >
@@ -212,6 +213,7 @@ export const UserInfo = ({ preloadedValues }) => {
               ) : (
                 <PrimaryButton
                   button
+                  type="button"
                   className="px-20 py-2 my-1 text-xl"
                   variant="solid"
                   onClick={startEdit}
@@ -226,6 +228,7 @@ export const UserInfo = ({ preloadedValues }) => {
             <div className="my-4">
               <PrimaryButton
                 button
+                type="button"
                 className="px-12 py-2 my-1 text-xl"
                 variant="solid"
                 onClick={logout}
