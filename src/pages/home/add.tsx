@@ -33,7 +33,6 @@ import { useForm } from "react-hook-form";
 const Add = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-
   const [toddlerImageFile, setToddlerImageFile] = useState<any>(null);
   const [temperatureList, setTemperatureList] = useState([]);
   const router = useRouter();
@@ -159,10 +158,10 @@ const Add = () => {
 
           </div>
 
-          <div>
+           <div>
             <Select label="機嫌" value="mood" array={MOODS} />
           </div>
-          <div>
+           <div>
             <Select label="運動(活発性)" value="exercise" array={EXERCISES} />
           </div>
           <div>
@@ -186,6 +185,7 @@ const Add = () => {
           <div>
             <Select label="皮膚の状況" value="skin" array={SKINS} />
           </div>
+
            <div className="space-y-1">
             <p className="text-sm text-gray-700 dark:text-white font-medium">
               他の症状
@@ -203,6 +203,7 @@ const Add = () => {
         <div>
           <PrimaryButton
             button
+            type="submit"
             variant="solid"
             className="px-8 py-2"
           >
