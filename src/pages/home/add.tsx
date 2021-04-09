@@ -7,7 +7,7 @@ import {InputHTMLAttributes, useEffect, useState } from "react";
 import { auth } from "src/firebase";
 import { GenderSwitch } from "src/components/separate/GenderSwitch";
 import { Input } from "src/components/shared/Input";
-import { Layout } from "src/components/separate/layout";
+import { Layout } from "src/components/separate/Layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { Select } from "src/components/shared/Select";
 

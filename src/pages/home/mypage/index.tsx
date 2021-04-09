@@ -5,7 +5,7 @@ import firebase from "firebase/app";
 
 //Import Components
 import { auth, db } from "src/firebase";
-import { Layout } from "src/components/separate/layout";
+import { Layout } from "src/components/separate/Layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { testUser } from "src/config/testuser";
 

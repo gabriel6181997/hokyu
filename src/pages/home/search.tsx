@@ -5,7 +5,7 @@ import firebase from "firebase/app";
 
 //Import Components
 import { auth, db } from "src/firebase";
-import { Layout } from "src/components/separate/layout";
+import { Layout } from "src/components/separate/Layout";
 import { Input } from "src/components/shared/Input";
 import Link from "next/link";
 import { ToddlerItem } from "src/components/separate/ToddlersItem";
