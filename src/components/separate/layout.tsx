@@ -10,6 +10,7 @@ import { ButtonNavigation } from "src/components/separate/ButtonNavigation";
 
 //import logos
 import { BsPencilSquare } from "react-icons/bs";
+import { RecoilRoot, RecoilState } from "recoil";
 
 type Props = {
   addbutton?: boolean;
@@ -21,7 +22,7 @@ type Props = {
     description?: string;
   };
   sideMenu?: boolean;
-  title:string;
+  title: string;
 };
 
 export const Layout: VFC<Props> = (props) => {
@@ -34,7 +35,7 @@ export const Layout: VFC<Props> = (props) => {
   };
 
   return (
-    <>
+    <RecoilRoot>
       <Head>
         <title>{meta.title}</title>
         <meta charSet="utf-8" />
@@ -52,7 +53,7 @@ export const Layout: VFC<Props> = (props) => {
           </div>
         ) : null}
         <div className={props.sideMenu ? "md:col-span-9" : "md:col-span-12"}>
-          <Header title={props.title}/>
+          <Header title={props.title} />
           <main className="md:border-l  md:border-r">{props.children}</main>
           {props.buttonNavigation ? (
             <div className="mx:block md:hidden">
@@ -69,6 +70,6 @@ export const Layout: VFC<Props> = (props) => {
           ) : null}
         </div>
       </div>
-    </>
+    </RecoilRoot>
   );
 };
