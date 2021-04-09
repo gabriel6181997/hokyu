@@ -1,8 +1,9 @@
 import type { VFC } from "react";
-import {  useState } from "react";
+import { forwardRef, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
+import type { UseFormRegisterReturn } from "react-hook-form";
 
-type Props = {
+type Props = UseFormRegisterReturn & {
   array:string[];
   className?: string;
   label?: string;
@@ -18,6 +19,7 @@ export const Select: VFC<Props> = (props) => {
       className="space-y-1"
       value={selectedArray}
       onChange={setSelectedArray}
+      ref={props.ref}
     >
       {({ open }) => (
         <>
@@ -26,7 +28,7 @@ export const Select: VFC<Props> = (props) => {
           </Listbox.Label>
           <div className="relative">
             <span className="inline-block w-full rounded-md shadow-sm">
-              <Listbox.Button className="cursor-default relative w-full rounded-md border border-gray-300 bg-white dark:bg-gray-900 pl-3 pr-10 py-2 text-left focus:outline-none focus:shadow-outline-blue focus:border-blue-400 transition ease-in-out duration-300 sm:text-sm sm:leading-5">
+              <Listbox.Button className="cursor-default relative w-full rounded-md border border-gray-300 bg-white dark:bg-gray-900 pl-3 pr-10 py-2 text-left focus:outline-none focus:shadow-outline-blue focus:border-blue-400 transition ease-in-out duration-300 sm:text-sm sm:leading-5" id={props.label}>
                 <span className="block truncate">
                   {selectedArray}
                 </span>
