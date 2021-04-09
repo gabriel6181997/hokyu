@@ -35,7 +35,7 @@ export const Layout: VFC<Props> = (props) => {
   };
 
   return (
-    <RecoilRoot>
+    <>
       <Head>
         <title>{meta.title}</title>
         <meta charSet="utf-8" />
@@ -70,6 +70,6 @@ export const Layout: VFC<Props> = (props) => {
           ) : null}
         </div>
       </div>
-    </RecoilRoot>
+    </>
   );
 };
