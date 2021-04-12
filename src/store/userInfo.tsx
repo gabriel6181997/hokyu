@@ -1,44 +1,28 @@
-import { atom, useRecoilState } from 'recoil'
+import { selector } from "recoil";
 import { auth, db } from "src/firebase";
-import { useEffect } from "react";
 
-type UserInfo = {
-  name: string,
-  username: string,
-  profileImageFile: string
-}
+export const userInfoData = selector({
+  key: "userInfo",
+  get: async ({ get }) => {
+    auth.onAuthStateChanged(async function (user) {
+      if (user) {
+        const response = await db.collection("users").doc(user.uid).get();
 
-const userInfoState = atom<UserInfo>({
-  key: 'userInfoState',
-  default: {name: "unknown", username: "unknown", profileImageFile: "no picture"},
-})
+        let info = {
+          name: "unknown",
+          username: "unknown",
+          profileImageFile: "no picture",
+        };
 
-export const UserInfo = () => {
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  const user = auth.currentUser;
+        if (response.exists) {
+          info = response.data();
+        }
 
-  if(user){
-    useEffect(()=>{
-      const fetchData = async() => {
-         try{
-           const response = await db
-           .collection("users")
-           .doc(user.uid)
-           .get();
-
-           let info = {name: "unknown", username: "unknown", profileImageFile: "no picture"}
-
-           if(response.exists) {
-             info = response.data()
-           }
-           setUserInfo(info);
-         } catch(error) {
-           alert("ユーザーの情報お取得できませんでした！")
-         }
-      };
-      fetchData();
-    },[])
-  }
-
-  console.log(userInfo);
-}
+        // console.log(info);
+      } else {
+        alert("no user!");
+        return;
+      }
+    });
+  },
+});
