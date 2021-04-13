@@ -1,6 +1,6 @@
 import { Listbox, Transition } from "@headlessui/react";
 import type { VFC } from "react";
-import React, { forwardRef, useState } from "react";
+import  { forwardRef, useState } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 type Props = UseFormRegisterReturn & {
