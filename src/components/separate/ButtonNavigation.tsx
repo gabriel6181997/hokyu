@@ -4,7 +4,7 @@ import Link from "next/link";
 import {  useRecoilValueLoadable } from "recoil";
 import { auth, db } from "src/firebase";
 import { useRecoilValueReplayLoadable } from "src/store/useRecoilValueReplayLoadable";
-import { userInfoData } from "src/store/userInfo";
+import { userInfoData } from "src/store/userInfoData";
 //Import Components
 import { BOTTOM_NAVS } from "src/utils/constants/bottomnav";
 
