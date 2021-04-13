@@ -1,6 +1,6 @@
-import type { VFC } from "react";
-import { forwardRef, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
+import type { VFC } from "react";
+import React, { forwardRef, useState } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 type Props = UseFormRegisterReturn & {
@@ -10,7 +10,7 @@ type Props = UseFormRegisterReturn & {
   value:string;
 };
 
-export const Select: VFC<Props> = (props) => {
+export const Select: VFC<Props> = forwardRef((props, ref) => {
   const [selectedArray, setSelectedArray] = useState(props.array[0]);
 
   return(
@@ -19,9 +19,8 @@ export const Select: VFC<Props> = (props) => {
       className="space-y-1"
       value={selectedArray}
       onChange={setSelectedArray}
-      ref={props.ref}
     >
-      {({ open }) => (
+      {({ open }) => {return (
         <>
           <Listbox.Label className="block text-sm leading-5 font-medium text-gray-700 dark:text-white">
             {props.label}
@@ -59,12 +58,12 @@ export const Select: VFC<Props> = (props) => {
             >
               <Listbox.Options
                 static
-                className = "max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm border sm:leading-5"
+                className = "max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm border sm:leading-5" ref={ref}
               >
 
-                {props.array.map( (item) => (
-                  <Listbox.Option key={item} value={item}>
-                    {({ selected, active }) => (
+                {props.array.map( (item) => {return (
+                  <Listbox.Option key={item} value={item} >
+                    {({ selected, active }) => {return (
                       <div
                         className={`${
                           active
@@ -100,14 +99,16 @@ export const Select: VFC<Props> = (props) => {
                           </span>
                         )}
                       </div>
-                    )}
+                    )}}
                   </Listbox.Option>
-                ))}
+                )})}
               </Listbox.Options>
             </Transition>
           </div>
         </>
-      )}
+      )}}
     </Listbox>
   )
-}
+});
+
+Select.displayName === 'Select'
