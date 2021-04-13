@@ -1,7 +1,7 @@
 //Import Libraries
 import { useRouter } from "next/router";
 import Modal from "react-modal";
-import {InputHTMLAttributes, useEffect, useState } from "react";
+import { InputHTMLAttributes, useEffect, useState } from "react";
 
 //Import Components
 import { auth } from "src/firebase";
@@ -31,7 +31,11 @@ import { TemperatureList } from "src/components/separate/TemperatureList";
 import { useForm } from "react-hook-form";
 
 const Add = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const [toddlerImageFile, setToddlerImageFile] = useState<any>(null);
   const [temperatureList, setTemperatureList] = useState([]);
@@ -62,25 +66,24 @@ const Add = () => {
   };
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  function openModal() {
+  const openModal() => {
     setIsOpen(true);
   }
 
-  function closeModal() {
+  const closeModal()=> {
     setIsOpen(false);
   }
 
-  const onSubmit = data => console.log(data);
-
+  const onSubmit = (data) => console.log(data);
 
   return (
     <Layout sideMenu buttonNavigation title="新規幼児">
-      <form className="container space-y-6 pb-6" onSubmit={onSubmit}>
+      <form className="container space-y-6 pb-6" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex ms:flex-col items-center justify-center pt-12">
           <div className="relative w-36 h-36">
             <img
               src="/img/nouserimage.jpg"
-              alt="profile-picture"
+              // alt="profile-picture"
               className="w-full h-auto rounded-full border-gray-700 border object-fit"
               id="avatar"
             />
@@ -96,9 +99,19 @@ const Add = () => {
             </div>
           </div>
           <div className="ms:mt-7 mt-3 ms:ml-0 ml-10 md:ml-20">
-            <Input id="name" placeholder="名前" variant="underlined" {...register("name", { required: "名前を入力してください！" })}/>
+            <Input
+              id="name"
+              placeholder="名前"
+              variant="underlined"
+              {...register("name", { required: "名前を入力してください！" })}
+            />
             <div className="mt-8 flex">
-              <Input id="age" placeholder="年齢" variant="underlined" {...register("age", { required: "年齢を入力してください！" })}/>
+              <Input
+                id="age"
+                placeholder="年齢"
+                variant="underlined"
+                {...register("age", { required: "年齢を入力してください！" })}
+              />
               <p>歳</p>
             </div>
           </div>
@@ -117,10 +130,11 @@ const Add = () => {
             className="z-100"
             value="urgencynumber"
             array={URGENCYNUMBERS}
+            {...register("urgencynumbers")}
           />
         </div>
 
-         <div>
+        <div>
           <Modal
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
@@ -154,39 +168,38 @@ const Add = () => {
               </button>
             </div>
 
-            <TemperatureList/>
-
+            <TemperatureList />
           </div>
 
-           <div>
-            <Select label="機嫌" value="mood" array={MOODS} />
-          </div>
-           <div>
-            <Select label="運動(活発性)" value="exercise" array={EXERCISES} />
+          <div>
+            <Select label="機嫌" value="mood" array={MOODS} {...register("mood")}/>
           </div>
           <div>
-            <Select label="顔つき" value="face" array={FACES} />
+            <Select label="運動(活発性)" value="exercise" array={EXERCISES} {...register("exercise")}/>
           </div>
           <div>
-            <Select label="食欲" value="appetite" array={APPETITES} />
+            <Select label="顔つき" value="face" array={FACES} {...register("face")} />
           </div>
           <div>
-            <Select label="呼吸" value="breath" array={BREATHS} />
+            <Select label="食欲" value="appetite" array={APPETITES} {...register("appetite")} />
           </div>
           <div>
-            <Select label="睡眠" value="sleep" array={SLEEPS} />
+            <Select label="呼吸" value="breath" array={BREATHS} {...register("breath")} />
           </div>
           <div>
-            <Select label="下痢、嘔吐" value="diarrhea" array={DIARRHEAS} />
+            <Select label="睡眠" value="sleep" array={SLEEPS} {...register("sleep")}/>
           </div>
           <div>
-            <Select label="咳" value="cough" array={COUGHS} />
+            <Select label="下痢、嘔吐" value="diarrhea" array={DIARRHEAS} {...register("diarrhea")} />
           </div>
           <div>
-            <Select label="皮膚の状況" value="skin" array={SKINS} />
+            <Select label="咳" value="cough" array={COUGHS} {...register("cough")} />
+          </div>
+          <div>
+            <Select label="皮膚の状況" value="skin" array={SKINS} {...register("skin")} />
           </div>
 
-           <div className="space-y-1">
+          <div className="space-y-1">
             <p className="text-sm text-gray-700 dark:text-white font-medium">
               他の症状
             </p>
