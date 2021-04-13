@@ -66,11 +66,11 @@ const Add = () => {
   };
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const openModal() => {
+  const openModal = () => {
     setIsOpen(true);
   }
 
-  const closeModal()=> {
+  const closeModal = ()=> {
     setIsOpen(false);
   }
 
@@ -95,7 +95,8 @@ const Add = () => {
             />
 
             <div className="absolute right-0 bottom-1 z-20">
-              <GenderSwitch />
+              <GenderSwitch {...register("gender")}
+ />
             </div>
           </div>
           <div className="ms:mt-7 mt-3 ms:ml-0 ml-10 md:ml-20">

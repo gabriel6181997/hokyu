@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { GiMale, GiFemale } from "react-icons/gi";
+import React, {  useState } from "react";
+import { GiFemale,GiMale } from "react-icons/gi";
 
-export const GenderSwitch = () => {
+export const GenderSwitch = React.forwardRef((ref) => {
   const [gender, setGender] = useState(false);
 
   const onClickChangeGender = () => {
@@ -14,6 +14,7 @@ export const GenderSwitch = () => {
         type="hidden"
         name="gender"
         value={gender ? "male" : "female"}
+        // ref={ref}
       />
     <button
       className="text-3xl bg-white border border-gray-700 rounded-full p-1 "
@@ -33,4 +34,7 @@ export const GenderSwitch = () => {
     </button>
     </div>
   );
-};
+})
+
+GenderSwitch.displayName === "GenderSwitch";
+
