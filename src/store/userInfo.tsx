@@ -4,7 +4,7 @@ import { auth, db } from "src/firebase";
 export const userInfoData = selector({
   key: "userInfo",
   get: async ({ get }) => {
-    auth.onAuthStateChanged(async function (user) {
+    auth.onAuthStateChanged(async (user) => {
       if (user) {
         const response = await db.collection("users").doc(user.uid).get();
 
@@ -21,7 +21,6 @@ export const userInfoData = selector({
         // console.log(info);
       } else {
         alert("no user!");
-        return;
       }
     });
   },
