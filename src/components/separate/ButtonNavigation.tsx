@@ -1,50 +1,60 @@
 //Import Libraries
-import Link from "next/link";
-import { useEffect, useState } from "react";
 import firebase from "firebase/app";
-
+import Link from "next/link";
+import {  useRecoilValueLoadable } from "recoil";
+import { auth, db } from "src/firebase";
+import { useRecoilValueReplayLoadable } from "src/store/useRecoilValueReplayLoadable";
+import { userInfoData } from "src/store/userInfo";
 //Import Components
 import { BOTTOM_NAVS } from "src/utils/constants/bottomnav";
-import { auth, db } from "src/firebase";
 
 export const ButtonNavigation = () => {
-  const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
+  // const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
   const user = auth.currentUser;
 
-  // if (user) {
-  //   useEffect(() => {
-  //     db.collection("users")
-  //       .doc(user.uid)
-  //       .onSnapshot((snapshot) => {
-  //         setUserInfo(snapshot.data());
-  //       });
-  //   }, []);
+  const userInfoLoadable = useRecoilValueLoadable(userInfoData);
+  console.log(userInfoLoadable.contents)
+
+  // if(userInfoLoadable.state === 'hasValue') {
+  //   console.log(userInfoLoadable.contents);
   // }
 
-  //↑Cause of Memory Leak
+  // const userInfoLoadable = useRecoilValueReplayLoadable(userInfoData)
+  // const getUserInfoData = userInfoLoadable.getLastResolvedValue();
+  // console.log(getUserInfoData)
 
-  if(user){
-    useEffect(()=>{
-      const fetchData = async() => {
-         try{
-           const response = await db
-           .collection("users")
-           .doc(user.uid)
-           .get();
 
-           let info = {name: "unknown", username: "unknown", profileImageFile: "no picture"}
+    // switch (userInfoLoadable.state) {
+    //   case 'hasValue':
+    //     return <div>{userInfoLoadable.contents}</div>;
+    //   case 'loading':
+    //     return <div>Loading...</div>;
+    //   case 'hasError':
+    //     throw userInfoLoadable.contents;
+    // }
 
-           if(response.exists) {
-             info = response.data()
-           }
-           setUserInfo(info);
-         } catch(error) {
-           alert("ユーザーの情報お取得できませんでした！")
-         }
-      };
-      fetchData();
-    },[])
-  }
+  // if(user){
+  //   useEffect(()=>{
+  //     const fetchData = async() => {
+  //        try{
+  //          const response = await db
+  //          .collection("users")
+  //          .doc(user.uid)
+  //          .get();
+
+  //          let info = {name: "unknown", username: "unknown", profileImageFile: "no picture"}
+
+  //          if(response.exists) {
+  //            info = response.data()
+  //          }
+  //          setUserInfo(info);
+  //        } catch(error) {
+  //          alert("ユーザーの情報お取得できませんでした！")
+  //        }
+  //     };
+  //     fetchData();
+  //   },[])
+  // }
 
 
   return (
@@ -71,18 +81,19 @@ export const ButtonNavigation = () => {
             );
           })}
 
-          <li className="flex-1 text-center">
+          {/* <li className="flex-1 text-center">
             <Link href="/home/mypage">
               <a>
                 <img
-                  src={userInfo?.profileImageFile}
-                  alt={userInfo?.name}
+                  src={userInfo.profileImageFile}
+                  alt={userInfo.name}
                   className="rounded-full block mx-auto w-7 h-7 "
                 />
               </a>
             </Link>
             <p className="text-sm pt-1">マイページ</p>
-          </li>
+          </li> */}
+
         </ul>
       </nav>
     </>
