@@ -1,14 +1,14 @@
 //Import Libraries
-import { ChangeEventHandler, useEffect, useState } from "react";
+import type firebase from "firebase/app";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import firebase from "firebase/app";
-
+import type { ChangeEventHandler} from "react";
+import { useEffect, useState } from "react";
+import { Layout } from "src/components/separate/Layout";
+import { ToddlerItem } from "src/components/separate/ToddlersItem";
+import { Input } from "src/components/shared/Input";
 //Import Components
 import { auth, db } from "src/firebase";
-import { Layout } from "src/components/separate/Layout";
-import { Input } from "src/components/shared/Input";
-import Link from "next/link";
-import { ToddlerItem } from "src/components/separate/ToddlersItem";
 
 const SearchPage = () => {
   const router = useRouter();
@@ -28,14 +28,14 @@ const SearchPage = () => {
       .orderBy("urgency", "desc")
       .get()
       .then((toddler) =>
-        setToddlerInfos(
-          toddler.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-        )
+        {return setToddlerInfos(
+          toddler.docs.map((doc) => {return { id: doc.id, data: doc.data() }})
+        )}
       );
   }, []);
 
   const resultsofToddlers = toddlerInfos.filter((toddlerInfo) =>
-    toddlerInfo.data.name.includes(searchInput)
+    {return toddlerInfo.data.name.includes(searchInput)}
   );
 
   const search: ChangeEventHandler<HTMLInputElement>["onChange"] = (e) => {
@@ -57,7 +57,7 @@ const SearchPage = () => {
         <div className="mt-4">
           <ul>
             {searchInput.trim() &&
-              resultsofToddlers.map(({ id, data }) => (
+              resultsofToddlers.map(({ id, data }) => {return (
                 <li
                   key={id}
                   className="border-b dark:border-gray-400 md:hover:bg-blue-50 duration-300 md:dark:hover:text-blue-400 md:dark:hover:bg-gray-50 md:dark:hover:bg-opacity-20"
@@ -72,7 +72,7 @@ const SearchPage = () => {
                     />
                   </Link>
                 </li>
-              ))}
+              )})}
           </ul>
         </div>
     </Layout>

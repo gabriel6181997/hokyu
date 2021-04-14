@@ -2,15 +2,13 @@
 import Head from "next/head";
 import Link from "next/link";
 import type { ReactNode, VFC } from "react";
-
-//import components
-import { Header } from "src/components/separate/Header";
-import { SideMenu } from "src/components/separate/SideMenu";
-import { ButtonNavigation } from "src/components/separate/ButtonNavigation";
-
 //import logos
 import { BsPencilSquare } from "react-icons/bs";
 import { RecoilRoot, RecoilState } from "recoil";
+import { ButtonNavigation } from "src/components/separate/ButtonNavigation";
+//import components
+import { Header } from "src/components/separate/Header";
+import { SideMenu } from "src/components/separate/SideMenu";
 
 type Props = {
   addbutton?: boolean;

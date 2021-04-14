@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
 import { Switch } from "@material-ui/core";
 import { useTheme } from "next-themes";
+import  { useEffect, useState } from "react";
 
 export const DarkModeSwitch = () => {
   const [isMounted, setIsMounted] = useState(false);

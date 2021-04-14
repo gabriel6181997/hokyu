@@ -1,14 +1,14 @@
 //Import Libraries
 import Image from "next/image";
-import React, { InputHTMLAttributes, useState } from "react";
 import { useRouter } from "next/router";
-
+import type { InputHTMLAttributes} from "react";
+import React, { useState } from "react";
 //Import Components
 import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
 import { Input } from "src/components/shared/Input";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
-import {auth} from "src/firebase";
 import { testUser } from "src/config/testuser";
+import {auth} from "src/firebase";
 
 
 const IndexPage = () => {
