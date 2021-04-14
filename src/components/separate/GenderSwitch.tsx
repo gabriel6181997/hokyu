@@ -1,10 +1,15 @@
-import React, {  useState } from "react";
+import { forwardRef, useState, VFC } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 import { GiFemale,GiMale } from "react-icons/gi";
 
-export const GenderSwitch = React.forwardRef((ref) => {
+// type Props = UseFormRegisterReturn & {
+//   register: any;
+// }
+
+export const GenderSwitch= forwardRef(( ref) => {
   const [gender, setGender] = useState(false);
 
-  const onClickChangeGender = () => {
+  const handleChangeGender = () => {
     setGender(!gender);
   };
 
@@ -14,11 +19,12 @@ export const GenderSwitch = React.forwardRef((ref) => {
         type="hidden"
         name="gender"
         value={gender ? "male" : "female"}
-        // ref={ref}
+        ref={ref}
+        // {...props.register}
       />
     <button
       className="text-3xl bg-white border border-gray-700 rounded-full p-1 "
-      onClick={onClickChangeGender}
+      onClick={handleChangeGender}
     >
       <div className="relative">
         {gender ? (
