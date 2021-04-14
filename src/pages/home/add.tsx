@@ -60,17 +60,17 @@ const Add = () => {
     setToddlerImageFile(file);
   };
 
-  const onClickAdd = () => {
+  const handleOnClickAdd = () => {
     alert("Add Input");
     // const newTemperatureList = [...TemperatureList, ]
   };
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const openModal = () => {
+  const handleOpenModal = () => {
     setIsOpen(true);
   }
 
-  const closeModal = ()=> {
+  const handleCloseModal = ()=> {
     setIsOpen(false);
   }
 
@@ -83,7 +83,7 @@ const Add = () => {
           <div className="relative w-36 h-36">
             <img
               src="/img/nouserimage.jpg"
-              // alt="profile-picture"
+              alt=""
               className="w-full h-auto rounded-full border-gray-700 border object-fit"
               id="avatar"
             />
@@ -119,9 +119,9 @@ const Add = () => {
         </div>
 
         <div className="flex items-center justify-center">
-          <label className="flex mr-6">
+          <label htmlFor="urgency" className="flex mr-6">
             <p>緊急度</p>
-            <button className="mx-1" onClick={openModal}>
+            <button className="mx-1" onClick={handleOpenModal}>
               <AiOutlineQuestionCircle />
             </button>
             <p>:</p>
@@ -138,13 +138,13 @@ const Add = () => {
         <div>
           <Modal
             isOpen={modalIsOpen}
-            onRequestClose={closeModal}
+            onRequestClose={handleCloseModal}
             contentLabel="Urgency Modal"
             className="bg-blue-200 dark:bg-gray-700 w-80 relative top-1/3 left-1/4 md:left-1/2 right-auto bottom-auto -translate-x-1/2 -translate-y-1/2 p-5 z-50"
           >
             <button
               className="absolute top-1 right-4 font-bold"
-              onClick={closeModal}
+              onClick={handleCloseModal}
             >
               X
             </button>
@@ -163,7 +163,7 @@ const Add = () => {
               </p>
               <button
                 className="text-gray-600 dark:text-white"
-                onClick={onClickAdd}
+                onClick={handleOnClickAdd}
               >
                 <BiPlusCircle />
               </button>
@@ -173,7 +173,7 @@ const Add = () => {
           </div>
 
           <div>
-            <Select label="機嫌" value="mood" array={MOODS} {...register("mood")}/>
+            <Select label="機嫌" value="mood" array={MOODS} register={{...register("mood")}} />
           </div>
           <div>
             <Select label="運動(活発性)" value="exercise" array={EXERCISES} {...register("exercise")}/>
