@@ -1,114 +1,100 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable react/jsx-handler-names */
+import { forwardRef, Fragment, useState, VFC } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import type { VFC } from "react";
-import  { forwardRef, useState } from "react";
-import type { UseFormRegisterReturn } from "react-hook-form";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 type Props = UseFormRegisterReturn & {
-  array:string[];
-  className?: string;
+  array: string[];
   label?: string;
-  value:string;
 };
 
 export const Select: VFC<Props> = forwardRef((props, ref) => {
-  const [selectedArray, setSelectedArray] = useState(props.array[0]);
+  const [selected, setSelected] = useState(props.array[0]);
 
-  return(
-    <Listbox
-      as="div"
-      className="space-y-1"
-      value={selectedArray}
-      onChange={setSelectedArray}
-    >
-      {({ open }) => {return (
-        <>
-          <Listbox.Label className="block text-sm leading-5 font-medium text-gray-700 dark:text-white">
-            {props.label}
-          </Listbox.Label>
-          <div className="relative">
-            <span className="inline-block w-full rounded-md shadow-sm">
-              <Listbox.Button className="cursor-default relative w-full rounded-md border border-gray-300 bg-white dark:bg-gray-900 pl-3 pr-10 py-2 text-left focus:outline-none focus:shadow-outline-blue focus:border-blue-400 transition ease-in-out duration-300 sm:text-sm sm:leading-5" id={props.label}>
-                <span className="block truncate">
-                  {selectedArray}
-                </span>
-                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                  <svg
-                    className="h-5 w-5 text-gray-400"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <path
-                      d="M7 7l3-3 3 3m0 6l-3 3-3-3"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+  return (
+    <div className="py-3">
+      <label
+        htmlFor={props.label}
+        className="block text-sm leading-5 font-medium text-gray-700 dark:text-white pb-1"
+      >
+        {props.label}
+      </label>
+      <div className="mx-auto">
+        <Listbox value={selected} onChange={setSelected}>
+          {({ open }) => (
+            <>
+              <div className="relative mt-1">
+                <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-blue-300 focus-visible:ring-offset-2 focus-visible:border-blue-500 sm:text-sm">
+                  <span className="block truncate">{selected}</span>
+                  <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                    <SelectorIcon
+                      className="w-5 h-5 text-gray-400"
+                      aria-hidden="true"
                     />
-                  </svg>
-                </span>
-              </Listbox.Button>
-            </span>
-
-            <Transition
-              show={open}
-              leave="transition ease-in duration-100"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-              className="absolute mt-1 w-full rounded-md bg-white dark:bg-gray-900 shadow-lg z-100"
-            >
-              <Listbox.Options
-                static
-                className = "max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm border sm:leading-5" ref={ref}
-              >
-
-                {props.array.map( (item) => {return (
-                  <Listbox.Option key={item} value={item} >
-                    {({ selected, active }) => {return (
-                      <div
-                        className={`${
-                          active
-                            ? "text-white bg-blue-600"
-                            : "text-gray-900 dark:text-white"
-                        } cursor-default select-none relative py-2 pl-8 pr-4`}
+                  </span>
+                </Listbox.Button>
+                <Transition
+                  show={open}
+                  as={Fragment}
+                  leave="transition ease-in duration-100"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Listbox.Options
+                    static
+                    className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none z-100 sm:text-sm"
+                    ref={ref}
+                  >
+                    {props.array.map((item, itemIdx) => (
+                      <Listbox.Option
+                        key={itemIdx}
+                        className={({ active }) =>
+                          `${
+                            active
+                              ? "text-blue-900 bg-blue-100"
+                              : "text-gray-900"
+                          }
+                          cursor-default select-none relative py-2 pl-10 pr-4`
+                        }
+                        value={item}
                       >
-                        <span
-                          className={`${
-                            selected ? "font-semibold" : "font-normal"
-                          } block truncate`}
-                        >
-                          {item}
-                        </span>
-                        {selected && (
-                          <span
-                            className={`${
-                              active ? "text-white" : "text-blue-600"
-                            } absolute inset-y-0 left-0 flex items-center pl-1.5`}
-                          >
-                            <svg
-                              className="h-5 w-5"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
+                        {({ selected, active }) => (
+                          <>
+                            <span
+                              className={`${
+                                selected ? "font-medium" : "font-normal"
+                              } block truncate`}
                             >
-                              <path
-                                fillRule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </span>
+                              {item}
+                            </span>
+                            {selected ? (
+                              <span
+                                className={`${
+                                  active ? "text-blue-600" : "text-blue-600"
+                                }
+                                absolute inset-y-0 left-0 flex items-center pl-3`}
+                              >
+                                <CheckIcon
+                                  className="w-5 h-5"
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            ) : null}
+                          </>
                         )}
-                      </div>
-                    )}}
-                  </Listbox.Option>
-                )})}
-              </Listbox.Options>
-            </Transition>
-          </div>
-        </>
-      )}}
-    </Listbox>
-  )
+                      </Listbox.Option>
+                    ))}
+                  </Listbox.Options>
+                </Transition>
+              </div>
+            </>
+          )}
+        </Listbox>
+      </div>
+    </div>
+  );
 });
 
-Select.displayName === 'Select'
+Select.displayName === "Select";
