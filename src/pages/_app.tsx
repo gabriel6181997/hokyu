@@ -1,10 +1,13 @@
-import { RecoilRoot } from "recoil";
+/* eslint-disable react/destructuring-assignment */
 import "src/styles/global.css";
-import "@fortawesome/fontawesome-free/css/all.css";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
+import { RecoilRoot } from "recoil";
+import { useEffect } from "react";
+import { auth, db } from "src/firebase";
 
-function MyApp({ Component, pageProps }: AppProps) {
+const  MyApp =  ({ Component, pageProps }: AppProps) => {
+
   return (
     <RecoilRoot>
       <ThemeProvider attribute="class">
