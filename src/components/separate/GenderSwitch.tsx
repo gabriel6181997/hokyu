@@ -2,11 +2,11 @@ import { forwardRef, useState, VFC } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { GiFemale,GiMale } from "react-icons/gi";
 
-// type Props = UseFormRegisterReturn & {
-//   register: any;
-// }
+type Props = UseFormRegisterReturn & {
+  register: any;
+}
 
-export const GenderSwitch= forwardRef(( ref) => {
+export const GenderSwitch:VFC<Props>= forwardRef((props, ref) => {
   const [gender, setGender] = useState(false);
 
   const handleChangeGender = () => {
