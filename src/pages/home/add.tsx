@@ -9,7 +9,6 @@ import { GenderSwitch } from "src/components/separate/GenderSwitch";
 import { Input } from "src/components/shared/Input";
 import { Layout } from "src/components/separate/Layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
-import { Select } from "src/components/shared/Select";
 
 //Import React Icons
 import { AiOutlineQuestionCircle } from "react-icons/ai";
@@ -29,8 +28,11 @@ import {
 } from "src/utils/constants/selectoption";
 import { TemperatureList } from "src/components/separate/TemperatureList";
 import { useForm } from "react-hook-form";
+import { Select } from "src/components/shared/Select";
 
 const Add = () => {
+
+
   const {
     register,
     handleSubmit,
@@ -68,17 +70,22 @@ const Add = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const handleOpenModal = () => {
     setIsOpen(true);
-  }
+  };
 
-  const handleCloseModal = ()=> {
+  const handleCloseModal = () => {
     setIsOpen(false);
-  }
+  };
 
   const onSubmit = (data) => console.log(data);
 
+  const NumberArray = [1,2,3,4,5];
+
   return (
     <Layout sideMenu buttonNavigation title="新規幼児">
-      <form className="container space-y-6 pb-6" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="container space-y-6 pb-6"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="flex ms:flex-col items-center justify-center pt-12">
           <div className="relative w-36 h-36">
             <img
@@ -95,8 +102,10 @@ const Add = () => {
             />
 
             <div className="absolute right-0 bottom-1 z-20">
-              <GenderSwitch {...register("gender")}
- />
+              <GenderSwitch
+                // register={register("gender")}
+                {...register("gender")}
+              />
             </div>
           </div>
           <div className="ms:mt-7 mt-3 ms:ml-0 ml-10 md:ml-20">
@@ -126,13 +135,9 @@ const Add = () => {
             </button>
             <p>:</p>
           </label>
-          <Select
-            label=""
-            className="z-100"
-            value="urgencynumber"
-            array={URGENCYNUMBERS}
-            {...register("urgencynumbers")}
-          />
+          <div className="w-24">
+            <Select array={URGENCYNUMBERS} {...register("urgencynumbers")} />
+          </div>
         </div>
 
         <div>
@@ -173,31 +178,42 @@ const Add = () => {
           </div>
 
           <div>
-            <Select label="機嫌" value="mood" array={MOODS} register={{...register("mood")}} />
+            <Select array={MOODS}
+            {...register("mood")}
+            label="機嫌" />
+          </div>
+
+          <div>
+            <Select
+              array={EXERCISES}
+              {...register("exercise")}
+              label="運動 (活発性)"
+            />
           </div>
           <div>
-            <Select label="運動(活発性)" value="exercise" array={EXERCISES} {...register("exercise")}/>
+            <Select array={FACES} {...register("face")} label="顔つき" />
           </div>
           <div>
-            <Select label="顔つき" value="face" array={FACES} {...register("face")} />
+            <Select array={APPETITES} {...register("appetite")} label="食欲" />
           </div>
           <div>
-            <Select label="食欲" value="appetite" array={APPETITES} {...register("appetite")} />
+            <Select array={BREATHS} {...register("breath")} label="呼吸" />
           </div>
           <div>
-            <Select label="呼吸" value="breath" array={BREATHS} {...register("breath")} />
+            <Select array={SLEEPS} {...register("sleep")} label="睡眠" />
           </div>
           <div>
-            <Select label="睡眠" value="sleep" array={SLEEPS} {...register("sleep")}/>
+            <Select
+              array={DIARRHEAS}
+              {...register("diarrhea")}
+              label="下痢、嘔吐"
+            />
           </div>
           <div>
-            <Select label="下痢、嘔吐" value="diarrhea" array={DIARRHEAS} {...register("diarrhea")} />
+            <Select array={COUGHS} {...register("cough")} label="咳" />
           </div>
           <div>
-            <Select label="咳" value="cough" array={COUGHS} {...register("cough")} />
-          </div>
-          <div>
-            <Select label="皮膚の状況" value="skin" array={SKINS} {...register("skin")} />
+            <Select array={SKINS} {...register("skin")} label="皮膚の状況" />
           </div>
 
           <div className="space-y-1">
