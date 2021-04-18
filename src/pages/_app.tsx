@@ -6,8 +6,7 @@ import { RecoilRoot } from "recoil";
 import { useEffect } from "react";
 import { auth, db } from "src/firebase";
 
-const  MyApp =  ({ Component, pageProps }: AppProps) => {
-
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <RecoilRoot>
       <ThemeProvider attribute="class">
@@ -15,6 +14,6 @@ const  MyApp =  ({ Component, pageProps }: AppProps) => {
       </ThemeProvider>
     </RecoilRoot>
   );
-}
+};
 
 export default MyApp;
