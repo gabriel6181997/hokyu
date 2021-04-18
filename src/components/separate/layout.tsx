@@ -54,8 +54,6 @@ export const Layout: VFC<Props> = (props) => {
           info = response.data();
         }
         setUserInfoData(info);
-      } else {
-        alert("no user!");
       }
     });
   }, [setUserInfoData]);
