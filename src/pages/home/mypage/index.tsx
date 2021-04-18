@@ -1,16 +1,18 @@
 //Import Libraries
-import type firebase from "firebase/app";
 import { useRouter } from "next/router";
-import React, { useEffect,useState } from "react";
+import { useRecoilValue } from "recoil";
 import { Layout } from "src/components/separate/Layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { testUser } from "src/config/testuser";
 //Import Components
-import { auth, db } from "src/firebase";
+import { auth } from "src/firebase";
+import { userInfoState } from "src/store/userInfoState";
 
 const myPage = () => {
   const user = auth.currentUser;
   const router = useRouter();
+  const userInfoData = useRecoilValue(userInfoState)
+
 
   const handleLogout = () => {
     const answer = confirm("ログアウトしますか？");
@@ -24,17 +26,13 @@ const myPage = () => {
     <Layout addbutton sideMenu buttonNavigation title="マイページ">
       <div className="text-center mx-auto pt-10">
         <img
-          src={userInfoUser
-            ?.profileImageFile}
-          alt={userInfoUser
-            ?.name}
+          src={userInfoData.profileImageFile}
+          alt={userInfoData.name}
           className="block mx-auto rounded-full w-52 h-52 object-fit"
         />
 
-          <p className="text-2xl font-bold py-6">{userInfoUser
-          ?.name}</p>
-          <p className="mt-2">{userInfoUser
-          ?.username}</p>
+          <p className="text-2xl font-bold py-6">{userInfoData.name}</p>
+          <p className="mt-2">{userInfoData.username}</p>
 
         <div className="flex flex-col">
           {user !== null && user.email === testUser.email ? null : (

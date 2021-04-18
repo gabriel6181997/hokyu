@@ -1,61 +1,13 @@
 //Import Libraries
-import firebase from "firebase/app";
 import Link from "next/link";
-import {  useRecoilValueLoadable } from "recoil";
-import { auth, db } from "src/firebase";
-import { useRecoilValueReplayLoadable } from "src/store/useRecoilValueReplayLoadable";
-import { userInfoData } from "src/store/userInfoData";
+import { useRecoilValue } from "recoil";
+import { userInfoState  } from "src/store/userInfoState";
 //Import Components
 import { BOTTOM_NAVS } from "src/utils/constants/bottomnav";
 
 export const ButtonNavigation = () => {
-  // const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
-  const user = auth.currentUser;
 
-  const userInfoLoadable = useRecoilValueLoadable(userInfoData);
-  console.log(userInfoLoadable.contents)
-
-  // if(userInfoLoadable.state === 'hasValue') {
-  //   console.log(userInfoLoadable.contents);
-  // }
-
-  // const userInfoLoadable = useRecoilValueReplayLoadable(userInfoData)
-  // const getUserInfoData = userInfoLoadable.getLastResolvedValue();
-  // console.log(getUserInfoData)
-
-
-    // switch (userInfoLoadable.state) {
-    //   case 'hasValue':
-    //     return <div>{userInfoLoadable.contents}</div>;
-    //   case 'loading':
-    //     return <div>Loading...</div>;
-    //   case 'hasError':
-    //     throw userInfoLoadable.contents;
-    // }
-
-  // if(user){
-  //   useEffect(()=>{
-  //     const fetchData = async() => {
-  //        try{
-  //          const response = await db
-  //          .collection("users")
-  //          .doc(user.uid)
-  //          .get();
-
-  //          let info = {name: "unknown", username: "unknown", profileImageFile: "no picture"}
-
-  //          if(response.exists) {
-  //            info = response.data()
-  //          }
-  //          setUserInfo(info);
-  //        } catch(error) {
-  //          alert("ユーザーの情報お取得できませんでした！")
-  //        }
-  //     };
-  //     fetchData();
-  //   },[])
-  // }
-
+  const userInfoData = useRecoilValue(userInfoState)
 
   return (
     <>
@@ -80,20 +32,18 @@ export const ButtonNavigation = () => {
               </li>
             );
           })}
-
-          {/* <li className="flex-1 text-center">
+          <li className="flex-1 text-center">
             <Link href="/home/mypage">
               <a>
                 <img
-                  src={userInfo.profileImageFile}
-                  alt={userInfo.name}
+                  src={userInfoData.profileImageFile}
+                  alt={userInfoData.name}
                   className="rounded-full block mx-auto w-7 h-7 "
                 />
               </a>
             </Link>
             <p className="text-sm pt-1">マイページ</p>
-          </li> */}
-
+          </li>
         </ul>
       </nav>
     </>
