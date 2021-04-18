@@ -1,32 +1,18 @@
 //Import Libraries
+import type firebase from "firebase/app";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import firebase from "firebase/app";
-
-//Import Components
-import { auth, db } from "src/firebase";
+import React, { useEffect,useState } from "react";
 import { Layout } from "src/components/separate/Layout";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { testUser } from "src/config/testuser";
+//Import Components
+import { auth, db } from "src/firebase";
 
 const myPage = () => {
-  const [userInfo, setUserInfo] = useState<firebase.firestore.DocumentData>();
   const user = auth.currentUser;
   const router = useRouter();
 
-  useEffect(() => {
-    if (user) {
-      db.collection("users")
-        .doc(user.uid)
-        .onSnapshot((snapshot) => {
-          setUserInfo(snapshot.data());
-        });
-    } else {
-      router.push("/");
-    }
-  }, []);
-
-  const logout = () => {
+  const handleLogout = () => {
     const answer = confirm("ログアウトしますか？");
     if (answer) {
       auth.signOut();
@@ -38,13 +24,17 @@ const myPage = () => {
     <Layout addbutton sideMenu buttonNavigation title="マイページ">
       <div className="text-center mx-auto pt-10">
         <img
-          src={userInfo?.profileImageFile}
-          alt={userInfo?.name}
+          src={userInfoUser
+            ?.profileImageFile}
+          alt={userInfoUser
+            ?.name}
           className="block mx-auto rounded-full w-52 h-52 object-fit"
         />
 
-          <p className="text-2xl font-bold py-6">{userInfo?.name}</p>
-          <p className="mt-2">{userInfo?.username}</p>
+          <p className="text-2xl font-bold py-6">{userInfoUser
+          ?.name}</p>
+          <p className="mt-2">{userInfoUser
+          ?.username}</p>
 
         <div className="flex flex-col">
           {user !== null && user.email === testUser.email ? null : (
@@ -64,7 +54,7 @@ const myPage = () => {
               button
               className="px-12 py-2 my-1 text-xl"
               variant="solid"
-              onClick={logout}
+              onClick={handleLogout}
             >
               ログアウト
             </PrimaryButton>
