@@ -3,7 +3,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 
 type Props = UseFormRegisterReturn & {
   array: string[];
-  label: string;
+  label?: string;
 };
 
 export const Select: VFC<Props> = forwardRef((props, ref) => {
