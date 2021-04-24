@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { DatetimePicker } from "src/components/separate/DatetimePicker";
+import { useRecoilState } from "recoil";
 import { Layout } from "src/components/separate/Layout";
-import { Input } from "src/components/shared/Input";
 import { TestInputItem } from "src/components/test/TestInputItem";
 import { inputListState } from "src/store/inputListState";
 
 const Add2 = () => {
-  const [inputList, setInputList] = useState([])
+  const [inputList, setInputList] = useRecoilState(inputListState)
 
   const handleOnClickAdd = () => {
     setInputList((oldInputList) => [
@@ -34,9 +32,11 @@ const Add2 = () => {
           </button>
         </div>
 
-        {inputList.map(()=> (
-            <TestInputItem />
-        ))}
+        {inputList.map((inputItem)=> {
+          return(
+              <TestInputItem key={inputItem.id} item={inputItem}/>
+          )
+          })}
       </div>
     </Layout>
   );
