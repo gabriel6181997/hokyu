@@ -7,8 +7,8 @@ import TextAreaAutoSize from "react-textarea-autosize";
 type Props = UseFormRegisterReturn & {
   className?: string;
   error?: string;
-  id: string;
   placeholder?: string;
+  name:string;
   onChange?: InputHTMLAttributes<HTMLInputElement>["onChange"];
   onChangeTextarea?: TextareaHTMLAttributes<HTMLTextAreaElement>["onChange"];
   textarea?: boolean;
@@ -32,8 +32,7 @@ export const Input: VFC<Props> = forwardRef((props, ref) => {
     <>
       {props.textarea ? (
         <TextAreaAutoSize
-          id={props.id}
-          name={props.id}
+          name={props.name}
           onChange={props.onChangeTextarea}
           placeholder={props.placeholder}
           className={className}
@@ -45,8 +44,7 @@ export const Input: VFC<Props> = forwardRef((props, ref) => {
       ) : (
         <input
           type={props.type}
-          id={props.id}
-          name={props.id}
+          name={props.name}
           placeholder={props.placeholder}
           className={className}
           onChange={props.onChange}
