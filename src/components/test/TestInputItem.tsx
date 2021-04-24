@@ -13,10 +13,11 @@ export const TestInputItem = ({ item }) => {
   };
 
   return (
-    <div className="w-full flex ">
-      <input
-        type="text"
-        className=" pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400"
+    <div className="w-full flex mt-3">
+      <Input
+       variant="underlined"
+       id="temperature"
+       placeholder="例：37°C"
       />
       <button
         className="text-gray-600 dark:text-white ml-1"
