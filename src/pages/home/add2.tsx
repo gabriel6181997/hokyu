@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
+import {  BiPlusCircle } from "react-icons/bi";
 import { useRecoilState } from "recoil";
 import { Layout } from "src/components/separate/Layout";
 import { TestInputItem } from "src/components/test/TestInputItem";
