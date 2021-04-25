@@ -1,14 +1,17 @@
+/* eslint-disable react/destructuring-assignment */
 import { BiMinusCircle } from "react-icons/bi";
 import { useRecoilState } from "recoil";
 import { inputListState } from "src/store/inputListState";
-import { Input } from "../shared/Input";
+import { Input } from "src/components/shared/Input";
 
 export const TestInputItem = ({ item }) => {
   const [inputList, setInputList] = useRecoilState(inputListState);
   const index = inputList.findIndex((listItem) => listItem === item);
 
-  const deleteItem = () => {
-    const newList = removeItemAtIndex(inputList, index);
+  const handleDeleteItem = (inputIndex) => {
+    // const newList = removeItemAtIndex(inputList, index);
+    // setInputList(newList);
+    const newList = inputList.filter((_, index)=> index !== inputIndex);
     setInputList(newList);
   };
 
@@ -16,12 +19,12 @@ export const TestInputItem = ({ item }) => {
     <div className="w-full flex mt-3">
       <Input
        variant="underlined"
-       id="temperature"
+       name="temperature"
        placeholder="例：37°C"
       />
       <button
         className="text-gray-600 dark:text-white ml-1"
-        onClick={deleteItem}
+        onClick={handleDeleteItem}
       >
         <BiMinusCircle />
       </button>
@@ -29,6 +32,6 @@ export const TestInputItem = ({ item }) => {
   );
 };
 
-export const removeItemAtIndex = (arr, index) => {
-  return [...arr.slice(0, index), ...arr.slice(index + 1)];
-};
+// export const removeItemAtIndex = (arr, index) => {
+//   return [...arr.slice(0, index), ...arr.slice(index + 1)];
+// };
