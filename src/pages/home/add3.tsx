@@ -1,14 +1,12 @@
 import { Layout } from "src/components/separate/Layout";
-import Typography from "@material-ui/core/Typography";
-import TodoForm from "src/components/test/TodoForm";
-import TodoList from "src/components/test/TodoList";
-import useTodoState from "src/components/test/useTodoState";
 import {  BiPlusCircle } from "react-icons/bi";
 import { useRecoilState } from "recoil";
 import { inputListState } from "src/store/inputListState";
 import { useForm } from "react-hook-form";
+import { auth, db, storage } from "src/firebase";
 
 const Add3 = () => {
+
   const {
    handleSubmit,
    register
@@ -16,15 +14,25 @@ const Add3 = () => {
 
   const [inputList, setInputList] = useRecoilState(inputListState);
 
+
+  const onSubmit = async (data) => {
+    try{
+      await db
+      .collection("temperature")
+      .add({
+        temperature: data.temperature
+      })
+    } catch(error) {
+      alert("failed to upload data!")
+    }
+  }
+
   // const handleOnClickAdd = () => {
-    // setInputList((prevInputList )=> [
-      // const newInputList = [...prevInputList, ]
-      // return newInputList;
+  //   setInputList((prevInputList )=> [
+  //     const newInputList = [...prevInputList, data.temperature];
+  //     return newInputList;
   //   ])
   // }
-
-  const onSubmit = (data) => console.log(data);
-
 
   return (
     <Layout sideMenu buttonNavigation title="add3">
