@@ -3,20 +3,29 @@ import { BiPlusCircle } from "react-icons/bi";
 import { GenderSwitch } from "src/components/separate/GenderSwitch";
 import { Layout } from "src/components/separate/Layout";
 import { TemperatureList } from "src/components/separate/TemperatureList";
-import { Select } from "src/components/shared/Select";
-import {
-  APPETITES,
-  BREATHS,
-  COUGHS,
-  DIARRHEAS,
-  EXERCISES,
-  FACES,
-  MOODS,
-  SKINS,
-  SLEEPS,
-} from "src/utils/constants/selectoption";
+import type firebase from "firebase/app";
+import { auth, db } from "src/firebase";
+import { useEffect, useState } from "react";
 
 const ToddlerPage = () => {
+  const [
+    toddlerInfos,
+    setToddlerInfos,
+  ] = useState<firebase.firestore.DocumentData>([]);
+
+  useEffect(() => {
+    db.collection("toddlers")
+      .get()
+      .then((toddler) =>
+        {return setToddlerInfos(
+          toddler.docs.map((doc) => {return { id: doc.id, data: doc.data() }})
+        )}
+      );
+  }, []);
+
+  // console.log(toddlerInfos);
+
+
   return (
     <Layout sideMenu buttonNavigation title="幼児詳細">
       <div className="container space-y-6 pb-6">
@@ -70,32 +79,37 @@ const ToddlerPage = () => {
           </div>
 
           <div>
-            <Select array={MOODS} />
+            <label htmlFor="moods">機嫌</label>
+            <p>xxxx</p>
           </div>
 
           <div>
-            <Select array={EXERCISES} />
+            <label htmlFor="exercises">運動(活発性)</label>
+            <p>xxxx</p>
           </div>
           <div>
-            <Select array={FACES} />
+            <label htmlFor="faces">顔つき</label>
+            <p>xxxx</p>
           </div>
           <div>
-            <Select array={APPETITES} />
+            <label htmlFor="appetites">食欲</label>
+            <p>xxxx</p>
           </div>
           <div>
-            <Select array={BREATHS} />
+            <label htmlFor="breaths">呼吸</label>
+            <p>xxxx</p>
           </div>
           <div>
-            <Select array={SLEEPS} />
+            <label htmlFor="sleeps">睡眠</label>
+            <p>xxxx</p>
           </div>
           <div>
-            <Select array={DIARRHEAS} />
+            <label htmlFor="cough">咳</label>
+            <p>xxxx</p>
           </div>
           <div>
-            <Select array={COUGHS} />
-          </div>
-          <div>
-            <Select array={SKINS} />
+            <label htmlFor="skins">皮膚の状況</label>
+            <p>xxxx</p>
           </div>
 
           <div className="space-y-1">
@@ -103,6 +117,7 @@ const ToddlerPage = () => {
               他の症状
             </p>
           </div>
+
         </div>
       </div>
     </Layout>
