@@ -2,13 +2,13 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import type { InputHTMLAttributes} from "react";
-import React, { useState } from "react";
+import  { useState } from "react";
 //Import Components
 import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
 import { Input } from "src/components/shared/Input";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
 import { testUser } from "src/config/testuser";
-import {auth} from "src/firebase";
+import { auth } from "src/firebase";
 
 
 const IndexPage = () => {
@@ -16,7 +16,7 @@ const IndexPage = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const login = async (e: React.SyntheticEvent) => {
+  const handleLogin = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     await auth
       .signInWithEmailAndPassword(email, password)
@@ -30,7 +30,7 @@ const IndexPage = () => {
       });
   };
 
-  const testLogin = async (e:React.SyntheticEvent) => {
+  const handleTestLogin = async (e:React.SyntheticEvent) => {
     e.preventDefault();
     await auth
       .signInWithEmailAndPassword(testUser.email, testUser.password)
@@ -42,11 +42,11 @@ const IndexPage = () => {
       });
   };
 
-  const inputEmail: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e)  => {
+  const handleInputEmail: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e)  => {
     setEmail(e.target.value);
   };
 
-  const inputPassword: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+  const handleInputPassword: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
     setPassword(e.target.value);
   };
 
@@ -69,7 +69,7 @@ const IndexPage = () => {
               id="email"
               placeholder="メールアドレス"
               variant="underlined"
-              onChange={inputEmail}
+              onChange={handleInputEmail}
             />
           </div>
 
@@ -79,7 +79,7 @@ const IndexPage = () => {
               id="password"
               placeholder="パスワード"
               variant="underlined"
-              onChange={inputPassword}
+              onChange={handleInputPassword}
             />
           </div>
         </div>
@@ -90,7 +90,7 @@ const IndexPage = () => {
               button
               className="px-20 py-2 my-1 text-xl"
               variant="solid"
-              onClick={login}
+              onClick={handleLogin}
             >
               ログイン
             </PrimaryButton>
@@ -101,7 +101,7 @@ const IndexPage = () => {
               button
               className="px-12 py-2 my-1 text-xl"
               variant="solid"
-              onClick={testLogin}
+              onClick={handleTestLogin}
             >
               テストユーザー
             </PrimaryButton>
