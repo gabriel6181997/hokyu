@@ -20,6 +20,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const [profileImageFile, setProfileImageFile] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [progress, setProgress] = useState(0);
   const router = useRouter();
 
