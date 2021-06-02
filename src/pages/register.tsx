@@ -1,6 +1,5 @@
 //Import Libraries
 import { useRouter } from "next/router";
-import type { InputHTMLAttributes } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
@@ -35,22 +34,6 @@ const Register = () => {
     }
     setProfileImageFile(file);
   };
-
-  // const inputName: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
-  //   setName(e.target.value);
-  // };
-
-  // const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
-  //   setUsername(e.target.value);
-  // };
-
-  // const inputEmail: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
-  //   setEmail(e.target.value);
-  // };
-
-  // const inputPassword: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
-  //   setPassword(e.target.value);
-  // };
 
   // const createAccount = (e: React.SyntheticEvent) => {
   //   e.preventDefault();
