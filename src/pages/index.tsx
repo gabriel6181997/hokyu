@@ -1,8 +1,6 @@
 //Import Libraries
 import Image from "next/image";
 import { useRouter } from "next/router";
-import type { InputHTMLAttributes } from "react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
