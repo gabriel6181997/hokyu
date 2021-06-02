@@ -39,7 +39,7 @@ const Register = () => {
   const onSubmit = (e: React.SyntheticEvent) => {
     auth
       .createUserWithEmailAndPassword(e.email, e.password)
-      .then((user) => {
+      .then(() => {
         const uploadTask = storage
           .ref(`profileImageFile/${profileImageFile.name}`)
           .put(profileImageFile);
@@ -69,21 +69,18 @@ const Register = () => {
                     username: e.username,
                     profileImageFile: url,
                   })
-                  .catch((error) => {
-                    alert(
-                      "ネーム・ユーザーネーム・プロフィール写真の登録に失敗しました"
-                    );
+                  .catch(() => {
+                    alert( "ネーム・ユーザーネーム・プロフィール写真の登録に失敗しました")
                   });
               });
             setProgress(0);
             setProfileImageFile(null);
           }
         );
-
         alert("アカウントを登録しました。ログインしてください");
         router.push("/");
       })
-      .catch((error) => {
+      .catch(() => {
         return alert("新規登録に失敗しました");
       });
   };
