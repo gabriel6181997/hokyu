@@ -1,23 +1,30 @@
 //Import Libraries
-import React, { InputHTMLAttributes, useState } from "react";
 import { useRouter } from "next/router";
-
-//Import Components
-import { auth, db, storage } from "src/firebase";
-import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
-import { Input } from "src/components/shared/Input";
-import { PrimaryButton } from "src/components/shared/PrimaryButton";
+import type { InputHTMLAttributes } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 
 //Import Icons
 import { FaCamera } from "react-icons/fa";
+import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
+import { Input } from "src/components/shared/Input";
+import { PrimaryButton } from "src/components/shared/PrimaryButton";
+//Import Components
+import { auth, db, storage } from "src/firebase";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  // const [email, setEmail] = useState("");
   const [profileImageFile, setProfileImageFile] = useState<any>(null);
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  // const [name, setName] = useState("");
+  // const [password, setPassword] = useState("");
   const [progress, setProgress] = useState(0);
-  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
   const router = useRouter();
 
   const handleChange = (e: any) => {
@@ -33,73 +40,75 @@ const Register = () => {
     setProfileImageFile(file);
   };
 
-  const inputName: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
-    setName(e.target.value);
-  };
+  // const inputName: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+  //   setName(e.target.value);
+  // };
 
-  const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
-    setUsername(e.target.value);
-  };
+  // const inputUsername: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+  //   setUsername(e.target.value);
+  // };
 
-  const inputEmail: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
-    setEmail(e.target.value);
-  };
+  // const inputEmail: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+  //   setEmail(e.target.value);
+  // };
 
-  const inputPassword: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
-    setPassword(e.target.value);
-  };
+  // const inputPassword: InputHTMLAttributes<HTMLInputElement>["onChange"] = (e) => {
+  //   setPassword(e.target.value);
+  // };
 
-  const createAccount = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        const uploadTask = storage
-          .ref(`profileImageFile/${profileImageFile.name}`)
-          .put(profileImageFile);
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progressValue = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-            setProgress(progressValue);
-          },
-          // 上記snapshotの部分はuseEffect clean up functionを用いて書き直す必要があります
+  // const createAccount = (e: React.SyntheticEvent) => {
+  //   e.preventDefault();
+  //   auth
+  //     .createUserWithEmailAndPassword(email, password)
+  //     .then((user) => {
+  //       const uploadTask = storage
+  //         .ref(`profileImageFile/${profileImageFile.name}`)
+  //         .put(profileImageFile);
+  //       uploadTask.on(
+  //         "state_changed",
+  //         (snapshot) => {
+  //           const progressValue = Math.round(
+  //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+  //           );
+  //           setProgress(progressValue);
+  //         },
+  //         // 上記snapshotの部分はuseEffect clean up functionを用いて書き直す必要があります
 
-          (error) => {
-            alert("画像がデータベースにアップロードできませんでした");
-          },
-          async () => {
-            await storage
-              .ref("profileImageFile")
-              .child(profileImageFile.name)
-              .getDownloadURL()
-              .then((url) => {
-                if (!auth.currentUser) return;
-                db.collection("users")
-                  .doc(auth.currentUser.uid)
-                  .set({
-                    name: name,
-                    username: username,
-                    profileImageFile: url,
-                  })
-                  .catch((error) => {
-                    alert(
-                      "ネーム・ユーザーネーム・プロフィール写真の登録に失敗しました"
-                    );
-                  });
-              });
-            setProgress(0);
-            setProfileImageFile(null);
-          }
-        );
+  //         (error) => {
+  //           alert("画像がデータベースにアップロードできませんでした");
+  //         },
+  //         async () => {
+  //           await storage
+  //             .ref("profileImageFile")
+  //             .child(profileImageFile.name)
+  //             .getDownloadURL()
+  //             .then((url) => {
+  //               if (!auth.currentUser) return;
+  //               db.collection("users")
+  //                 .doc(auth.currentUser.uid)
+  //                 .set({
+  //                   name: name,
+  //                   username: username,
+  //                   profileImageFile: url,
+  //                 })
+  //                 .catch((error) => {
+  //                   alert(
+  //                     "ネーム・ユーザーネーム・プロフィール写真の登録に失敗しました"
+  //                   );
+  //                 });
+  //             });
+  //           setProgress(0);
+  //           setProfileImageFile(null);
+  //         }
+  //       );
 
-        alert("アカウントを登録しました。ログインしてください");
-        router.push("/");
-      })
-      .catch((error) => alert("新規登録に失敗しました"));
-  };
+  //       alert("アカウントを登録しました。ログインしてください");
+  //       router.push("/");
+  //     })
+  //     .catch((error) => {return alert("新規登録に失敗しました")});
+  // };
+
+  const onSubmit = (data) => console.log(data);
 
   return (
     <>
@@ -107,7 +116,7 @@ const Register = () => {
         <DarkModeSwitch />
       </div>
 
-      <form className="text-center mt-7">
+      <form className="text-center mt-7" onSubmit={handleSubmit(onSubmit)}>
         <div className="relative w-52 mx-auto">
           <img
             src={profileImageFile ?? "/img/nouserimage.jpg"}
@@ -132,15 +141,19 @@ const Register = () => {
         <p className="mt-5 text-2xl font-bold">新規登録</p>
 
         <div>
-          <div className=" mt-6 space-y-5">
+          <div className=" mt-6 space-y-4">
             <div className="w-72 mx-auto">
               <Input
                 id="name"
                 placeholder="名前"
                 variant="underlined"
                 type="text"
-                onChange={inputName}
+                // onChange={inputName}
+                {...register("name", { required: "名前を入力してください！" })}
               />
+              <div className="text-rose-600 font-bold">
+                <ErrorMessage errors={errors} name="name" />
+              </div>
             </div>
 
             <div className="w-72 mx-auto">
@@ -149,8 +162,14 @@ const Register = () => {
                 placeholder="ユーザーネーム"
                 variant="underlined"
                 type="text"
-                onChange={inputUsername}
+                // onChange={inputUsername}
+                {...register("username", {
+                  required: "ユーザーネームを入力してください！",
+                })}
               />
+              <div className="text-rose-600 font-bold">
+                <ErrorMessage errors={errors} name="username" />
+              </div>
             </div>
 
             <div className="w-72 mx-auto">
@@ -159,8 +178,14 @@ const Register = () => {
                 placeholder="メールアドレス"
                 variant="underlined"
                 type="email"
-                onChange={inputEmail}
+                // onChange={inputEmail}
+                {...register("email", {
+                  required: "メールアドレスを入力してください！",
+                })}
               />
+              <div className="text-rose-600 font-bold">
+                <ErrorMessage errors={errors} name="email" />
+              </div>
             </div>
 
             <div className="w-72 mx-auto">
@@ -169,17 +194,23 @@ const Register = () => {
                 placeholder="パスワード"
                 variant="underlined"
                 type="password"
-                onChange={inputPassword}
+                // onChange={inputPassword}
+                {...register("password", {
+                  required: "パスワードを入力してください！",
+                })}
               />
+              <div className="text-rose-600 font-bold">
+                <ErrorMessage errors={errors} name="password" />
+              </div>
             </div>
           </div>
 
           <div className="mt-10">
             <PrimaryButton
               button
+              type="submit"
               className="px-20 py-2 my-1 text-xl"
               variant="solid"
-              onClick={createAccount}
             >
               登録
             </PrimaryButton>
