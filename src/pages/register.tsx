@@ -1,6 +1,6 @@
 //Import Libraries
 import { useRouter } from "next/router";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
@@ -9,6 +9,7 @@ import { FaCamera } from "react-icons/fa";
 import { DarkModeSwitch } from "src/components/separate/DarkModeSwitch";
 import { Input } from "src/components/shared/Input";
 import { PrimaryButton } from "src/components/shared/PrimaryButton";
+
 //Import Components
 import { auth, db, storage } from "src/firebase";
 
@@ -35,59 +36,58 @@ const Register = () => {
     setProfileImageFile(file);
   };
 
-  // const createAccount = (e: React.SyntheticEvent) => {
-  //   e.preventDefault();
-  //   auth
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then((user) => {
-  //       const uploadTask = storage
-  //         .ref(`profileImageFile/${profileImageFile.name}`)
-  //         .put(profileImageFile);
-  //       uploadTask.on(
-  //         "state_changed",
-  //         (snapshot) => {
-  //           const progressValue = Math.round(
-  //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-  //           );
-  //           setProgress(progressValue);
-  //         },
-  //         // 上記snapshotの部分はuseEffect clean up functionを用いて書き直す必要があります
+  const onSubmit = (e: React.SyntheticEvent) => {
+    auth
+      .createUserWithEmailAndPassword(e.email, e.password)
+      .then((user) => {
+        const uploadTask = storage
+          .ref(`profileImageFile/${profileImageFile.name}`)
+          .put(profileImageFile);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progressValue = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setProgress(progressValue);
+          },
 
-  //         (error) => {
-  //           alert("画像がデータベースにアップロードできませんでした");
-  //         },
-  //         async () => {
-  //           await storage
-  //             .ref("profileImageFile")
-  //             .child(profileImageFile.name)
-  //             .getDownloadURL()
-  //             .then((url) => {
-  //               if (!auth.currentUser) return;
-  //               db.collection("users")
-  //                 .doc(auth.currentUser.uid)
-  //                 .set({
-  //                   name: name,
-  //                   username: username,
-  //                   profileImageFile: url,
-  //                 })
-  //                 .catch((error) => {
-  //                   alert(
-  //                     "ネーム・ユーザーネーム・プロフィール写真の登録に失敗しました"
-  //                   );
-  //                 });
-  //             });
-  //           setProgress(0);
-  //           setProfileImageFile(null);
-  //         }
-  //       );
+          () => {
+            alert("画像がデータベースにアップロードできませんでした");
+          },
+          async () => {
+            await storage
+              .ref("profileImageFile")
+              .child(profileImageFile.name)
+              .getDownloadURL()
+              .then((url) => {
+                if (!auth.currentUser) return;
+                db.collection("users")
+                  .doc(auth.currentUser.uid)
+                  .set({
+                    name: e.name,
+                    username: e.username,
+                    profileImageFile: url,
+                  })
+                  .catch((error) => {
+                    alert(
+                      "ネーム・ユーザーネーム・プロフィール写真の登録に失敗しました"
+                    );
+                  });
+              });
+            setProgress(0);
+            setProfileImageFile(null);
+          }
+        );
 
-  //       alert("アカウントを登録しました。ログインしてください");
-  //       router.push("/");
-  //     })
-  //     .catch((error) => {return alert("新規登録に失敗しました")});
-  // };
+        alert("アカウントを登録しました。ログインしてください");
+        router.push("/");
+      })
+      .catch((error) => {
+        return alert("新規登録に失敗しました");
+      });
+  };
 
-  const onSubmit = (data) => console.log(data);
 
   return (
     <>
