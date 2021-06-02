@@ -19,12 +19,8 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  // const [email, setEmail] = useState("");
   const [profileImageFile, setProfileImageFile] = useState<any>(null);
-  // const [name, setName] = useState("");
-  // const [password, setPassword] = useState("");
   const [progress, setProgress] = useState(0);
-  // const [username, setUsername] = useState("");
   const router = useRouter();
 
   const handleChange = (e: any) => {
@@ -148,7 +144,6 @@ const Register = () => {
                 placeholder="名前"
                 variant="underlined"
                 type="text"
-                // onChange={inputName}
                 {...register("name", { required: "名前を入力してください！" })}
               />
               <div className="text-rose-600 font-bold">
@@ -162,7 +157,6 @@ const Register = () => {
                 placeholder="ユーザーネーム"
                 variant="underlined"
                 type="text"
-                // onChange={inputUsername}
                 {...register("username", {
                   required: "ユーザーネームを入力してください！",
                 })}
@@ -178,7 +172,6 @@ const Register = () => {
                 placeholder="メールアドレス"
                 variant="underlined"
                 type="email"
-                // onChange={inputEmail}
                 {...register("email", {
                   required: "メールアドレスを入力してください！",
                 })}
@@ -194,7 +187,6 @@ const Register = () => {
                 placeholder="パスワード"
                 variant="underlined"
                 type="password"
-                // onChange={inputPassword}
                 {...register("password", {
                   required: "パスワードを入力してください！",
                 })}
