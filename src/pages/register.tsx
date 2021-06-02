@@ -123,7 +123,6 @@ const Register = () => {
           <div className=" mt-6 space-y-4">
             <div className="w-72 mx-auto">
               <Input
-                id="name"
                 placeholder="名前"
                 variant="underlined"
                 type="text"
@@ -136,7 +135,6 @@ const Register = () => {
 
             <div className="w-72 mx-auto">
               <Input
-                id="username"
                 placeholder="ユーザーネーム"
                 variant="underlined"
                 type="text"
@@ -151,7 +149,6 @@ const Register = () => {
 
             <div className="w-72 mx-auto">
               <Input
-                id="email"
                 placeholder="メールアドレス"
                 variant="underlined"
                 type="email"
@@ -166,7 +163,6 @@ const Register = () => {
 
             <div className="w-72 mx-auto">
               <Input
-                id="password"
                 placeholder="パスワード"
                 variant="underlined"
                 type="password"
