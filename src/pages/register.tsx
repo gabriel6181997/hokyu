@@ -36,6 +36,7 @@ const Register = () => {
     setProfileImageFile(file);
   };
 
+  const onSubmit = async (e: React.SyntheticEvent) => {
     await auth
       .createUserWithEmailAndPassword(e.email, e.password)
       .then(() => {
@@ -68,9 +69,9 @@ const Register = () => {
                     username: e.username,
                     profileImageFile: url,
                   })
-                  .catch(() => {
-                    alert( "ネーム・ユーザーネーム・プロフィール写真の登録に失敗しました")
-                  });
+              })
+              .catch(() => {
+                alert( "ネーム・ユーザーネーム・プロフィール写真の登録に失敗しました")
               });
             setProgress(0);
             setProfileImageFile(null);
@@ -95,7 +96,7 @@ const Register = () => {
         <div className="relative w-52 mx-auto">
           <img
             src={profileImageFile ?? "/img/nouserimage.jpg"}
-            alt="profile-picture"
+            alt="profilePicture"
             className="mx-auto rounded-full border border-gray-700 w-48 h-48 object-cover"
             id="avatar"
           />
