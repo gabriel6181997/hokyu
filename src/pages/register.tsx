@@ -13,6 +13,13 @@ import { PrimaryButton } from "src/components/shared/PrimaryButton";
 //Import Components
 import { auth, db, storage } from "src/firebase";
 
+type RegisterInfo = {
+  name: string;
+  username: string;
+  email:string;
+  password:string;
+}
+
 const Register = () => {
   const {
     register,
@@ -37,7 +44,7 @@ const Register = () => {
     setProfileImageFile(file);
   };
 
-  const onSubmit = async (e: React.SyntheticEvent) => {
+  const onSubmit = async (e: RegisterInfo) => {
     await auth
       .createUserWithEmailAndPassword(e.email, e.password)
       .then(() => {
