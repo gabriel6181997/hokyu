@@ -36,8 +36,7 @@ const Register = () => {
     setProfileImageFile(file);
   };
 
-  const onSubmit = (e: React.SyntheticEvent) => {
-    auth
+    await auth
       .createUserWithEmailAndPassword(e.email, e.password)
       .then(() => {
         const uploadTask = storage
