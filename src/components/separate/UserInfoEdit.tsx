@@ -31,7 +31,7 @@ export const UserInfoEdit = ({preloadedValues}: { preloadedValues: Inputs}) => {
   const [newProfileImageFile, setNewProfileImageFile] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [progress, setProgress] = useState(0);
-  const [submittedData, setSubmittedData] = React.useState({});
+  const [submittedData, setSubmittedData] = useState({});
   const user = auth.currentUser;
   const router = useRouter();
 
