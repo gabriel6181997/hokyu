@@ -8,11 +8,10 @@ import { testUser } from "src/config/testuser";
 import { auth } from "src/firebase";
 import { userInfoState } from "src/store/userInfoState";
 
-const myPage = () => {
+const MyPage = () => {
   const user = auth.currentUser;
   const router = useRouter();
-  const userInfoData = useRecoilValue(userInfoState)
-
+  const userInfoData = useRecoilValue(userInfoState);
 
   const handleLogout = () => {
     const answer = confirm("ログアウトしますか？");
@@ -63,4 +62,4 @@ const myPage = () => {
   );
 };
 
-export default myPage;
+export default MyPage;
