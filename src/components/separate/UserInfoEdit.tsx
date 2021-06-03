@@ -127,6 +127,8 @@ export const UserInfoEdit = ({preloadedValues}: { preloadedValues: Inputs}) => {
           <div
             className="absolute left-2/3 bottom-2  text-xl bg-white border border-gray-700 rounded-full p-2 dark:text-gray-700"
             onClick={handleChange}
+            role="button"
+            aria-hidden="true"
           >
             <FaCamera />
           </div>
