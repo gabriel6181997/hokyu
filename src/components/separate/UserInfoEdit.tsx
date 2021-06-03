@@ -62,7 +62,7 @@ export const UserInfoEdit = ({preloadedValues}: { preloadedValues: Inputs}) => {
           );
           setProgress(progressValue);
         },
-        (error) => {
+        () => {
           alert("画像がデータベースにアップロードできませんでした");
         },
         async () => {
@@ -93,7 +93,7 @@ export const UserInfoEdit = ({preloadedValues}: { preloadedValues: Inputs}) => {
         name: data.name,
         username: data.username,
       })
-      .catch((error) => {
+      .catch(() => {
         alert("ユーザー情報の変更に失敗しました");
       }),
       setSubmittedData(data);
