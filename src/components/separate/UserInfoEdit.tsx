@@ -135,7 +135,6 @@ export const UserInfoEdit = ({preloadedValues}: { preloadedValues: Inputs}) => {
         <div className="w-72 mx-auto py-6">
           <Input
             type="text"
-            id="name"
             placeholder="名前"
             variant="underlined"
             {...register("name", { required: "名前を入力してください！" })}
@@ -148,7 +147,6 @@ export const UserInfoEdit = ({preloadedValues}: { preloadedValues: Inputs}) => {
         <div className="w-72 mx-auto mt-2">
           <Input
             type="text"
-            id="username"
             placeholder="ユーザーネーム"
             variant="underlined"
             {...register("username", {
