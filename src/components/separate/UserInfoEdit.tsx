@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import { ErrorMessage } from "@hookform/error-message";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaCamera } from "react-icons/fa";
-import { PrimaryButton } from "../shared/PrimaryButton";
-import { auth, db, storage } from "src/firebase";
-import { useRouter } from "next/router";
 import { Input } from "src/components/shared/Input";
-import { ErrorMessage } from "@hookform/error-message";
+import { auth, db, storage } from "src/firebase";
+
+import { PrimaryButton } from "../shared/PrimaryButton";
 
 type Inputs = {
   name: string;
@@ -13,11 +14,8 @@ type Inputs = {
   profileImageFile: string;
 };
 
-export const UserInfoEdit = ({
-  preloadedValues,
-}: {
-  preloadedValues: Inputs;
-}) => {
+// eslint-disable-next-line react/destructuring-assignment
+export const UserInfoEdit = ({preloadedValues}: { preloadedValues: Inputs}) => {
   const {
     register,
     handleSubmit,
@@ -31,6 +29,7 @@ export const UserInfoEdit = ({
   });
 
   const [newProfileImageFile, setNewProfileImageFile] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [progress, setProgress] = useState(0);
   const [submittedData, setSubmittedData] = React.useState({});
   const user = auth.currentUser;
@@ -51,7 +50,6 @@ export const UserInfoEdit = ({
 
   const onSubmit = async (data: Inputs) => {
     if (!user) return;
-
     if (newProfileImageFile) {
       const uploadTask = storage
         .ref(`profileImageFile/${newProfileImageFile.name}`)
@@ -102,7 +100,7 @@ export const UserInfoEdit = ({
     router.push("/home/mypage");
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSubmitSuccessful) {
       reset({ ...submittedData });
     }
