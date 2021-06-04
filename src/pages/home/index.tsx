@@ -9,6 +9,7 @@ import { auth, db } from "src/firebase";
 import { Layout } from "src/components/separate/Layout";
 import {ToddlerItem} from "src/components/separate/ToddlersItem"
 
+    mood: string;
 
 const IndexPage = () => {
   const router = useRouter();
