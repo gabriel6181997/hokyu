@@ -35,11 +35,15 @@ export const ButtonNavigation = () => {
           <li className="flex-1 text-center">
             <Link href="/home/mypage">
               <a>
-                <img
-                  src={userInfoData.profileImageFile}
-                  alt={userInfoData.name}
-                  className="rounded-full block mx-auto w-7 h-7 "
-                />
+                {userInfoData ? (
+                  <img
+                    src={userInfoData.profileImageFile}
+                    alt={userInfoData.name}
+                    className="rounded-full block mx-auto w-7 h-7 "
+                  />
+                ): (
+                  <div className="animate-pulse bg-gray-200 mx-auto w-7 h-7 rounded-full"></div>
+                )}
               </a>
             </Link>
             <p className="text-sm pt-1">マイページ</p>
