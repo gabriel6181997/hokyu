@@ -56,7 +56,8 @@ export const Layout: VFC<Props> = (props) => {
         setUserInfoData(info);
       }
     });
-  }, [setUserInfoData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
   return (
