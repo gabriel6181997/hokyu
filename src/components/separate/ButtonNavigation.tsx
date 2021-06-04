@@ -37,7 +37,7 @@ export const ButtonNavigation = () => {
               <a>
                 {userInfoData ? (
                   <img
-                    src={userInfoData.profileImageFile}
+                    src={userInfoData.profileImageFile ?? "/img/nouserimage.jpg"}
                     alt={userInfoData.name}
                     className="rounded-full block mx-auto w-7 h-7 "
                   />
