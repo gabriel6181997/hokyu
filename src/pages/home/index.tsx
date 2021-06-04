@@ -82,7 +82,7 @@ const IndexPage = () => {
                 </Link>
               </li>
 
-              <div className="shadow rounded-md p-4  w-full mx-auto">
+              {/* <div className="shadow rounded-md p-4  w-full mx-auto">
                 <div className="animate-pulse flex">
                   <div className="rounded-full bg-gray-200 h-28 w-28 mr-7"></div>
                   <div className="ms:w-1/3 w-1/2 space-y-5 py-7">
@@ -97,7 +97,7 @@ const IndexPage = () => {
 
                   <div className="ml-auto bg-gray-200 w-8 h-14 mt-9"></div>
                 </div>
-              </div>
+              </div> */}
             </>
           );
         })}
