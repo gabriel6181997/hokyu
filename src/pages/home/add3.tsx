@@ -1,42 +1,13 @@
 import { Layout } from "src/components/separate/Layout";
 import { BiPlusCircle } from "react-icons/bi";
-import { useRecoilState } from "recoil";
-import { inputListState } from "src/store/inputListState";
 import { useForm } from "react-hook-form";
 import { db } from "src/firebase";
-import { DatetimePicker } from "src/components/separate/DatetimePicker";
-
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  KeyboardDateTimePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
-import ja from "date-fns/locale/ja";
 import { useEffect, useState } from "react";
-import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
+import { Input } from "src/components/shared/Input";
 
 const Add3 = () => {
   const { handleSubmit, register, setValue, getValues } = useForm();
   // const [inputList, setInputList] = useRecoilState(inputListState);
-  const [date, setDate] = useState<MaterialUiPickersDate>(null);
-  const value = getValues('fieldName') as Date;
-  useEffect(() => {
-    setDate(value || null);
-  }, [setDate, value]);
-
-  useEffect(() => {
-    register('fieldName');
-  }, [register]);
-
-  // const onSubmit = async (data) => {
-  //   try {
-  //     await db.collection("temperature").add({
-  //       temperature: data.temperature,
-  //     });
-  //   } catch (error) {
-  //     alert("failed to upload data!");
-  //   }
-  // };
 
   const onSubmit = (data) => console.log(data);
 
@@ -46,10 +17,6 @@ const Add3 = () => {
   //     return newInputList;
   //   ])
   // }
-
-  const handleDateChange = (date) => {
-     setValue('fieldName', date, { shouldValidate: true, shouldDirty: true})
-  }
 
   return (
     <Layout sideMenu buttonNavigation title="add3">
@@ -68,27 +35,13 @@ const Add3 = () => {
 
         {/* <TodoList todos={todos} deleteTodo={deleteTodo} /> */}
 
-        <div className="flex justify-between">
-
-          <div>
-            <MuiPickersUtilsProvider locale={ja} utils={DateFnsUtils}>
-              <KeyboardDateTimePicker
-                variant="inline"
-                ampm={false}
-                value={date}
-                onChange={handleDateChange}
-                // onError={console.log}
-                disablePast
-                format="yyyy/MM/dd HH:mm"
-                minDateMessage="過去の日付は指定できません"
-              />
-            </MuiPickersUtilsProvider>
-          </div>
-
-          <input
-            className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-b-2 focus:border-blue-400 mt-4"
-            {...register("temperature")}
-          />
+        <div className="flex space-between gap-2">
+            <Input type="time" variant="underlined" {...register("time")} />
+            <Input
+              variant="underlined"
+              placeholder="時間を入力してください"
+              {...register("temperature")}
+            />
         </div>
 
         <button
