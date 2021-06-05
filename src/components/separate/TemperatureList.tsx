@@ -1,4 +1,3 @@
-import React from "react";
 import { BiMinusCircle } from "react-icons/bi";
 import { Input } from "src/components/shared/Input";
 
