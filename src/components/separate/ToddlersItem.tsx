@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
-import { GiMale, GiFemale } from "react-icons/gi";
+import  { forwardRef } from "react";
+import { GiFemale, GiMale } from "react-icons/gi";
 
 type Props = {
   age: string;
@@ -9,6 +9,7 @@ type Props = {
   toddlerphoto: string;
 };
 
+// eslint-disable-next-line react/display-name
 export const ToddlerItem: React.FC<Props> = forwardRef<
   HTMLAnchorElement,
   Props
