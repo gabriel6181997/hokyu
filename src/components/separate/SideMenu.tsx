@@ -70,7 +70,7 @@ export const SideMenu = () => {
       {userInfoData ? (
         <div className="mt-auto mb-5 mx-auto flex items-center">
           <img
-            src={userInfoData.profileImageFile}
+            src={userInfoData.profileImageFile ?? "/img/nouserimage.jpg"}
             alt={userInfoData.name}
             className="rounded-full w-11 h-11"
           />
