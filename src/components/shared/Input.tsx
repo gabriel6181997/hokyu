@@ -4,7 +4,9 @@ import { forwardRef } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 import TextAreaAutoSize from "react-textarea-autosize";
 
-type Props = UseFormRegisterReturn & {
+type OmitOnChange = Omit<UseFormRegisterReturn, "onChange">;
+
+type Props = OmitOnChange & {
   className?: string;
   error?: string;
   placeholder?: string;
