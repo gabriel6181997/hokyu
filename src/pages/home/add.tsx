@@ -1,7 +1,7 @@
 //Import Libraries
 import { useRouter } from "next/router";
 import Modal from "react-modal";
-import { InputHTMLAttributes, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 //Import Components
 import { auth } from "src/firebase";
@@ -13,7 +13,6 @@ import { PrimaryButton } from "src/components/shared/PrimaryButton";
 //Import React Icons
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
-
 import {
   APPETITES,
   BREATHS,
@@ -31,8 +30,6 @@ import { useForm } from "react-hook-form";
 import { Select } from "src/components/shared/Select";
 
 const Add = () => {
-
-
   const {
     register,
     handleSubmit,
@@ -78,8 +75,6 @@ const Add = () => {
 
   const onSubmit = (data) => console.log(data);
 
-  const NumberArray = [1,2,3,4,5];
-
   return (
     <Layout sideMenu buttonNavigation title="新規幼児">
       <form
@@ -102,12 +97,10 @@ const Add = () => {
             />
 
             <div className="absolute right-0 bottom-1 z-20">
-              <GenderSwitch
-                // register={register("gender")}
-                {...register("gender")}
-              />
+              <GenderSwitch />
             </div>
           </div>
+
           <div className="ms:mt-7 mt-3 ms:ml-0 ml-10 md:ml-20">
             <Input
               id="name"
@@ -174,13 +167,18 @@ const Add = () => {
               </button>
             </div>
 
-            <TemperatureList />
+            <div className="flex space-between gap-2">
+              <Input type="time" variant="underlined" {...register("time")} />
+              <Input
+                variant="underlined"
+                placeholder="例：37°C"
+                {...register("degree")}
+              />
+            </div>
           </div>
 
           <div>
-            <Select array={MOODS}
-            {...register("mood")}
-            label="機嫌" />
+            <Select array={MOODS} {...register("mood")} label="機嫌" />
           </div>
 
           <div>
@@ -230,6 +228,7 @@ const Add = () => {
             />
           </div>
         </div>
+
         <div>
           <PrimaryButton
             button
