@@ -2,11 +2,10 @@
 import type firebase from "firebase/app";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type { ChangeEventHandler} from "react";
+import type { InputHTMLAttributes} from "react";
 import { useEffect, useState } from "react";
 import { Layout } from "src/components/separate/Layout";
 import { ToddlerItem } from "src/components/separate/ToddlersItem";
-import { Input } from "src/components/shared/Input";
 //Import Components
 import { auth, db } from "src/firebase";
 
@@ -21,7 +20,8 @@ const SearchPage = () => {
     if (!auth.currentUser) {
       router.push("/");
     }
-  }, [auth.currentUser]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     db.collection("toddlers")
@@ -34,7 +34,7 @@ const SearchPage = () => {
       );
   }, []);
 
-  const resultsofToddlers = toddlerInfos.filter((toddlerInfo) =>
+  const resultsOfToddlers = toddlerInfos.filter((toddlerInfo) =>
     {return toddlerInfo.data.name.includes(searchInput)}
   );
 
@@ -45,19 +45,19 @@ const SearchPage = () => {
   return (
     <Layout addbutton sideMenu buttonNavigation title="検索">
       <div className=" container pt-10">
-        <Input
-          id="search"
+        <input
+          name="search"
           placeholder="幼児を検索"
-          variant="box"
           value={searchInput}
-          onChange={search}
+          onChange={handleSearch}
+          className="block w-full pl-2 bg-transparent dark:bg-gray-900 focus:outline-none border-2 focus:border-blue-400"
         />
         <p className="mt-12 text-xl">検索結果</p>
      </div>
         <div className="mt-4">
           <ul>
             {searchInput.trim() &&
-              resultsofToddlers.map(({ id, data }) => {return (
+              resultsOfToddlers.map(({ id, data }) => {return (
                 <li
                   key={id}
                   className="border-b dark:border-gray-400 md:hover:bg-blue-50 duration-300 md:dark:hover:text-blue-400 md:dark:hover:bg-gray-50 md:dark:hover:bg-opacity-20"
