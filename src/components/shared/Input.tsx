@@ -1,18 +1,14 @@
 import cc from "classcat";
-import type { InputHTMLAttributes, TextareaHTMLAttributes, VFC } from "react";
+import type { VFC } from "react";
 import { forwardRef } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 import TextAreaAutoSize from "react-textarea-autosize";
 
-type OmitOnChange = Omit<UseFormRegisterReturn, "onChange">;
-
-type Props = OmitOnChange & {
+type Props = UseFormRegisterReturn & {
   className?: string;
   error?: string;
   placeholder?: string;
   name:string;
-  onChange?: InputHTMLAttributes<HTMLInputElement>["onChange"];
-  onChangeTextarea?: TextareaHTMLAttributes<HTMLTextAreaElement>["onChange"];
   textarea?: boolean;
   type?: string;
   variant: "underlined" | "box";
@@ -35,7 +31,7 @@ export const Input: VFC<Props> = forwardRef((props, ref) => {
       {props.textarea ? (
         <TextAreaAutoSize
           name={props.name}
-          onChange={props.onChangeTextarea}
+          onChange={props.onChange}
           placeholder={props.placeholder}
           className={className}
           minRows={3}
