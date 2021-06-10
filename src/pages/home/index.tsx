@@ -22,18 +22,21 @@ const IndexPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    db.collection("toddlers")
-      .orderBy("urgency", "desc")
-      .get()
-      .then((toddler) => {
-        return setToddlerInfos(
-          toddler.docs.map((doc) => {
-            return { id: doc.id, data: doc.data() };
-          })
-        );
+  useEffect(()=> {
+    const unSub = db.collection("toddlers").orderBy("urgency", "desc").onSnapshot((snapshot)=> {
+      setToddlerInfos(
+        // eslint-disable-next-line arrow-body-style
+        snapshot.docs.map((doc)=> ({
+          id: doc.id,
+          data:doc.data()
+        }))
+      )
       });
-  }, []);
+
+    // eslint-disable-next-line arrow-body-style
+    return () => unSub();
+  },[])
+
 
   return (
     <Layout addbutton sideMenu buttonNavigation title="ホーム">
