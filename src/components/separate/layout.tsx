@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { ReactNode, VFC } from "react";
 //import logos
 import { BsPencilSquare } from "react-icons/bs";
-import { useSetRecoilState } from "recoil";
+import {  useSetRecoilState } from "recoil";
 import { ButtonNavigation } from "src/components/separate/ButtonNavigation";
 //import components
 import { Header } from "src/components/separate/Header";
@@ -28,6 +28,12 @@ type Props = {
   title: string;
 };
 
+type DocData = {
+  name: string;
+  username: string;
+  profileImageFile:string;
+}
+
 export const Layout: VFC<Props> = (props) => {
   const meta = {
     title: props.meta?.pageName
@@ -37,23 +43,23 @@ export const Layout: VFC<Props> = (props) => {
       "Hokyuは、保育園で幼児が急病した時、保育士が簡単に急病した幼児の最新健康状況を確認するアプリです。",
   };
 
-  const setUserInfoData = useSetRecoilState(userInfoState)
+  const setUserInfoData = useSetRecoilState(userInfoState);
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        const response = await db.collection("users").doc(user.uid).get();
-
-        let info = {
-          name: "unknown",
-          username: "unknown",
-          profileImageFile: "no picture",
-        };
-
-        if (response.exists) {
-          info = response.data();
-        }
-        setUserInfoData(info);
+        const unSub =  db.collection("users").doc(user.uid);
+        await unSub.get()
+        .then(
+          (doc) => {
+            if(doc.exists){
+              setUserInfoData(doc.data() as DocData);
+            }
+          }
+        ).catch((error)=> {
+          // eslint-disable-next-line no-console
+          console.log(error.message)
+        })
       }
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,7 +78,7 @@ export const Layout: VFC<Props> = (props) => {
         <meta content={meta.description} name="description" />
       </Head>
 
-      <div className="w-full max-w-6xl mx-auto mb-auto md:grid md:grid-cols-12">
+      <div className="w-full max-w-6xl mx-auto mb-auto md:grid md:grid-cols-12 min-h-screen">
         {props.sideMenu ? (
           <div className="hidden md:block md:col-span-3">
             <SideMenu />
