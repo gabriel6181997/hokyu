@@ -2,28 +2,19 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { BiPlusCircle } from "react-icons/bi";
 import { GenderSwitch } from "src/components/separate/GenderSwitch";
 import { Layout } from "src/components/separate/Layout";
-import { TemperatureList } from "src/components/separate/TemperatureList";
 import type firebase from "firebase/app";
 import { auth, db } from "src/firebase";
 import { useEffect, useState } from "react";
 
 const ToddlerPage = () => {
-  const [
-    toddlerInfos,
-    setToddlerInfos,
-  ] = useState<firebase.firestore.DocumentData>([]);
+  const [toddlerInfo, setToddlerInfo] = useState([]);
 
   useEffect(() => {
-    db.collection("toddlers")
-      .get()
-      .then((toddler) =>
-        {return setToddlerInfos(
-          toddler.docs.map((doc) => {return { id: doc.id, data: doc.data() }})
-        )}
-      );
-  }, []);
+    const unSub = db.collection("toddlers")
+  },[])
 
-  // console.log(toddlerInfos);
+
+
 
 
   return (
@@ -75,7 +66,6 @@ const ToddlerPage = () => {
               </button>
             </div>
 
-            <TemperatureList />
           </div>
 
           <div>
