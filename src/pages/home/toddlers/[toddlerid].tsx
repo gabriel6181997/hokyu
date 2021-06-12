@@ -1,17 +1,17 @@
+import type firebase from "firebase/app";
+import { useEffect, useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { BiPlusCircle } from "react-icons/bi";
 import { GenderSwitch } from "src/components/separate/GenderSwitch";
 import { Layout } from "src/components/separate/Layout";
-import type firebase from "firebase/app";
 import { auth, db } from "src/firebase";
-import { useEffect, useState } from "react";
 
 const ToddlerPage = () => {
   const [toddlerInfo, setToddlerInfo] = useState([]);
 
-  useEffect(() => {
-    const unSub = db.collection("toddlers")
-  },[])
+  // useEffect(() => {
+  //   const unSub = db.collection("toddlers")
+  // },[])
 
 
 
@@ -52,20 +52,13 @@ const ToddlerPage = () => {
           </label>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 text-sm text-gray-700 dark:text-white font-medium">
           <div className="space-y-2">
-            <div className="flex justify-between">
-              <p className="text-sm text-gray-700 font-medium dark:text-white">
-                体温
-              </p>
-              <button
-                className="text-gray-600 dark:text-white"
-                // onClick={handleOnClickAdd}
-              >
-                <BiPlusCircle />
-              </button>
-            </div>
-
+              <p>体温</p>
+              <div className="flex space-between">
+                <p>xxx</p>
+                <p>xxx</p>
+              </div>
           </div>
 
           <div>
@@ -103,9 +96,10 @@ const ToddlerPage = () => {
           </div>
 
           <div className="space-y-1">
-            <p className="text-sm text-gray-700 dark:text-white font-medium">
+            <p>
               他の症状
             </p>
+            <p>xxxxxx</p>
           </div>
 
         </div>
