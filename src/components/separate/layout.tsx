@@ -1,18 +1,14 @@
-//import libraries
 import Head from "next/head";
 import Link from "next/link";
 import type { ReactNode, VFC } from "react";
-//import logos
+import { useEffect } from "react";
 import { BsPencilSquare } from "react-icons/bs";
 import {  useSetRecoilState } from "recoil";
 import { ButtonNavigation } from "src/components/separate/ButtonNavigation";
-//import components
 import { Header } from "src/components/separate/Header";
 import { SideMenu } from "src/components/separate/SideMenu";
-import { userInfoState } from "src/store/userInfoState";
-
-import { useEffect } from "react";
 import { auth, db } from "src/firebase";
+import { userInfoState } from "src/store/userInfoState";
 
 
 type Props = {
