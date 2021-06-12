@@ -47,7 +47,13 @@ const IndexPage = () => {
                 key={id}
                 className="border-b dark:border-gray-400 md:hover:bg-blue-50 duration-300 md:dark:hover:text-blue-400 md:dark:hover:bg-gray-50 md:dark:hover:bg-opacity-20"
               >
-                <Link href="/toddlers/id">
+              <Link
+                href={{
+                  pathname: "/home/toddlers/[slug]",
+                  query: { slug: id },
+                }}
+              >
+                <a>
                   <ToddlerItem
                     age={data.age}
                     toddlerphoto={data.toddlerphoto}
@@ -55,6 +61,7 @@ const IndexPage = () => {
                     urgency={data.urgency}
                     gender={data.gender}
                   />
+                </a>
                 </Link>
               </li>
             );
