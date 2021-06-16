@@ -67,7 +67,7 @@ export const SideMenu = () => {
         </PrimaryButton>
       </div>
 
-      {userInfoData ? (
+      { userInfoData !=undefined ? (
         <div className="mt-auto mb-5 mx-auto flex items-center">
           <img
             src={userInfoData.profileImageFile ?? "/img/nouserimage.jpg"}
