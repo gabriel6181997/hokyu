@@ -1,21 +1,12 @@
-import type firebase from "firebase/app";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { BiPlusCircle } from "react-icons/bi";
-import { GenderSwitch } from "src/components/separate/GenderSwitch";
+import { GiFemale, GiMale } from "react-icons/gi";
 import { Layout } from "src/components/separate/Layout";
-import { auth, db } from "src/firebase";
+import { TemperatureList } from "src/components/separate/TemperatureList";
+import { db } from "src/firebase";
 
-const ToddlerPage = () => {
-  const [toddlerInfo, setToddlerInfo] = useState([]);
-
-  // useEffect(() => {
-  //   const unSub = db.collection("toddlers")
-  // },[])
-
-
-
-
+const ToddlerPage = (props) => {
+  // eslint-disable-next-line react/destructuring-assignment
 
   return (
     <Layout sideMenu buttonNavigation title="幼児詳細">
@@ -23,19 +14,26 @@ const ToddlerPage = () => {
         <div className="pt-12 flex ms:flex-col items-center justify-center">
           <div className="relative w-36 h-36">
             <img
-              src="/img/nouserimage.jpg"
+              src={props.toddlerphoto ?? "/img/nouserimage.jpg"}
               alt=""
               className="w-full h-auto rounded-full border-gray-700 border object-fit"
             />
-
-            <div className="absolute right-0 bottom-1 z-20">
-              <GenderSwitch />
+            <div className="absolute right-0 bottom-1 z-20 text-2xl p-2 bg-white rounded-full border">
+              {props.gender === "male" ? (
+                <div className="text-blue-400">
+                  <GiMale />
+                </div>
+              ) : (
+                <div className="text-rose-300">
+                  <GiFemale />
+                </div>
+              )}
             </div>
           </div>
 
           <div className="ms:mt-7 mt-3 ms:ml-0 ml-10 md:ml-20">
-            <p>名前</p>
-            <p className="mt-8">xx歳</p>
+            <p>{props.name} </p>
+            <p className="mt-8">{props.age}歳</p>
           </div>
         </div>
 
@@ -48,60 +46,63 @@ const ToddlerPage = () => {
             >
               <AiOutlineQuestionCircle />
             </button>
-            <p>: xx</p>
+            <p>: {props.urgency}</p>
           </label>
         </div>
 
         <div className="space-y-4 text-sm text-gray-700 dark:text-white font-medium">
           <div className="space-y-2">
-              <p>体温</p>
-              <div className="flex space-between">
-                <p>xxx</p>
-                <p>xxx</p>
-              </div>
+            <p>体温</p>
+
+            {/* {props.temperature.map(({time, degree}) => {
+              return (
+                <div key={time} className="flex gap-20 sm:gap-40 my-2">
+                  <p>{time}</p>
+                  <p>{degree}°C</p>
+                </div>
+              )
+            })} */}
+
           </div>
 
           <div>
             <label htmlFor="moods">機嫌</label>
-            <p>xxxx</p>
+            <p>{props.mood}</p>
           </div>
 
           <div>
             <label htmlFor="exercises">運動(活発性)</label>
-            <p>xxxx</p>
+            <p>{props.exercise}</p>
           </div>
           <div>
             <label htmlFor="faces">顔つき</label>
-            <p>xxxx</p>
+            <p>{props.face}</p>
           </div>
           <div>
             <label htmlFor="appetites">食欲</label>
-            <p>xxxx</p>
+            <p>{props.appetite}</p>
           </div>
           <div>
             <label htmlFor="breaths">呼吸</label>
-            <p>xxxx</p>
+            <p>{props.breath}</p>
           </div>
           <div>
             <label htmlFor="sleeps">睡眠</label>
-            <p>xxxx</p>
+            <p>{props.sleep}</p>
           </div>
           <div>
             <label htmlFor="cough">咳</label>
-            <p>xxxx</p>
+            <p>{props.cough}</p>
           </div>
           <div>
             <label htmlFor="skins">皮膚の状況</label>
-            <p>xxxx</p>
+            <p>{props.skin}</p>
           </div>
 
           <div className="space-y-1">
-            <p>
-              他の症状
-            </p>
-            <p>xxxxxx</p>
+            <label htmlFor="others">他の症状</label>
+            <p>{props.others}</p>
           </div>
-
         </div>
       </div>
     </Layout>
@@ -131,9 +132,10 @@ export const getStaticProps = async (context) => {
     .doc(toddlerId)
     .get()
     .then((result) => {
-      content['name'] = result.data().name;
-      content['age'] = result.data().age;
-      content['toddlerphoto'] = result.data().toddlerphoto;
+      content["name"] = result.data().name;
+      content["age"] = result.data().age;
+      content["toddlerphoto"] = result.data().toddlerphoto;
+      content["gender"] = result.data().gender;
       content["urgency"] = result.data().urgency;
       content["temperature"] = result.data().temperature;
       content["mood"] = result.data().mood;
@@ -151,7 +153,8 @@ export const getStaticProps = async (context) => {
     props: {
       name: content.name,
       age: content.age,
-      toddlerphoto : content.toddlerphoto,
+      toddlerphoto: content.toddlerphoto,
+      gender: content.gender,
       urgency: content.urgency,
       temperature: content.temperature,
       mood: content.mood,
@@ -162,8 +165,8 @@ export const getStaticProps = async (context) => {
       sleep: content.sleep,
       cough: content.cough,
       skin: content.skin,
-      others: content.others
-    }
+      others: content.others,
+    },
   };
 };
 
