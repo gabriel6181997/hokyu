@@ -8,6 +8,8 @@ import { db } from "src/firebase";
 const ToddlerPage = (props) => {
   // eslint-disable-next-line react/destructuring-assignment
 
+  console.log(props.temperature)
+
   return (
     <Layout sideMenu buttonNavigation title="幼児詳細">
       <div className="container space-y-6 pb-6">
@@ -54,14 +56,14 @@ const ToddlerPage = (props) => {
           <div className="space-y-2">
             <p>体温</p>
 
-            {/* {props.temperature.map(({time, degree}) => {
+            {props.temperature.map(tg => {
               return (
-                <div key={time} className="flex gap-20 sm:gap-40 my-2">
-                  <p>{time}</p>
-                  <p>{degree}°C</p>
+                <div key={tg.time} className="flex gap-20 sm:gap-40 my-2">
+                  <p>{tg.time}</p>
+                  <p>{tg.degree}°C</p>
                 </div>
-              )
-            })} */}
+              );
+            })}
 
           </div>
 
