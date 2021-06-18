@@ -108,4 +108,63 @@ const ToddlerPage = () => {
   );
 };
 
+export const getStaticPaths = async () => {
+  const toddlersData = await db.collection("toddlers").get();
+  // eslint-disable-next-line arrow-body-style
+  const paths = toddlersData.docs.map((toddlerData) => ({
+    params: {
+      toddlerId: toddlerData.id,
+    },
+  }));
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps = async (context) => {
+  const { toddlerId } = context.params;
+  const content = {};
+  await db
+    .collection("toddlers")
+    .doc(toddlerId)
+    .get()
+    .then((result) => {
+      content['name'] = result.data().name;
+      content['age'] = result.data().age;
+      content['toddlerphoto'] = result.data().toddlerphoto;
+      content["urgency"] = result.data().urgency;
+      content["temperature"] = result.data().temperature;
+      content["mood"] = result.data().mood;
+      content["exercise"] = result.data().exercise;
+      content["face"] = result.data().face;
+      content["appetite"] = result.data().appetite;
+      content["breath"] = result.data().breath;
+      content["sleep"] = result.data().sleep;
+      content["cough"] = result.data().cough;
+      content["skin"] = result.data().skin;
+      content["others"] = result.data().others;
+    });
+
+  return {
+    props: {
+      name: content.name,
+      age: content.age,
+      toddlerphoto : content.toddlerphoto,
+      urgency: content.urgency,
+      temperature: content.temperature,
+      mood: content.mood,
+      exercise: content.exercise,
+      face: content.face,
+      appetite: content.appetite,
+      breath: content.breath,
+      sleep: content.sleep,
+      cough: content.cough,
+      skin: content.skin,
+      others: content.others
+    }
+  };
+};
+
 export default ToddlerPage;
