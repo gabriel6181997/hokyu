@@ -1,18 +1,19 @@
 //Import Libraries
 import { useRouter } from "next/router";
-import Modal from "react-modal";
 import { useEffect, useState } from "react";
-
-//Import Components
-import { auth } from "src/firebase";
-import { GenderSwitch } from "src/components/separate/GenderSwitch";
-import { Input } from "src/components/shared/Input";
-import { Layout } from "src/components/separate/Layout";
-import { PrimaryButton } from "src/components/shared/PrimaryButton";
-
+import { useForm } from "react-hook-form";
 //Import React Icons
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
+import { BiMinusCircle,BiPlusCircle } from "react-icons/bi";
+import Modal from "react-modal";
+import { GenderSwitch } from "src/components/separate/GenderSwitch";
+import { Layout } from "src/components/separate/Layout";
+import { TemperatureList } from "src/components/separate/TemperatureList";
+import { Input } from "src/components/shared/Input";
+import { PrimaryButton } from "src/components/shared/PrimaryButton";
+import { Select } from "src/components/shared/Select";
+//Import Components
+import { auth } from "src/firebase";
 import {
   APPETITES,
   BREATHS,
@@ -25,9 +26,6 @@ import {
   SLEEPS,
   URGENCYNUMBERS,
 } from "src/utils/constants/selectoption";
-import { TemperatureList } from "src/components/separate/TemperatureList";
-import { useForm } from "react-hook-form";
-import { Select } from "src/components/shared/Select";
 
 const Add = () => {
   const {
@@ -73,7 +71,7 @@ const Add = () => {
     setIsOpen(false);
   };
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {return console.log(data)};
 
   return (
     <Layout sideMenu buttonNavigation title="新規幼児">
