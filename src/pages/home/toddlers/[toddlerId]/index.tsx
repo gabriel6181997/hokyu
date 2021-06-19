@@ -1,14 +1,11 @@
-import { useRouter } from "next/router";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { GiFemale, GiMale } from "react-icons/gi";
 import { Layout } from "src/components/separate/Layout";
-import { TemperatureList } from "src/components/separate/TemperatureList";
 import { db } from "src/firebase";
 
 const ToddlerPage = (props) => {
   // eslint-disable-next-line react/destructuring-assignment
-
-  console.log(props.temperature)
 
   return (
     <Layout sideMenu buttonNavigation title="幼児詳細">
@@ -55,16 +52,17 @@ const ToddlerPage = (props) => {
         <div className="space-y-4 text-sm text-gray-700 dark:text-white font-medium">
           <div className="space-y-2">
             <p>体温</p>
-
-            {Object.keys(props.temperature).map(value => {
+            {Object.keys(props.temperature).map((value) => {
               return (
-                <div key={props.temperature[value].time} className="flex gap-20 sm:gap-40 my-1">
+                <div
+                  key={props.temperature[value].time}
+                  className="flex gap-20 sm:gap-40 my-1"
+                >
                   <p>{props.temperature[value].time}</p>
                   <p>{props.temperature[value].degree}°C</p>
                 </div>
               );
             })}
-
           </div>
 
           <div>
@@ -111,7 +109,7 @@ const ToddlerPage = (props) => {
   );
 };
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const toddlersData = await db.collection("toddlers").get();
   // eslint-disable-next-line arrow-body-style
   const paths = toddlersData.docs.map((toddlerData) => ({
@@ -126,8 +124,8 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
-  const { toddlerId } = context.params;
+export const getStaticProps: GetStaticProps = async (context) => {
+  const toddlerId  = context.params?.toddlerId as string;
   const content = {};
   await db
     .collection("toddlers")
