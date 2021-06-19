@@ -56,11 +56,11 @@ const ToddlerPage = (props) => {
           <div className="space-y-2">
             <p>体温</p>
 
-            {props.temperature.map(tg => {
+            {Object.keys(props.temperature).map(value => {
               return (
-                <div key={tg.time} className="flex gap-20 sm:gap-40 my-2">
-                  <p>{tg.time}</p>
-                  <p>{tg.degree}°C</p>
+                <div key={props.temperature[value].time} className="flex gap-20 sm:gap-40 my-1">
+                  <p>{props.temperature[value].time}</p>
+                  <p>{props.temperature[value].degree}°C</p>
                 </div>
               );
             })}
