@@ -55,7 +55,7 @@ const ToddlerPage = (props) => {
             {Object.keys(props.temperature).map((value) => {
               return (
                 <div
-                  key={props.temperature[value].time}
+                  key={props.temperature[value]}
                   className="flex gap-20 sm:gap-40 my-1"
                 >
                   <p>{props.temperature[value].time}</p>
