@@ -101,14 +101,12 @@ const Add = () => {
 
           <div className="ms:mt-7 mt-3 ms:ml-0 ml-10 md:ml-20">
             <Input
-              id="name"
               placeholder="名前"
               variant="underlined"
               {...register("name", { required: "名前を入力してください！" })}
             />
             <div className="mt-8 flex">
               <Input
-                id="age"
                 placeholder="年齢"
                 variant="underlined"
                 {...register("age", { required: "年齢を入力してください！" })}
@@ -218,7 +216,6 @@ const Add = () => {
             </p>
             <Input
               textarea
-              id="others"
               placeholder="他の症状があれば、ご記入ください。"
               variant="box"
               className="text-sm pt-1"
